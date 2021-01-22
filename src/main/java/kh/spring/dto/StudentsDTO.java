@@ -13,6 +13,7 @@ public class StudentsDTO {
 	private String rest;
 	private String grade;
 	private String birth;
+	private String gender;
 	public int getS_seq() {
 		return s_seq;
 	}
@@ -79,8 +80,14 @@ public class StudentsDTO {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 	public StudentsDTO(int s_seq, String pw, String name, int age, String email, String contact, String address,
-			String scholarship, String rest, String grade, String birth) {
+			String scholarship, String rest, String grade, String birth, String gender) {
 		super();
 		this.s_seq = s_seq;
 		this.pw = pw;
@@ -93,11 +100,14 @@ public class StudentsDTO {
 		this.rest = rest;
 		this.grade = grade;
 		this.birth = birth;
+		this.gender = gender;
 	}
 	public StudentsDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 	
 	
 	
