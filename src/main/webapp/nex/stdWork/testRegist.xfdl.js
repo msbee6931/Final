@@ -52,6 +52,11 @@
             obj.set_useclientlayout("true");
             obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"basket\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("ds_myBasket", this);
+            obj._setContents("<ColumnInfo><Column id=\"chk\" type=\"STRING\" size=\"256\"/><Column id=\"classPart\" type=\"STRING\" size=\"256\"/><Column id=\"className\" type=\"STRING\" size=\"256\"/><Column id=\"classSeq\" type=\"INT\" size=\"256\"/><Column id=\"classPoint\" type=\"STRING\" size=\"256\"/><Column id=\"proCode\" type=\"STRING\" size=\"256\"/><Column id=\"proName\" type=\"STRING\" size=\"256\"/><Column id=\"dept\" type=\"STRING\" size=\"256\"/><Column id=\"classTime\" type=\"STRING\" size=\"256\"/><Column id=\"classRoom\" type=\"STRING\" size=\"256\"/><Column id=\"limit\" type=\"STRING\" size=\"256\"/><Column id=\"basketLimit\" type=\"STRING\" size=\"256\"/><Column id=\"grade\" type=\"STRING\" size=\"256\"/><Column id=\"classGoal\" type=\"STRING\" size=\"256\"/><Column id=\"classMethod\" type=\"STRING\" size=\"256\"/><Column id=\"classEvaluation\" type=\"STRING\" size=\"256\"/><Column id=\"classReferences\" type=\"STRING\" size=\"256\"/><Column id=\"reqState\" type=\"STRING\" size=\"256\"/><Column id=\"rejectMsg\" type=\"STRING\" size=\"256\"/><Column id=\"reg_date\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
             obj = new Div("Div00","0","0","200","570",null,null,null,null,null,null,this);
@@ -151,7 +156,7 @@
 
             obj = new Static("sta_sSeq","89","99","100","30",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("13");
-            obj.set_text("12345");
+            obj.set_text("1234");
             obj.set_border("1px solid black");
             obj.set_padding("0px 0px 0px 5px");
             this.Div00.addChild(obj.name, obj);
@@ -185,32 +190,20 @@
             obj.set_text("조회");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Static("sta_basket","9","434","110","30",null,null,null,null,null,null,this.Div00.form);
+            obj = new Static("sta_timeTable","14","419","110","30",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("18");
-            obj.set_text("장바구니");
-            obj.set_border("1px solid black");
-            obj.set_textAlign("center");
-            this.Div00.addChild(obj.name, obj);
-
-            obj = new Static("sta_timeTable","9","469","110","30",null,null,null,null,null,null,this.Div00.form);
-            obj.set_taborder("19");
             obj.set_text("시간표 조회");
             obj.set_border("1px solid black");
             obj.set_textAlign("center");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Button("basket","129","434","60","30",null,null,null,null,null,null,this.Div00.form);
-            obj.set_taborder("20");
-            obj.set_text("조회");
-            this.Div00.addChild(obj.name, obj);
-
-            obj = new Button("classTime","129","469","60","30",null,null,null,null,null,null,this.Div00.form);
-            obj.set_taborder("21");
+            obj = new Button("classTime","129","419","60","30",null,null,null,null,null,null,this.Div00.form);
+            obj.set_taborder("19");
             obj.set_text("조회");
             this.Div00.addChild(obj.name, obj);
 
             obj = new Static("sta_semester","9","19","180","40",null,null,null,null,null,null,this.Div00.form);
-            obj.set_taborder("22");
+            obj.set_taborder("20");
             obj.set_text("");
             this.Div00.addChild(obj.name, obj);
 
@@ -222,40 +215,26 @@
             obj = new Grid("Grid00","210","35","860","260",null,null,null,null,null,null,this);
             obj.set_taborder("2");
             obj.set_binddataset("ds_class");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"58\"/><Column size=\"44\"/><Column size=\"68\"/><Column size=\"216\"/><Column size=\"47\"/><Column size=\"57\"/><Column size=\"181\"/><Column size=\"38\"/><Column size=\"58\"/><Column size=\"91\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"이수구분\"/><Cell col=\"1\" text=\"학년\"/><Cell col=\"2\" text=\"과목코드\"/><Cell col=\"3\" text=\"과목명\"/><Cell col=\"4\" text=\"학점\"/><Cell col=\"5\" text=\"담당교수\"/><Cell col=\"6\" text=\"강의시간\"/><Cell col=\"7\" text=\"신청\"/><Cell col=\"8\" text=\"강의실\"/><Cell col=\"9\" text=\"신청/제한인원\"/></Band><Band id=\"body\"><Cell text=\"bind:classPart\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:grade\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:classSeq\" textAlign=\"center\" displaytype=\"mask\" maskeditformat=\"########\"/><Cell col=\"3\" text=\"bind:className\" textDecoration=\"underline\" tooltiptext=\"수업계획서 보기\" textAlign=\"center\" cursor=\"pointer\" wordWrap=\"english\"/><Cell col=\"4\" text=\"bind:classPoint\" textAlign=\"center\"/><Cell col=\"5\" text=\"bind:proName\" textAlign=\"center\"/><Cell col=\"6\" text=\"bind:classTime\" textAlign=\"center\" wordWrap=\"english\"/><Cell col=\"7\" displaytype=\"buttoncontrol\" text=\"신청\" textAlign=\"center\" cursor=\"pointer\"/><Cell col=\"8\" text=\"bind:classRoom\" textAlign=\"center\"/><Cell col=\"9\" text=\"bind:limit\" textAlign=\"center\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"58\"/><Column size=\"44\"/><Column size=\"68\"/><Column size=\"216\"/><Column size=\"47\"/><Column size=\"57\"/><Column size=\"181\"/><Column size=\"38\"/><Column size=\"58\"/><Column size=\"91\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"이수구분\"/><Cell col=\"1\" text=\"학년\"/><Cell col=\"2\" text=\"과목코드\"/><Cell col=\"3\" text=\"과목명\"/><Cell col=\"4\" text=\"학점\"/><Cell col=\"5\" text=\"담당교수\"/><Cell col=\"6\" text=\"강의시간\"/><Cell col=\"7\" text=\"담기\"/><Cell col=\"8\" text=\"강의실\"/><Cell col=\"9\" text=\"신청/제한인원\"/></Band><Band id=\"body\"><Cell text=\"bind:classPart\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:grade\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:classSeq\" textAlign=\"center\" displaytype=\"mask\" maskeditformat=\"########\"/><Cell col=\"3\" text=\"bind:className\" textDecoration=\"underline\" tooltiptext=\"수업계획서 보기\" textAlign=\"center\" cursor=\"pointer\" wordWrap=\"english\"/><Cell col=\"4\" text=\"bind:classPoint\" textAlign=\"center\"/><Cell col=\"5\" text=\"bind:proName\" textAlign=\"center\"/><Cell col=\"6\" text=\"bind:classTime\" textAlign=\"center\" wordWrap=\"english\"/><Cell col=\"7\" displaytype=\"buttoncontrol\" text=\"담기\" textAlign=\"center\" cursor=\"pointer\"/><Cell col=\"8\" text=\"bind:classRoom\" textAlign=\"center\"/><Cell col=\"9\" text=\"bind:basketLimit\" textAlign=\"center\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             obj = new Static("Static01_00_00","210","300","140","30",null,null,null,null,null,null,this);
             obj.set_taborder("3");
-            obj.set_text("▷ 수강신청내역 리스트");
+            obj.set_text("▷ 장바구니 리스트");
             this.addChild(obj.name, obj);
 
             obj = new Grid("Grid00_00","210","325","860","220",null,null,null,null,null,null,this);
             obj.set_taborder("4");
-            obj.set_binddataset("ds_myClass");
+            obj.set_binddataset("ds_myBasket");
             obj.set_autofittype("col");
             obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"45\"/><Column size=\"60\"/><Column size=\"46\"/><Column size=\"75\"/><Column size=\"236\"/><Column size=\"47\"/><Column size=\"68\"/><Column size=\"226\"/><Column size=\"56\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"취소\"/><Cell col=\"1\" text=\"이수구분\"/><Cell col=\"2\" text=\"학년\"/><Cell col=\"3\" text=\"과목코드\"/><Cell col=\"4\" text=\"과목명\"/><Cell col=\"5\" text=\"학점\"/><Cell col=\"6\" text=\"담당교수\"/><Cell col=\"7\" text=\"강의시간\"/><Cell col=\"8\" text=\"강의실\"/></Band><Band id=\"body\"><Cell displaytype=\"buttoncontrol\" text=\"취소\" cursor=\"pointer\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:classPart\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:grade\" textAlign=\"center\"/><Cell col=\"3\" text=\"bind:classSeq\" textAlign=\"center\" displaytype=\"mask\" maskeditformat=\"########\"/><Cell col=\"4\" text=\"bind:className\" cursor=\"pointer\" textDecoration=\"underline\" textAlign=\"center\" wordWrap=\"english\"/><Cell col=\"5\" text=\"bind:classPoint\" textAlign=\"center\"/><Cell col=\"6\" text=\"bind:proName\" textAlign=\"center\"/><Cell col=\"7\" text=\"bind:classTime\" textAlign=\"center\" wordWrap=\"english\"/><Cell col=\"8\" text=\"bind:classRoom\" textAlign=\"center\"/></Band></Format></Formats>");
-            this.addChild(obj.name, obj);
-
-            obj = new Grid("Grid01","53","25","777","315",null,null,null,null,null,null,this);
-            obj.set_taborder("5");
-            obj.set_positionstep("1");
-            obj.set_binddataset("ds_stdTimeTable");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row band=\"head\" size=\"24\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"sCode\"/><Cell col=\"1\" text=\"classCode\"/><Cell col=\"2\" text=\"time\"/><Cell col=\"3\" text=\"mon\"/><Cell col=\"4\" text=\"tue\"/><Cell col=\"5\" text=\"wed\"/><Cell col=\"6\" text=\"thu\"/><Cell col=\"7\" text=\"fri\"/><Cell col=\"8\" text=\"sat\"/></Band><Band id=\"body\"><Cell text=\"bind:sCode\"/><Cell col=\"1\" text=\"bind:classCode\"/><Cell col=\"2\" text=\"bind:time\"/><Cell col=\"3\" text=\"bind:mon\"/><Cell col=\"4\" text=\"bind:tue\"/><Cell col=\"5\" text=\"bind:wed\"/><Cell col=\"6\" text=\"bind:thu\"/><Cell col=\"7\" text=\"bind:fri\"/><Cell col=\"8\" text=\"bind:sat\"/></Band></Format></Formats>");
-            this.addChild(obj.name, obj);
-
-            obj = new Grid("Grid02","40","18","640","445",null,null,null,null,null,null,this);
-            obj.set_taborder("6");
-            obj.set_positionstep("2");
-            obj.set_binddataset("ds_stdTimeTableCopy");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row band=\"head\" size=\"24\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"sCode\"/><Cell col=\"1\" text=\"classCode\"/><Cell col=\"2\" text=\"time\"/><Cell col=\"3\" text=\"mon\"/><Cell col=\"4\" text=\"tue\"/><Cell col=\"5\" text=\"wed\"/><Cell col=\"6\" text=\"thu\"/><Cell col=\"7\" text=\"fri\"/><Cell col=\"8\" text=\"sat\"/></Band><Band id=\"body\"><Cell text=\"bind:sCode\"/><Cell col=\"1\" text=\"bind:classCode\"/><Cell col=\"2\" text=\"bind:time\"/><Cell col=\"3\" text=\"bind:mon\"/><Cell col=\"4\" text=\"bind:tue\"/><Cell col=\"5\" text=\"bind:wed\"/><Cell col=\"6\" text=\"bind:thu\"/><Cell col=\"7\" text=\"bind:fri\"/><Cell col=\"8\" text=\"bind:sat\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","",1080,570,this,function(p){});
             obj.set_mobileorientation("landscape");
-            obj.set_stepcount("3");
+            obj.set_stepcount("0");
             this.addLayout(obj.name, obj);
             
             // BindItem Information
@@ -268,7 +247,7 @@
         };
         
         // User Script
-        this.registerScript("regist.xfdl", function() {
+        this.registerScript("testRegist.xfdl", function() {
 
         this.ClassRegist_onload = function(obj,e)
         {
@@ -296,6 +275,14 @@
         	//수강신청 항목 가져옴(아직 테이블 수정) - 해당 과목 ds_class에서 filter후 myClass로 Copy
         	var sCode = this.Div00.form.sta_sSeq.text;
         	this.transaction(
+        		"myBasketList"
+        		,"/myBasketList.nex"
+        		,""
+        		,"ds_myBasket=out_ds"
+        		,"sCode="+sCode + " startTime="+startTime+" endTime="+endTime
+        		,"fn_callback_myBasket"
+        	);
+        	this.transaction(
         		"myClassList"
         		,"/myClassList.nex"
         		,""
@@ -313,18 +300,25 @@
         		,"fn_callback_TimeTable"
         	);
         };
-        this.fn_callback=function(sId,errorCode,errorMsg){
-        	trace(sId +":"+ errorCode +":"+errorMsg);
+
+        this.fn_callback_myBasket=function(){
+        	for(var i=0; i<this.ds_myBasket.getRowCount(); i++){
+        		var classSeq = this.ds_myBasket.getColumn(i,"classSeq");
+        		var nRow = this.ds_class.findRow("classSeq",classSeq);
+        		this.ds_class.deleteRow(nRow)
+        	}
+        	trace(this.ds_myBasket.saveXML());
         }
-        this.fn_callback_myClass=function(){
+         this.fn_callback_myClass=function(){
 
         	for(var i=0; i<this.ds_myClass.getRowCount(); i++){
         		var classSeq = this.ds_myClass.getColumn(i,"classSeq");
         		var nRow = this.ds_class.findRow("classSeq",classSeq);
+        		trace(nRow);
         		this.ds_class.deleteRow(nRow)
         	}
          	trace(this.ds_myClass.saveXML());
-        }
+         }
         this.fn_callback_TimeTable=function(){
         	var Time = new Array();
         	var Mon = new Array();
@@ -367,7 +361,6 @@
         {
         	var dept = this.Div00.form.co_dept.text;
         	var part = this.Div00.form.co_part.text;
-
         	var className = this.Div00.form.edt_className.text;
         	if(dept == "전체"){dept = ""}
         	if(part == "전체"){part = ""}
@@ -398,25 +391,23 @@
         		var person =limit.split("/");
         		var myPoint = this.Div00.form.sta_point.text;
         		var point = this.ds_class.getColumn(nRow,"classPoint").replace("학점","");
-        		var type ="";
         		if(person[0] < person[1]){
         			if(nexacro.toNumber(myPoint)-nexacro.toNumber(point) < 0){
         				alert("학점이 부족합니다");
         				return;
         			}else{
         				var classTime = this.ds_class.getColumn(nRow,"classTime");
-        				var className = this.ds_class.getColumn(nRow,"className");
+        				var className = this.ds_class.getColumn(nRow,"className")+" (예비)*";
         				var classCode = this.ds_class.getColumn(nRow,"classSeq");
         				var sCode = this.Div00.form.sta_sSeq.text;
+        				var type ="";
         				classTime = nexacro.replaceAll(classTime,"교시","");
-        				var time = classTime.split(")"); //요일(교시
+        				var time = classTime.split(")");
         				this.ds_stdTimeTableCopy.clearData();
         				for(var i=0; i<time.length-1; i++){
-        					var weeks = time[i].split("("); //요일
-        					var week = weeks[1].split(" "); //교시
-        					var col ="";
-        					var name ="";
-        					var code ="";
+        					var weeks = time[i].split("(");
+        					var week = weeks[1].split(" ");
+        					var col =""
         					if(weeks[0] =="월"){col="mon"}
         					else if(weeks[0] =="화"){col="tue"}
         					else if(weeks[0] =="수"){col="wed"}
@@ -434,71 +425,31 @@
         							this.ds_stdTimeTableCopy.setColumn(addRow,"time",week[j]+"교시");
         							this.ds_stdTimeTableCopy.setColumn(addRow,"classCode",classCode);
         							this.ds_stdTimeTableCopy.setColumn(addRow,"sCode",sCode);
-        							type = "insert";
         						}else{
-        							if(cName.substring(cName.length-1,cName.length)=="*"){
-        								//장바구니에 넣은것과 다른 과목 같은 시간대에 수강하는 경우(해당 과목 장바구니에서 삭제 + 새로운 과목 입력)
-        								var stdRow = this.ds_class.findRowNF("className",cName.substring(0,cName.length-6));
-        								var classSeq = this.ds_class.getColumnNF(stdRow,"classSeq");
-        								code +=classSeq +",";
-        								name += cName +"/";
-        								//새로운 과목 추가
-        								this.ds_stdTimeTable.setColumn(week[j]-1,col,className);
-        								this.ds_stdTimeTable.setColumn(week[j]-1,"classCode",classCode);
-        								this.ds_stdTimeTable.setColumn(week[j]-1,"sCode",sCode);
-        								var addRow = this.ds_stdTimeTableCopy.addRow(); //삭제 시 row가 변경되어 삭제한 내용도 추가되서 DsCopy본 이용
-        								this.ds_stdTimeTableCopy.setColumn(addRow,col,className);
-        								this.ds_stdTimeTableCopy.setColumn(addRow,"time",week[j]+"교시");
-        								this.ds_stdTimeTableCopy.setColumn(addRow,"classCode",classCode);
-        								this.ds_stdTimeTableCopy.setColumn(addRow,"sCode",sCode);
-        								type = "change"
-        							}else{
-        								alert("해당 시간에 이미 수강중인 과목이 있습니다");
-        								return; //함수 탈출
-        							}
+        							alert("해당 시간에 이미 수강중인 과목이 있습니다");
+        							return; //함수 탈출
         						}
         					}
         				}
         				//학점 갱신
         				this.Div00.form.sta_point.set_text(nexacro.toNumber(myPoint)-nexacro.toNumber(point));
-        				var addRow = this.ds_myClass.addRow();
-        				this.ds_myClass.copyRow(addRow,this.ds_class,nRow);
+
+        				var addRow = this.ds_myBasket.addRow();
+        				this.ds_myBasket.copyRow(addRow,this.ds_class,nRow);
+
         				//insert studentClass 추가
         				var addRow2 = this.ds_stdClass.addRow();
         				this.ds_stdClass.setColumn(addRow2,"sCode",sCode);
         				this.ds_stdClass.setColumn(addRow2,"classCode",classCode);
-        				this.ds_stdClass.setColumn(addRow2,"basket",'N');
-        				if(type =="insert"){
-        					//insert 시간표
-        					this.transaction(
-        						"stdClassInsert"
-        						,"/stdClassInsert.nex"
-        						,"in_ds1=ds_stdClass:U in_ds2=ds_stdTimeTableCopy:U"
-        						,""
-        						,"row="+nRow
-        						,"fn_callback_stdClass"
-        					);
-        				}else if(type="change"){
-        					code = code.substring(0,code.length-1)
-        					this.transaction(
-        						"stdClassInsert"
-        						,"/stdBasketDelete.nex"
-        						,"in_ds1=ds_stdTimeTableCopy:U in_ds2=ds_stdClass:U"
-        						,""
-        						,"classCode="+code + " sCode="+sCode +" row="+nRow
-        						,"fn_callback_stdClass"
-        					);
-        					cName = name.split("/");
-        					for(var m=0; m< cName.length; m++){ //보이지않는 내부적 로직으로 DB적용값과 맞춰주기 위해 dataSet에서 장바구니 내용 삭제
-        						for(var a=0; a<this.ds_stdTimeTable.getRowCount();a++){ //전체와 넣으려는 자리에 있던 과목의 이름과 비교
-        							for(var b=0; b<this.ds_stdTimeTable.getColCount(); b++){
-        								if(this.ds_stdTimeTable.getColumn(a,b)==cName[m]){
-        									this.ds_stdTimeTable.setColumn(a,b,"");
-        								}
-        							}
-        						}
-        					}
-        				}
+        				this.ds_stdClass.setColumn(addRow2,"basket",'Y');
+        				this.transaction(
+        					"stdClassInsert"
+        					,"/stdClassInsert.nex"
+        					,"in_ds1=ds_stdClass:U in_ds2=ds_stdTimeTableCopy:U"
+        					,""
+        					,"row="+nRow
+        					,"fn_callback_stdClass"
+        				);
         			}
         		}else{
         			alert("인원수가 초과되었습니다");
@@ -506,117 +457,54 @@
         	}
         };
         this.row= "";
-        this.count = "";
         this.count2 = "";
-        this.msg ="";
         this.fn_callback_stdClass=function(sId){
-        	trace(sId);
         	if(sId == "stdClassInsert"){
-        		if(this.msg == "Y"){
-        		var limit = this.ds_class.getColumn(this.row,"limit").split("/");
-        		this.ds_class.setColumn(this.row,"limit",this.count+"/"+limit[1]);
-        		limit = this.ds_class.getColumn(this.row,"limit")
+        		var limit = this.ds_class.getColumn(this.row,"basketLimit").split("/");
+        		this.ds_class.setColumn(this.row,"basketLimit",this.count2+"/"+limit[1]);
+        		limit = this.ds_class.getColumn(this.row,"basketLimit")
         		var classSeq = this.ds_class.getColumn(this.row,"classSeq");
+        		trace(limit);
         		this.transaction(
-        			"/limitUpd"
-        			,"/limitUpd.nex"
+        			"/limitBasketUpd"
+        			,"/limitBasketUpd.nex"
         			,""
         			,""
         			,"limit="+limit +" classSeq="+classSeq
         			,"fn_callback"
         		);
         		this.ds_class.deleteRow(this.row);
-        		}else{
-        			alert("인원수를 초과했습니다");
-        			this.ds_myClass.deleteRow(this.ds_myClass.getRowCount()-1);
-        			var className= this.ds_class.getColumn(this.row,"className");
-        			for(var i=0; i<this.ds_stdTimeTable.getRowCount();i++){
-        			for(var j=0; j<this.ds_stdTimeTable.getColCount(); j++){
-        				if(this.ds_stdTimeTable.getColumn(i,j)==className){
-        					this.ds_stdTimeTable.setColumn(i,j,"");
-        				};
-        			}
-        		}
-        		}
         	}else if(sId == "stdTimeTableDelete"){
-        		var limit = this.ds_myClass.getColumn(this.row,"limit").split("/");
-        		this.ds_myClass.setColumn(this.row,"limit",this.count+"/"+limit[1]);
-        		limit = this.ds_myClass.getColumn(this.row,"limit")
-        		var classSeq = this.ds_myClass.getColumn(this.row,"classSeq");
+        		var limit = this.ds_myBasket.getColumn(this.row,"basketLimit").split("/");
+        		this.ds_myBasket.setColumn(this.row,"basketLimit",this.count2+"/"+limit[1]);
+        		limit = this.ds_myBasket.getColumn(this.row,"basketLimit")
+        		var classSeq = this.ds_myBasket.getColumn(this.row,"classSeq");
+        		trace(limit);
         		this.transaction(
         			"/limitUpd"
-        			,"/limitUpd.nex"
+        			,"/limitBasketUpd.nex"
         			,""
         			,""
         			,"limit="+limit +" classSeq="+classSeq
         			,"fn_callback"
         		);
         		var addRow = this.ds_class.addRow();
-        		this.ds_class.copyRow(addRow,this.ds_myClass,this.row);
-        		this.ds_myClass.deleteRow(this.row);
+        		this.ds_class.copyRow(addRow,this.ds_myBasket,this.row);
+        		this.ds_myBasket.deleteRow(this.row);
         		var dept = this.Div00.form.co_dept.text;
         		if(dept == "전체"){dept = ""}
         		this.ds_class.filter("dept.indexOf('"+dept+"')>=0");
-        	}else if(sId == "stdClassUpdate"){
-        		var basketLimit = this.ds_class.getColumn(this.row,"basketLimit").split("/");
-        		this.ds_class.setColumn(this.row,"basketLimit",this.count2+"/"+basketLimit[1]);
-        		basketLimit = this.ds_class.getColumn(this.row,"basketLimit")
-        		var classSeq = this.ds_class.getColumn(this.row,"classSeq");
-        		this.transaction(
-        			"/limitUpdBasket"
-        			,"/limitBasketUpd.nex"
-        			,""
-        			,""
-        			,"limit="+basketLimit +" classSeq="+classSeq
-        			,"fn_callback"
-        		);
-        		var limit = this.ds_class.getColumn(this.row,"limit").split("/");
-        		this.ds_class.setColumn(this.row,"limit",this.count+"/"+limit[1]);
-        		limit = this.ds_class.getColumn(this.row,"limit")
-        		this.transaction(
-        			"/limitUpd"
-        			,"/limitUpd.nex"
-        			,""
-        			,""
-        			,"limit="+limit +" classSeq="+classSeq
-        			,"fn_callback"
-        		);
-        		this.ds_class.deleteRow(this.row);
-        	}else if(sId == "stdBasketDelete"){
-        		var basketLimit = this.ds_class.getColumnNF(this.row,"basketLimit").split("/");
-        		this.ds_class.setColumnNF(this.row,"basketLimit",this.count2+"/"+basketLimit[1]);
-        		basketLimit = this.ds_class.getColumnNF(this.row,"basketLimit")
-        		var classSeq = this.ds_class.getColumnNF(this.row,"classSeq");
-        		this.transaction(
-        			"/limitUpdBasket"
-        			,"/limitBasketUpd.nex"
-        			,""
-        			,""
-        			,"limit="+basketLimit +" classSeq="+classSeq
-        			,"fn_callback"
-        		);
-        		var limit = this.ds_class.getColumnNF(this.row,"limit").split("/");
-        		this.ds_class.setColumnNF(this.row,"limit",this.count+"/"+limit[1]);
-        		limit = this.ds_class.getColumnNF(this.row,"limit")
-        		this.transaction(
-        			"/limitUpd"
-        			,"/limitUpd.nex"
-        			,""
-        			,""
-        			,"limit="+limit +" classSeq="+classSeq
-        			,"fn_callback"
-        		);
         	}
         }
         this.Grid00_00_oncellclick = function(obj,e)
         {
         	if(e.col==0){
-        		var nRow = this.ds_myClass.rowposition;
-        		var className = this.ds_myClass.getColumn(nRow,"className");
-        		var classCode =this.ds_myClass.getColumn(nRow,"classSeq");
+        		var nRow = this.ds_myBasket.rowposition;
+        		var className = this.ds_myBasket.getColumn(nRow,"className")+" (예비)*";
+        		var classCode =this.ds_myBasket.getColumn(nRow,"classSeq");
         		var sCode = this.Div00.form.sta_sSeq.text;
         		var myPoint = this.Div00.form.sta_point.text;
-        		var point = this.ds_myClass.getColumn(nRow,"classPoint").replace("학점","");
+        		var point = this.ds_myBasket.getColumn(nRow,"classPoint").replace("학점","");
         		//학점 갱신
         		this.Div00.form.sta_point.set_text(nexacro.toNumber(myPoint)+nexacro.toNumber(point));
         		//DB에서 해당 시간표 삭제
@@ -641,8 +529,8 @@
         		this.ds_stdClass.deleteRow(stdRow);
         	}
         	if(e.col==4){
-        		var classSeq = this.ds_myClass.getColumn(e.row,"classSeq");
-        		var proCode = this.ds_myClass.getColumn(e.row,"proCode");
+        		var classSeq = this.ds_myBasket.getColumn(e.row,"classSeq");
+        		var proCode = this.ds_myBasket.getColumn(e.row,"proCode");
         		var x = this.width/2-500;
         		var y = this.height/2-340;
         		var objCF = new ChildFrame();
@@ -665,27 +553,6 @@
 
         };
 
-        this.Div00_basket_onclick = function(obj,e)
-        {
-        	var sCode = this.Div00.form.sta_sSeq.text;
-        	var point = this.Div00.form.sta_point.text;
-        	var x = this.width/2-450;
-        	var y = this.height/2-240;
-        	var objCF = new ChildFrame();
-        	objCF.init("popTimeTable",x,y,900,480,0,0,"stdWork::basketList.xfdl");
-        	objCF.set_showtitlebar(false);
-
-        	objCF.showModal(this.getOwnerFrame(),{sCode : sCode,point : point},this,"fn_callback_basket");
-        };
-
-        this.fn_callback_basket=function(sId,code){
-        	if(code != ""){
-        		this.reload();
-        	}
-        }
-
-
-
 
         });
         
@@ -697,7 +564,6 @@
             this.Div00.form.co_dept.addEventHandler("onitemchanged",this.Div00_co_dept_onitemchanged,this);
             this.Div00.form.edt_className.addEventHandler("onchanged",this.Div00_Edit00_onchanged,this);
             this.Div00.form.btnClassSearch.addEventHandler("onclick",this.Div00_btnClassSearch_onclick,this);
-            this.Div00.form.basket.addEventHandler("onclick",this.Div00_basket_onclick,this);
             this.Div00.form.classTime.addEventHandler("onclick",this.Div00_classTime_onclick,this);
             this.Static01_00.addEventHandler("onclick",this.Div00_Static01_onclick,this);
             this.Grid00.addEventHandler("oncellclick",this.Grid00_oncellclick,this);
@@ -705,7 +571,7 @@
             this.Grid00_00.addEventHandler("oncellclick",this.Grid00_00_oncellclick,this);
         };
 
-        this.loadIncludeScript("regist.xfdl");
+        this.loadIncludeScript("testRegist.xfdl");
         this.loadPreloadList();
         
         // Remove Reference

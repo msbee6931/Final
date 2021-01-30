@@ -20,7 +20,7 @@
 
             
             // UI Components Initialize
-            obj = new Static("Static00","21","20","59","40",null,null,null,null,null,null,this);
+            obj = new Static("Static00","6","20","49","40",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_text("과목코드");
             obj.set_textAlign("center");
@@ -36,11 +36,12 @@
             obj.set_textAlign("center");
             this.addChild(obj.name, obj);
 
-            obj = new Static("sta_classSeq","80","20","200","40",null,null,null,null,null,null,this);
+            obj = new Static("sta_classSeq","55","10","235","55",null,null,null,null,null,null,this);
             obj.set_taborder("3");
             obj.set_text("");
             obj.set_border("1px solid black");
             obj.set_padding("0px 0px 0px 5px");
+            obj.set_wordWrap("char");
             this.addChild(obj.name, obj);
 
             obj = new Button("btn_send","35","358","90","25",null,null,null,null,null,null,this);
@@ -101,12 +102,14 @@
         	}
         };
 
+
         });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
             this.addEventHandler("onload",this.rejectMsg_onload,this);
+            this.sta_classSeq.addEventHandler("onclick",this.sta_classSeq_onclick,this);
             this.btn_send.addEventHandler("onclick",this.btn_send_onclick,this);
             this.btn_cancel.addEventHandler("onclick",this.btn_cancel_onclick,this);
         };
