@@ -12,6 +12,7 @@
 <input type=button id=payment value= "납부 영수증">
 <input type=button id=transcript value=성적증명서>
 <input type=button id=free value=자유게시판>
+<input type=button id=request value=건의게시판>
 </body>
 <script>
 	document.getElementById("enroll").onclick=function(){
@@ -28,6 +29,9 @@
 	}
 	document.getElementById("free").onclick=function(){
 		location.href="/free/boardList"
+	}
+	document.getElementById("request").onclick=function(){
+		location.href="/request/boardList"
 	}
 </script>
 </html>
