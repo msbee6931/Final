@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 
 import kh.spring.dto.FreeBoardDTO;
 import kh.spring.dto.FreeCommentDTO;
+import kh.spring.service.FreeBoardService;
 import kh.spring.service.FreeCommentService;
 @Controller
 @RequestMapping("fcomment")
@@ -31,6 +32,8 @@ public class FreeCommentController {
 		@Autowired
 	   private FreeCommentService service;
 	   @Autowired
+	   private FreeBoardService FBservice;
+		@Autowired
 	   private HttpSession session;
 	   
 	   
@@ -70,6 +73,9 @@ public class FreeCommentController {
 	        
 	         List <FreeCommentDTO> list = service.selectAll(Integer.toString(dto.getMain_seq()),page);
 	         model.addAttribute("list",list);
+	         
+	 		FreeBoardDTO dto2 = FBservice.selectBySeq(Integer.toString(dto.getMain_seq()));
+			model.addAttribute("dto",dto2);
 	         return "Board/FreeView";
 	      }
 	      return "false" ;
@@ -92,11 +98,18 @@ public class FreeCommentController {
 	   @RequestMapping("delete")
 	   @ResponseBody
 	   public String delete(HttpServletRequest request) {
-	      System.out.println("delete.FreeComment 요청 확인");
-	      int rSeq=Integer.parseInt(request.getParameter("revSeq"));
-	      String result = Integer.toString(service.delete(rSeq));
-	            
-	      return result;
+	      System.out.println("delete 요청 확인");
+	      String mSeq=request.getParameter("mainSeq");
+	      int rSeq= Integer.parseInt(request.getParameter("revSeq"));
+
+	       int result = service.delete(rSeq);
+	       int page = 1;
+	       if(result>0) {
+	    	   Gson gson = new Gson();
+	    	   List<FreeCommentDTO> list = service.selectAll(mSeq, page);
+	    	   return gson.toJson(list);
+	       }
+	      return "false";
 	   }
 	   
 	   @RequestMapping("update")

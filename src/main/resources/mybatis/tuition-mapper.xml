@@ -1,0 +1,8 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Tuition">
+<select id="selectByStd_code" resultType="kh.spring.dto.TuitionDTO">
+select * from tuition where std_code=#{std_code}
+</select>
+</mapper>

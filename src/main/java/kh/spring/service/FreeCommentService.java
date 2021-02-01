@@ -75,4 +75,8 @@ public class FreeCommentService {
 	      }
 	      return sb.toString();
 	   }
+	   
+	   public FreeCommentDTO selectDTOByRev_Seq(String rev_seq) {
+		   return dao.selectDTOByRev_Seq(rev_seq);
+	   }
 }

@@ -17,7 +17,7 @@ public class StudentsDTO {
 	private String birth;
 	
 	
-	
+
 	public StudentsDTO() {
 		super();
 	}
@@ -109,6 +109,9 @@ public class StudentsDTO {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
+
+
+	
 	
 	
 	
