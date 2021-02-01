@@ -2,6 +2,8 @@ package kh.spring.dto;
 
 public class StudentsDTO {
 
+	
+	private int chk;
 	private int s_seq;
 	private String pw;
 	private String name;
@@ -13,6 +15,34 @@ public class StudentsDTO {
 	private String rest;
 	private String grade;
 	private String birth;
+	
+	
+	
+	public StudentsDTO() {
+		super();
+	}
+	public StudentsDTO(int chk, int s_seq, String pw, String name, int age, String email, String contact,
+			String address, String scholarship, String rest, String grade, String birth) {
+		super();
+		this.chk = chk;
+		this.s_seq = s_seq;
+		this.pw = pw;
+		this.name = name;
+		this.age = age;
+		this.email = email;
+		this.contact = contact;
+		this.address = address;
+		this.scholarship = scholarship;
+		this.rest = rest;
+		this.grade = grade;
+		this.birth = birth;
+	}
+	public int getChk() {
+		return chk;
+	}
+	public void setChk(int chk) {
+		this.chk = chk;
+	}
 	public int getS_seq() {
 		return s_seq;
 	}
@@ -79,25 +109,7 @@ public class StudentsDTO {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
-	public StudentsDTO(int s_seq, String pw, String name, int age, String email, String contact, String address,
-			String scholarship, String rest, String grade, String birth) {
-		super();
-		this.s_seq = s_seq;
-		this.pw = pw;
-		this.name = name;
-		this.age = age;
-		this.email = email;
-		this.contact = contact;
-		this.address = address;
-		this.scholarship = scholarship;
-		this.rest = rest;
-		this.grade = grade;
-		this.birth = birth;
-	}
-	public StudentsDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 	
 	
 	

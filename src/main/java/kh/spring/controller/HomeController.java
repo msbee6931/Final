@@ -10,24 +10,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-	
 
-	
+
+
 	@RequestMapping("/")
 	public String home() throws Exception{
-		
+
 		return "home";
 	}
 	@RequestMapping("/nex")
 	public String Nex() {
 		return "redirect:/nex/index.html";
 	}
-		@ExceptionHandler
-		public String ExceptionHandler(Exception e) {
-			e.printStackTrace();
-			return "error";
-		}
-	
+	@RequestMapping("pop.home")
+	public String popup() {
+		return "Pop";
 
-	
+	}
+	@RequestMapping("introduce.home")
+	public String Introduce() {
+		return "Introduce";
+	}
+	@RequestMapping("department.home")
+	public String Department() {
+		return "Department";
+	}
+	@RequestMapping("admission.home")
+	public String Admission() {
+		return "Admission";
+	}
+
+	@ExceptionHandler
+	public String ExceptionHandler(Exception e) {
+		e.printStackTrace();
+		return "error";
+	}
+
+
+
 }

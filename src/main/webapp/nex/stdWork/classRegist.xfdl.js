@@ -18,17 +18,17 @@
             
             // Object(Dataset, ExcelExportObject) Initialize
             obj = new Dataset("ds_class", this);
-            obj._setContents("<ColumnInfo><Column id=\"chk\" type=\"STRING\" size=\"256\"/><Column id=\"classPart\" type=\"STRING\" size=\"256\"/><Column id=\"className\" type=\"STRING\" size=\"256\"/><Column id=\"classSeq\" type=\"INT\" size=\"256\"/><Column id=\"classPoint\" type=\"STRING\" size=\"256\"/><Column id=\"proCode\" type=\"STRING\" size=\"256\"/><Column id=\"proName\" type=\"STRING\" size=\"256\"/><Column id=\"dept\" type=\"STRING\" size=\"256\"/><Column id=\"classTime\" type=\"STRING\" size=\"256\"/><Column id=\"classRoom\" type=\"STRING\" size=\"256\"/><Column id=\"limit\" type=\"STRING\" size=\"256\"/><Column id=\"grade\" type=\"STRING\" size=\"256\"/><Column id=\"classGoal\" type=\"STRING\" size=\"256\"/><Column id=\"classMethod\" type=\"STRING\" size=\"256\"/><Column id=\"classEvaluation\" type=\"STRING\" size=\"256\"/><Column id=\"classReferences\" type=\"STRING\" size=\"256\"/><Column id=\"reqState\" type=\"STRING\" size=\"256\"/><Column id=\"rejectMsg\" type=\"STRING\" size=\"256\"/><Column id=\"reg_date\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"dept\">정보통신학과</Col><Col id=\"className\">정보통신학개론</Col><Col id=\"classPart\">전공필수</Col></Row><Row><Col id=\"className\">간호학개론</Col><Col id=\"dept\">간호학과</Col><Col id=\"classPart\">교양필수</Col></Row></Rows>");
+            obj._setContents("<ColumnInfo><Column id=\"chk\" type=\"STRING\" size=\"256\"/><Column id=\"classPart\" type=\"STRING\" size=\"256\"/><Column id=\"className\" type=\"STRING\" size=\"256\"/><Column id=\"classSeq\" type=\"INT\" size=\"256\"/><Column id=\"classPoint\" type=\"STRING\" size=\"256\"/><Column id=\"proCode\" type=\"STRING\" size=\"256\"/><Column id=\"proName\" type=\"STRING\" size=\"256\"/><Column id=\"dept\" type=\"STRING\" size=\"256\"/><Column id=\"classTime\" type=\"STRING\" size=\"256\"/><Column id=\"classRoom\" type=\"STRING\" size=\"256\"/><Column id=\"limit\" type=\"STRING\" size=\"256\"/><Column id=\"grade\" type=\"STRING\" size=\"256\"/><Column id=\"classGoal\" type=\"STRING\" size=\"256\"/><Column id=\"classMethod\" type=\"STRING\" size=\"256\"/><Column id=\"classEvaluation\" type=\"STRING\" size=\"256\"/><Column id=\"classReferences\" type=\"STRING\" size=\"256\"/><Column id=\"reqState\" type=\"STRING\" size=\"256\"/><Column id=\"rejectMsg\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
 
 
             obj = new Dataset("ds_dept", this);
-            obj._setContents("<ColumnInfo><Column id=\"id\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"id\">00</Col><Col id=\"name\">전체</Col></Row><Row><Col id=\"id\">01</Col><Col id=\"name\">정보통신학과</Col></Row><Row><Col id=\"id\">02</Col><Col id=\"name\">간호학과</Col></Row><Row><Col id=\"id\">03</Col><Col id=\"name\">경찰경호화과</Col></Row><Row><Col id=\"id\">04</Col><Col id=\"name\">산업디자인과</Col></Row><Row><Col id=\"id\">05</Col><Col id=\"name\">교양학부</Col></Row></Rows>");
+            obj._setContents("<ColumnInfo><Column id=\"id\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"id\">01</Col><Col id=\"name\">정보통신학과</Col></Row><Row><Col id=\"id\">02</Col><Col id=\"name\">간호학과</Col></Row><Row><Col id=\"id\">03</Col><Col id=\"name\">경찰경호화과</Col></Row><Row><Col id=\"id\">04</Col><Col id=\"name\">산업디지인과</Col></Row><Row><Col id=\"id\">05</Col><Col id=\"name\">교양학부</Col></Row></Rows>");
             this.addChild(obj.name, obj);
 
 
             obj = new Dataset("ds_part", this);
-            obj._setContents("<ColumnInfo><Column id=\"id\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"id\">A</Col><Col id=\"name\">전공필수</Col></Row><Row><Col id=\"id\">B</Col><Col id=\"name\">전공선택</Col></Row><Row><Col id=\"id\">C</Col><Col id=\"name\">교양필수</Col></Row><Row><Col id=\"id\">D</Col><Col id=\"name\">지정교양</Col></Row><Row><Col id=\"id\">E</Col><Col id=\"name\">지정교양</Col></Row><Row><Col id=\"id\">F</Col><Col id=\"name\">계열기초</Col></Row><Row><Col id=\"id\">All</Col><Col id=\"name\">전체</Col></Row></Rows>");
+            obj._setContents("<ColumnInfo><Column id=\"id\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"id\">A</Col><Col id=\"name\">전공필수</Col></Row><Row><Col id=\"id\">B</Col><Col id=\"name\">전공선택</Col></Row><Row><Col id=\"id\">C</Col><Col id=\"name\">교양필수</Col></Row><Row><Col id=\"id\">D</Col><Col id=\"name\">교양선택</Col></Row><Row><Col id=\"id\">E</Col><Col id=\"name\">지정교양</Col></Row><Row><Col id=\"id\">F</Col><Col id=\"name\">계열기초</Col></Row></Rows>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -149,9 +149,9 @@
             obj.set_innerdataset("ds_part");
             obj.set_codecolumn("id");
             obj.set_datacolumn("name");
-            obj.set_text("전체");
-            obj.set_value("All");
-            obj.set_index("6");
+            obj.set_text("전공필수");
+            obj.set_value("A");
+            obj.set_index("0");
             this.Div00.addChild(obj.name, obj);
 
             obj = new Edit("edt_className","69","299","120","30",null,null,null,null,null,null,this.Div00.form);
@@ -195,7 +195,7 @@
             obj = new Grid("Grid00","210","35","860","260",null,null,null,null,null,null,this);
             obj.set_taborder("2");
             obj.set_binddataset("ds_class");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"58\"/><Column size=\"44\"/><Column size=\"68\"/><Column size=\"216\"/><Column size=\"37\"/><Column size=\"59\"/><Column size=\"181\"/><Column size=\"48\"/><Column size=\"58\"/><Column size=\"88\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"이수구분\"/><Cell col=\"1\" text=\"학년\"/><Cell col=\"2\" text=\"과목코드\"/><Cell col=\"3\" text=\"과목명\"/><Cell col=\"4\" text=\"학점\"/><Cell col=\"5\" text=\"담당교수\"/><Cell col=\"6\" text=\"강의시간\"/><Cell col=\"7\" text=\"신청\"/><Cell col=\"8\" text=\"강의실\"/><Cell col=\"9\" text=\"신청/제한인원\"/></Band><Band id=\"body\"><Cell text=\"bind:classPart\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:grade\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:classSeq\" textAlign=\"center\" displaytype=\"mask\" maskeditformat=\"########\"/><Cell col=\"3\" text=\"bind:className\" textDecoration=\"underline\" tooltiptext=\"수업계획서 보기\" textAlign=\"center\"/><Cell col=\"4\" text=\"bind:classPoint\" textAlign=\"center\"/><Cell col=\"5\" text=\"bind:proName\" textAlign=\"center\"/><Cell col=\"6\" text=\"bind:classTime\" textAlign=\"center\"/><Cell col=\"7\" displaytype=\"buttoncontrol\" text=\"신청\" textAlign=\"center\"/><Cell col=\"8\" text=\"bind:classRoom\" textAlign=\"center\"/><Cell col=\"9\" text=\"bind:limit\" textAlign=\"center\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"58\"/><Column size=\"44\"/><Column size=\"68\"/><Column size=\"216\"/><Column size=\"37\"/><Column size=\"59\"/><Column size=\"181\"/><Column size=\"48\"/><Column size=\"58\"/><Column size=\"88\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"이수구분\"/><Cell col=\"1\" text=\"학년\"/><Cell col=\"2\" text=\"과목코드\"/><Cell col=\"3\" text=\"과목명\"/><Cell col=\"4\" text=\"학점\"/><Cell col=\"5\" text=\"담당교수\"/><Cell col=\"6\" text=\"강의시간\"/><Cell col=\"7\" text=\"신청\"/><Cell col=\"8\" text=\"강의실\"/><Cell col=\"9\" text=\"신청/제한인원\"/></Band><Band id=\"body\"><Cell text=\"bind:classPart\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:grade\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:classSeq\" textAlign=\"center\"/><Cell col=\"3\" text=\"bind:className\" textDecoration=\"underline\" tooltiptext=\"수업계획서 보기\" textAlign=\"center\"/><Cell col=\"4\" text=\"bind:classPoint\" textAlign=\"center\"/><Cell col=\"5\" text=\"bind:proName\" textAlign=\"center\"/><Cell col=\"6\" text=\"bind:classTime\" textAlign=\"center\"/><Cell col=\"7\" displaytype=\"buttoncontrol\" text=\"신청\" textAlign=\"center\"/><Cell col=\"8\" text=\"bind:classRoom\" textAlign=\"center\"/><Cell col=\"9\" text=\"bind:limit\" textAlign=\"center\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             obj = new Static("Static01_00_00","210","300","140","30",null,null,null,null,null,null,this);
@@ -224,7 +224,7 @@
         };
         
         // User Script
-        this.registerScript("regist.xfdl", function() {
+        this.registerScript("classRegist.xfdl", function() {
 
         this.ClassRegist_onload = function(obj,e)
         {
@@ -243,18 +243,8 @@
 
         	var dept = this.Div00.form.sta_dept.text;
         	this.Div00.form.co_dept.set_text(dept);
-        	this.ds_class.filter("dept=='"+dept+"'");
-        };
-
-        //
-        this.Div00_btnClassSearch_onclick = function(obj,e)
-        {
-        	var dept = this.Div00.form.co_dept.text;
-        	var part = this.Div00.form.co_part.text;
-        	var className = this.Div00.form.edt_className.text;
-        	if(dept == "전체"){dept = ""}
-        	if(part == "전체"){part = ""}
-        	this.ds_class.filter("dept.indexOf('"+dept+"')>=0 && classPart.indexOf('"+part+"')>=0 && className.indexOf('"+className+"')>=0")
+        	var deptValue= this.Div00.form.co_dept.value;
+        	this.ds_class.filter("dept==정보통신학과");
         };
 
         });
@@ -265,12 +255,11 @@
             this.addEventHandler("onload",this.ClassRegist_onload,this);
             this.Div00.form.Static01.addEventHandler("onclick",this.Div00_Static01_onclick,this);
             this.Div00.form.edt_className.addEventHandler("onchanged",this.Div00_Edit00_onchanged,this);
-            this.Div00.form.btnClassSearch.addEventHandler("onclick",this.Div00_btnClassSearch_onclick,this);
             this.Static01_00.addEventHandler("onclick",this.Div00_Static01_onclick,this);
             this.Static01_00_00.addEventHandler("onclick",this.Div00_Static01_onclick,this);
         };
 
-        this.loadIncludeScript("regist.xfdl");
+        this.loadIncludeScript("classRegist.xfdl");
         this.loadPreloadList();
         
         // Remove Reference
