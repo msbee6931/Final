@@ -13,7 +13,7 @@
             this.set_titletext("New Form");
             if (Form == this.constructor)
             {
-                this._setFormPosition(,30);
+                this._setFormPosition(1080,30);
             }
             
             // Object(Dataset, ExcelExportObject) Initialize

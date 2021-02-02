@@ -28,14 +28,10 @@
 
 
             obj = new FileDialog("FileDialog00", this);
-            obj.getSetter("onclose").set("FileDialog00_onclose");
             this.addChild(obj.name, obj);
 
 
             obj = new FileUpTransfer("FileUpTransfer00", this);
-            obj.getSetter("onerror").set("FileUpTransfer00_onerror");
-            obj.getSetter("onprogress").set("FileUpTransfer00_onprogress");
-            obj.getSetter("onsuccess").set("FileUpTransfer00_onsuccess");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -164,7 +160,6 @@
         		return;
         	}else{
         		if(e.reason == 3) {    //FileDialog.MULTILOAD 옵션의 파일선택
-
         			this.addFileList(e.virtualfiles);
 
         		}
@@ -389,6 +384,10 @@
             this.Div00.form.btn_del.addEventHandler("onclick",this.Div00_btn_del_onclick,this);
             this.Div00.form.btn_save.addEventHandler("onclick",this.Div00_btn_save_onclick,this);
             this.Div00.form.btn_can.addEventHandler("onclick",this.Div00_btn_can_onclick,this);
+            this.FileDialog00.addEventHandler("onclose",this.FileDialog00_onclose,this);
+            this.FileUpTransfer00.addEventHandler("onerror",this.FileUpTransfer00_onerror,this);
+            this.FileUpTransfer00.addEventHandler("onprogress",this.FileUpTransfer00_onprogress,this);
+            this.FileUpTransfer00.addEventHandler("onsuccess",this.FileUpTransfer00_onsuccess,this);
         };
 
         this.loadIncludeScript("scholar_insert_pop.xfdl");
