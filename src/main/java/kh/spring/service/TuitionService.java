@@ -16,4 +16,8 @@ public class TuitionService {
 	public int insertTuition(List<TuitionDTO> list) {
 		return tDao.insertTuition(list);
 	}
+	
+	public TuitionDTO selectByStd_code(String std_code) {
+		return tDao.selectByStd_code(std_code);
+	}
 }

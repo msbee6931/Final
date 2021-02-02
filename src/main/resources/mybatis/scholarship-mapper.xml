@@ -38,4 +38,8 @@
 	select count(*) from reqSchFile where parentSeq = #{seq}
 </select>
 
+<select id="selectDTOByStd_Code" resultType="kh.spring.dto.ScholarshipDTO">
+select * from scholarship where std_code=#{std_code}
+</select>
+
 </mapper>

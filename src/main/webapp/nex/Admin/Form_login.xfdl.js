@@ -21,7 +21,7 @@
             
             // UI Components Initialize
             obj = new Div("Div00","385","155","580","350",null,null,null,null,null,null,this);
-            obj.set_taborder("0");
+            obj.set_taborder("1");
             obj.set_text("Div00");
             obj.set_border("1px solid #c1c1c1");
             this.addChild(obj.name, obj);
@@ -49,17 +49,17 @@
             obj.set_text("로그인");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Button("btn_std","382","65","145","33",null,null,null,null,null,null,this);
+            obj = new Button("Button00","390","60","120","50",null,null,null,null,null,null,this);
             obj.set_taborder("1");
             obj.set_text("학생");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_prf","601","65","145","33",null,null,null,null,null,null,this);
+            obj = new Button("Button00_00","531","60","120","50",null,null,null,null,null,null,this);
             obj.set_taborder("2");
             obj.set_text("교수");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_adm","820","65","145","33",null,null,null,null,null,null,this);
+            obj = new Button("Button00_01","670","60","120","50",null,null,null,null,null,null,this);
             obj.set_taborder("3");
             obj.set_text("관리자");
             this.addChild(obj.name, obj);
@@ -87,7 +87,7 @@
         	this.objApp.mainframe.VFrameSet00.set_separatesize("0,50,*,60");
         };
 
-        this.btn_std_onclick = function(obj,e)
+        this.Button00_onclick = function(obj,e)
         {
 
         	this.objApp.mainframe.VFrameSet00.TopFrame.set_formurl("Student::Form_Top.xfdl");
@@ -95,10 +95,9 @@
         	this.objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.ChildFrame00.set_formurl("Student::Form_Mdi.xfdl");
         	this.objApp.mainframe.VFrameSet00.BottomFrame.set_formurl("Student::Form_Bottom.xfdl");
         	this.objApp.mainframe.VFrameSet00.set_separatesize("0,50,*,60");
-
         };
 
-        this.btn_prf_onclick = function(obj,e)
+        this.Button00_00_onclick = function(obj,e)
         {
         	this.objApp.mainframe.VFrameSet00.TopFrame.set_formurl("Professor::Form_Top.xfdl");
         	this.objApp.mainframe.VFrameSet00.HFrameSet00.LeftFrame.set_formurl("Professor::Form_Left.xfdl");
@@ -106,7 +105,7 @@
         	this.objApp.mainframe.VFrameSet00.set_separatesize("0,50,*,60");
         };
 
-        this.btn_adm_onclick = function(obj,e)
+        this.Button00_01_onclick = function(obj,e)
         {
         	this.objApp.mainframe.VFrameSet00.TopFrame.set_formurl("Admin::Form_Top.xfdl");
         	this.objApp.mainframe.VFrameSet00.HFrameSet00.LeftFrame.set_formurl("Admin::Form_Left.xfdl");
@@ -121,9 +120,9 @@
         this.on_initEvent = function()
         {
             this.Div00.form.Button00.addEventHandler("onclick",this.Div00_Button00_onclick,this);
-            this.btn_std.addEventHandler("onclick",this.btn_std_onclick,this);
-            this.btn_prf.addEventHandler("onclick",this.btn_prf_onclick,this);
-            this.btn_adm.addEventHandler("onclick",this.btn_adm_onclick,this);
+            this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
+            this.Button00_00.addEventHandler("onclick",this.Button00_00_onclick,this);
+            this.Button00_01.addEventHandler("onclick",this.Button00_01_onclick,this);
         };
 
         this.loadIncludeScript("Form_login.xfdl");

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,9 +28,16 @@
 
 
 <style>
-   div{border: 1px solid black}
-.container{width:1000px; height:600px; position: relative; text-align: center;}
+div {
+	border: 1px solid black
+}
 
+.container {
+	width: 1000px;
+	height: 600px;
+	position: relative;
+	text-align: center;
+}
 
 .title {
 	width: 100%;
@@ -63,32 +69,40 @@
 	float: left;
 	width: 5%
 }
-.main{
-	float:left;
-	width:100%;
-	height:500px;
+
+.main {
+	float: left;
+	width: 100%;
+	height: 500px;
 }
 
 .rev {
-	width:1000px; height:300px;
-  position: relative;
-  left: 17%;
+	width: 1000px;
+	height: 300px;
+	position: relative;
+	left: 17%;
 }
-.revBTN{
-width:1000px; height:300px;
-  position: relative;
-  left: 17%;
-  text-align:right
+
+.revBTN {
+	width: 1000px;
+	height: 300px;
+	position: relative;
+	left: 17%;
+	text-align: right
 }
-.revlist{
-width:1000px; height:800px;
-  position: relative;
-  left: 17%;
+
+.revlist {
+	width: 1000px;
+	height: 800px;
+	position: relative;
+	left: 17%;
 }
-.rUpdModal{
-width:1000px; height:800px;
-  position: relative;
-  left: 17%;
+
+.rUpdModal {
+	width: 600px;
+	height: 200px;
+	position: relative;
+	left: 17%;
 }
 </style>
 </head>
@@ -103,7 +117,7 @@ width:1000px; height:800px;
 		<div class=bar4>${dto.write_date }</div>
 		<div class=bar5>${dto.view_count }</div>
 
-		<div class=main> ${dto.contents }</div>
+		<div class=main>${dto.contents }</div>
 
 
 
@@ -123,66 +137,285 @@ width:1000px; height:800px;
 				<input type=button id=btn2 value="돌아가기">
 			</form>
 		</div>
+	</div>
+
+
+	<form action=/fcomment/insert method="post"
+		enctype="multipart/form-data">
+		<div class=rev>
+			<textarea id=description name=rev_contents></textarea>
+		</div>
+		<div class=revBTN>
+			<input type="hidden" id=main_seq name=main_seq value=${dto.seq }>
+			<input type="submit" id=write value="글 쓰기">
 
 		</div>
+	</form>
 
 
-     <form action=/fcomment/insert method="post"  enctype="multipart/form-data">
-       <div class=rev>
-             <textarea id = description name = rev_contents></textarea>
-       </div>
-        <div class=revBTN>
-        	<input type="hidden" id=main_seq name=main_seq value=${dto.seq }>
-            <input type="submit" id = write value="글 쓰기">
+	<div class="revlist" id=revList>
+		<input type=hidden id=mSeq value=${dto.seq }>
+		<c:forEach var="i" items="${list}">
+			<div class='comment'>
+				<span class='revWriter'>${i.rev_writer}</span> <span class='revDate'>${i.rev_write_date}</span>
+				<p class='revContents'>${i.rev_contents}</p>
+				<!-- 여기다가 c:if id==i.writer_seq 해주기 -->
+				<button type='button' class='rUpdBtn' data-revSeq=${i.rev_seq }
+					data-mainSeq=${i.main_seq }>수정</button>
+				<button type='button' class='rDelBtn' data-revSeq=${i.rev_seq }
+					data-mainSeq=${i.main_seq }>삭제</button>
 
-        </div>
-        </form>
-
-    
-		<div class="revlist" id=revList>
-			<input type=hidden id=mSeq value=${dto.seq }>
-				<c:forEach var="i" items="${list}">
-					<div class='inputArea8_1_0'>
-						<span class='revWriter'>${i.rev_writer}</span> <span
-							class='revDate'>${i.rev_write_date}</span>
-						<p class='revContents'>${i.rev_contents}</p>
-						<button type='button' class='rUpdBtn' data-rev_seq=${i.rev_seq }>수정</button>
-						<button type='button' class='rDelBtn' data-rev_seq=${i.rev_seq }>삭제</button>
-					</div>
-				</c:forEach>
-				<!--댓글 페이징 처리 -->
 			</div>
-`
-			
-	<script>
-   $(function(){
+		</c:forEach>
+
+		<div class=rUpdModal>
+			<textarea id=uptContents></textarea>
+			<input type=button id=rUpdateBtn value=등록> <input type=button
+				id=rUpdateReturn value=돌아가기>
+		</div>
+	</div>
+	`
+
+
+	<script>      
+      
+	document.getElementById("btn2").onclick=function(){
+           location.href="/free/boardList?cpage=1"
+       }
+   
+	$(function(){
 	    //id가 description인 태그에 summernote 적용
 	    $("#description").summernote({
 	        height : 300,
 	        width : 1000
 	    });
+	    $("#uptContents").summernote({
+	    	height:200,
+	    	width:600
+	    });
 	});
+	$(".rDelBtn").click(function(){
+
+			$.ajax({
+				url:"/fcomment/delete",
+				type:"post",
+				data:{revSeq:$(this).attr("data-revSeq"),mainSeq:$(this).attr("data-mainSeq")},
+				dataType:"json"
+			}).done(function(obj){
+				if(obj.length>0){
+   					alert("삭제 성공!");
+   					$(".comment").remove();
+   					for (let i=0; i<obj.length;i++){
+                        let div = $("<div class='comment'>");
+                        str= "<span class='revWriter'>"+obj[i].rev_writer+"</span>"+
+                            "<span class='revDate'>"+obj[i].rev_write_date+"</span>"+
+                            "<p class='revContents'>"+obj[i].rev_contents+"</p>"+
+                            "<button type ='button' class='rUpdBtn' data-revSeq="+obj[i].rev_seq+" data-mainSeq="+obj[i].main_seq+">수정</button>"+
+                            "<button type='button' class='rDelBtn'  data-revSeq="+obj[i].rev_seq+" data-mainSeq="+obj[i].main_seq+">삭제</button>"+
+                            "</div>"
+                        div.html(str);
+                        $("#revList").append(div);
+                    }
+   					
+   					$("#revList").on("click",".rDelBtn",function(){
+
+   						$.ajax({
+   							url:"/fcomment/delete",
+   							type:"post",
+   							data:{revSeq:$(this).attr("data-revSeq"),mainSeq:$(this).attr("data-mainSeq")},
+   							dataType:"json"
+   						}).done(function(obj){
+   							if(obj.length>0){
+   			   					alert("삭제 성공!");
+   			   					$(".comment").remove();
+   			   					for (let i=0; i<obj.length;i++){
+   			                        let div = $("<div class='comment'>");
+   			                        str= "<span class='revWriter'>"+obj[i].rev_writer+"</span>"+
+   			                            "<span class='revDate'>"+obj[i].rev_write_date+"</span>"+
+   			                            "<p class='revContents'>"+obj[i].rev_contents+"</p>"+
+   			                            "<button type ='button' class='rUpdBtn' data-revSeq="+obj[i].rev_seq+" data-mainSeq="+obj[i].main_seq+">수정</button>"+
+   			                            "<button type='button' class='rDelBtn'  data-revSeq="+obj[i].rev_seq+" data-mainSeq="+obj[i].main_seq+">삭제</button>"+
+   			                            "</div>"
+   			                        div.html(str);
+   			                        $("#revList").append(div);
+   			                    }
+   							}
+   						})
+   					});
+
+   					$("#revList").on("click",".rUpdBtn",function(){
+   						$(".comment").hide();
+   			   			$(".rUpdModal").show();
+   			   			
+   			   			$("#rUpdateReturn").click(function(){
+   			   		   		$(".rUpdModal").hide();
+   			   		   		$(".comment").show();
+   			   		   	})
+   			   		   	let Seq = $(this).attr("data-revSeq");
+   						let mainSeq = $(this).attr("data-mainSeq");
+   			
+   						$("#rUpdateBtn").click(function(){
+
+   						let updConfirm = confirm("수정하시겠습니까?");
+   		   		   		if(updConfirm) {
+   		   		   			$.ajax({
+   		   		   				url:"/fcomment/update",
+   		   		   				type:"post",
+   		   		   				data:{revSeq:Seq,revContents:$("#uptContents").val(),mSeq:mainSeq},
+   		   		   				dataType:"json"
+   		   		   			}).done(function(obj){
+   		   		   				if(obj.length>0){
+   		   		   					alert("업데이트 성공!");
+   		   		   					$(".comment").remove();
+   		   		   					for (let i=0; i<obj.length;i++){
+   		   		                        let div = $("<div class='comment'>");
+   		   		                        str= "<span class='revWriter'>"+obj[i].rev_writer+"</span>"+
+   		   		                            "<span class='revDate'>"+obj[i].rev_write_date+"</span>"+
+   		   		                            "<p class='revContents'>"+obj[i].rev_contents+"</p>"+
+   		   		                            "<button type ='button' class='rUpdBtn' data-revSeq="+obj[i].rev_seq+" data-mainSeq="+obj[i].main_seq+">수정</button>"+
+   		   		                            "<button type='button' class='rDelBtn'  data-revSeq="+obj[i].rev_seq+" data-mainSeq="+obj[i].main_seq+">삭제</button>"+
+   		   		                            "</div>"
+   		   		                        div.html(str);
+   		   		                        $("#revList").append(div);
+   		   		                    }
+   		   		   			 	 $("#uptContents").val()="";
+   		   		   				 $(".rUpdModal").attr("style", "display:none;");
+   		   		   				}
+   							});
+   						}
+   					});
+   				});
+   			 $(".rUpdModal").attr("style", "display:none;");
+			}
+		})
+		
+	});
+
+	
+	
+	
+   	$(".rUpdModal").hide(); 
    	
-      
-       document.getElementById("btn2").onclick=function(){
-           location.href="/free/boardList?cpage=1"
-       }
+   	$(".rUpdBtn").click(function() {
+			$(".comment").hide();
+   			$(".rUpdModal").show();
+   			
+   			$("#rUpdateReturn").click(function(){
+   		   		$(".rUpdModal").hide();
+   		   		$(".comment").show();
+   		   	})
+   		   	
+   		   	let Seq = $(this).attr("data-revSeq");
+   			let mainSeq = $(this).attr("data-mainSeq");
+   			
+   			$("#rUpdateBtn").click(function(){
+   		   		let updConfirm = confirm("수정하시겠습니까?");
+   		   		if(updConfirm) {
+   		   			$.ajax({
+   		   				url:"/fcomment/update",
+   		   				type:"post",
+   		   				data:{revSeq:Seq,revContents:$("#uptContents").val(),mSeq:mainSeq},
+   		   				dataType:"json"
+   		   			}).done(function(obj){
+   		   				if(obj.length>0){
+   		   					alert("업데이트 성공!");
+   		   					$(".comment").remove();
+   		   					for (let i=0; i<obj.length;i++){
+   		                        let div = $("<div class='comment'>");
+   		                        str= "<span class='revWriter'>"+obj[i].rev_writer+"</span>"+
+   		                            "<span class='revDate'>"+obj[i].rev_write_date+"</span>"+
+   		                            "<p class='revContents'>"+obj[i].rev_contents+"</p>"+
+   		                            "<button type ='button' class='rUpdBtn' data-revSeq="+obj[i].rev_seq+" data-mainSeq="+obj[i].main_seq+">수정</button>"+
+   		                            "<button type='button' class='rDelBtn'  data-revSeq="+obj[i].rev_seq+" data-mainSeq="+obj[i].main_seq+">삭제</button>"+
+   		                            "</div>"
+   		                        div.html(str);
+   		                        $("#revList").append(div);
+   		                    }
+   		   				$("#uptContents").val()="";
+   		   				$("#revList").on("click",".rDelBtn",function(){
+
+   	   						$.ajax({
+   	   							url:"/fcomment/delete",
+   	   							type:"post",
+   	   							data:{revSeq:$(this).attr("data-revSeq"),mainSeq:$(this).attr("data-mainSeq")},
+   	   							dataType:"json"
+   	   						}).done(function(obj){
+   	   							if(obj.length>0){
+   	   			   					alert("삭제 성공!");
+   	   			   					$(".comment").remove();
+   	   			   					for (let i=0; i<obj.length;i++){
+   	   			                        let div = $("<div class='comment'>");
+   	   			                        str= "<span class='revWriter'>"+obj[i].rev_writer+"</span>"+
+   	   			                            "<span class='revDate'>"+obj[i].rev_write_date+"</span>"+
+   	   			                            "<p class='revContents'>"+obj[i].rev_contents+"</p>"+
+   	   			                            "<button type ='button' class='rUpdBtn' data-revSeq="+obj[i].rev_seq+" data-mainSeq="+obj[i].main_seq+">수정</button>"+
+   	   			                            "<button type='button' class='rDelBtn'  data-revSeq="+obj[i].rev_seq+" data-mainSeq="+obj[i].main_seq+">삭제</button>"+
+   	   			                            "</div>"
+   	   			                        div.html(str);
+   	   			                        $("#revList").append(div);
+   	   			                    }
+   	   							}
+   	   						})
+   	   					});
+
+   	   					$("#revList").on("click",".rUpdBtn",function(){
+   	   						$(".comment").hide();
+   	   			   			$(".rUpdModal").show();
+   	   			   			
+   	   			   			$("#rUpdateReturn").click(function(){
+   	   			   		   		$(".rUpdModal").hide();
+   	   			   		   		$(".comment").show();
+   	   			   		   	})
+   	   			   		   	let Seq = $(this).attr("data-revSeq");
+   	   						let mainSeq = $(this).attr("data-mainSeq");
+   	   			
+   	   						$("#rUpdateBtn").click(function(){
+
+   	   						let updConfirm = confirm("수정하시겠습니까?");
+   	   		   		   		if(updConfirm) {
+   	   		   		   			$.ajax({
+   	   		   		   				url:"/fcomment/update",
+   	   		   		   				type:"post",
+   	   		   		   				data:{revSeq:Seq,revContents:$("#uptContents").val(),mSeq:mainSeq},
+   	   		   		   				dataType:"json"
+   	   		   		   			}).done(function(obj){
+   	   		   		   				if(obj.length>0){
+   	   		   		   					alert("업데이트 성공!");
+   	   		   		   					$(".comment").remove();
+   	   		   		   					for (let i=0; i<obj.length;i++){
+   	   		   		                        let div = $("<div class='comment'>");
+   	   		   		                        str= "<span class='revWriter'>"+obj[i].rev_writer+"</span>"+
+   	   		   		                            "<span class='revDate'>"+obj[i].rev_write_date+"</span>"+
+   	   		   		                            "<p class='revContents'>"+obj[i].rev_contents+"</p>"+
+   	   		   		                            "<button type ='button' class='rUpdBtn' data-revSeq="+obj[i].rev_seq+" data-mainSeq="+obj[i].main_seq+">수정</button>"+
+   	   		   		                            "<button type='button' class='rDelBtn'  data-revSeq="+obj[i].rev_seq+" data-mainSeq="+obj[i].main_seq+">삭제</button>"+
+   	   		   		                            "</div>"
+   	   		   		                        div.html(str);
+   	   		   		                        $("#revList").append(div);
+   	   		   		                    }
+   	   		   		   				 $("#uptContents").val()="";
+   	   		   		   				 $(".rUpdModal").attr("style", "display:none;");
+   	   		   		   				}
+   	   							});
+   	   						}
+   	   					});
+   	   				});
+   		   			 $(".rUpdModal").attr("style", "display:none;");
+   		   			}
+   		   		})
+   			}
+   		})
+     });
+
+   	
+   
+   	
+   	
+   	
+   	
+
        
-      
-
-       $("#upd").click(function() {
-           formObj.attr("action", "/fcomment/update");
-           formObj.submit();
-       });
-
-       $("#del").click(function() {
-           let con = confirm("정말로 삭제하시겠습니까?");
-           if (con) {
-               formObj.attr("action", "/fcomment/delete");
-               formObj.submit();
-           }
-       });
    </script>
-    </script>
+
 </body>
 </html>

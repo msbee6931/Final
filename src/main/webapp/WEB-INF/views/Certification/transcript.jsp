@@ -26,19 +26,19 @@
    <h1 class= center>성적증명서</h1>
     <div class=container>
         <div class=header1>
-            학 번 : <br>
-            성 명 : <br>
-            성 별 : <br>
-            생 년 월 일 : 
+            학 번 : ${dto.s_seq }<br>
+            성 명 : ${dto.name }<br>
+            성 별 : ${dto.gender }<br>
+            생 년 월 일 : ${birth}
              
         </div>
         <div class=header2>
             대 학 : KH대학교<br><br>
-            학 부(과) : <br>
+            학 부(과) :${part} <br>
 
         </div>
         <div class=header1>
-            입학 연월일 : <br>
+            입학 연월일 : 20${s_id }.03.01<br>
             졸업 연월일 : <br>
             학 위 명 :
         </div>

@@ -1,5 +1,6 @@
 package kh.spring.dao;
 
+
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -12,6 +13,7 @@ import kh.spring.dto.ScholarshipDTO;
 
 @Repository
 public class ScholarshipDAO {
+
 	@Autowired
 	SqlSession session;
 	
@@ -53,4 +55,10 @@ public class ScholarshipDAO {
 		return session.selectOne("Scholarship.selectCountFile",seq);
 	}
 	
+
+	
+	public ScholarshipDTO selectDTOByStd_Code(int std_code) {
+		return session.selectOne("Scholarship.selectDTOByStd_Code",std_code);
+	}
+
 }

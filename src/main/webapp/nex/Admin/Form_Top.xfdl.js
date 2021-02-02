@@ -17,7 +17,9 @@
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
-
+            obj = new Dataset("admin_alarm", this);
+            obj._setContents("<ColumnInfo><Column id=\"confirm\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
             obj = new Static("Static00","0","0","200","50",null,null,null,null,null,null,this);
@@ -26,12 +28,12 @@
             obj.set_background("#c1c1c1");
             this.addChild(obj.name, obj);
 
-            obj = new Static("Static01","200","0",null,"50","0",null,null,null,null,null,this);
+            obj = new Static("Static01","200","0","1080","50",null,null,null,null,null,null,this);
             obj.set_taborder("1");
             obj.set_background("#cfe1e0");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_logout","Static01:-83","17","69","20",null,null,null,null,null,null,this);
+            obj = new Button("btn_logout","1197","17","69","20",null,null,null,null,null,null,this);
             obj.set_taborder("2");
             obj.set_text("로그아웃");
             this.addChild(obj.name, obj);
@@ -51,13 +53,20 @@
             obj.set_text("님 환영합니다.");
             this.addChild(obj.name, obj);
 
+            obj = new Button("alarm_btn","1128","10","64","34",null,null,null,null,null,null,this);
+            obj.set_taborder("6");
+            obj.set_text("알람");
+            this.addChild(obj.name, obj);
+
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","Desktop_screen",1280,50,this,function(p){});
             this.addLayout(obj.name, obj);
             
             // BindItem Information
-
+            obj = new BindItem("item0","alarm_btn","text","admin_alarm","confirm");
+            this.addChild(obj.name, obj);
+            obj.bind();
         };
         
         this.loadPreloadList = function()
@@ -94,13 +103,47 @@
         	this.objApp.mainframe.VFrameSet00.set_separatesize("*,0,0,0");
         };
 
+        this.alarm_btn_onclick = function(obj,e)
+        {
+        	var ObjCF = new ChildFrame();
+        	ObjCF.init("pop_CorpDept", 0, 0, 800, 600);
+        	ObjCF.set_formurl("admWork::alarm_admin.xfdl");
+
+        	ObjCF.showModal(this.getOwnerFrame(), {}, this, "fn_callback_pop");
+        };
+
+        this.fn_callback_pop= function(){
+        	this.transaction(
+        			"alarm" //id
+        			,"/alarm.nex"//url
+        			,""// inData
+        			,"admin_alarm=out_ds"// outData
+        			,""//strArg
+        			,"fn_callback"//callback
+        		);
+        }
+        this.Form_Top_onload = function(obj,e)
+        {
+        			this.transaction(
+        			"alarm" //id
+        			,"/alarm.nex"//url
+        			,""// inData
+        			,"admin_alarm=out_ds"// outData
+        			,""//strArg
+        			,"fn_callback"//callback
+        		);
+        };
+
+
         });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
+            this.addEventHandler("onload",this.Form_Top_onload,this);
             this.btn_logout.addEventHandler("onclick",this.btn_logout_onclick,this);
             this.btn_home.addEventHandler("onclick",this.btn_home_onclick,this);
+            this.alarm_btn.addEventHandler("onclick",this.alarm_btn_onclick,this);
         };
 
         this.loadIncludeScript("Form_Top.xfdl");

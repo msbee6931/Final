@@ -9,6 +9,7 @@ public class FreeCommentDTO {
 	private String rev_write_date;
 	private int good;
 	private int bad;
+	private int writer_seq;
 	public int getRev_seq() {
 		return rev_seq;
 	}
@@ -51,8 +52,14 @@ public class FreeCommentDTO {
 	public void setBad(int bad) {
 		this.bad = bad;
 	}
+	public int getWriter_seq() {
+		return writer_seq;
+	}
+	public void setWriter_seq(int writer_seq) {
+		this.writer_seq = writer_seq;
+	}
 	public FreeCommentDTO(int rev_seq, int main_seq, String rev_contents, String rev_writer, String rev_write_date,
-			int good, int bad) {
+			int good, int bad, int writer_seq) {
 		super();
 		this.rev_seq = rev_seq;
 		this.main_seq = main_seq;
@@ -61,11 +68,11 @@ public class FreeCommentDTO {
 		this.rev_write_date = rev_write_date;
 		this.good = good;
 		this.bad = bad;
+		this.writer_seq = writer_seq;
 	}
 	public FreeCommentDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 	
 }

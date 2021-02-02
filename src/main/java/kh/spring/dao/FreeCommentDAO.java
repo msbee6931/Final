@@ -59,4 +59,8 @@ public class FreeCommentDAO {
 	   public int getDataCount(String main_seq) throws Exception{
 	      return session.selectOne("fcomment.getDataCount",main_seq);
 	   }
+	   
+	   public FreeCommentDTO selectDTOByRev_Seq(String rev_seq) {
+		   return session.selectOne("fcomment.selectDTOByRev_Seq",rev_seq);
+	   }
 }

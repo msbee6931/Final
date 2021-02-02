@@ -3,6 +3,7 @@ package kh.spring.dto;
 import java.sql.Date;
 
 public class TuitionDTO {
+
 	private int std_code;
 	private int t_enter;
 	private int t_class;
@@ -10,11 +11,12 @@ public class TuitionDTO {
 	private int t_grd;
 	private int t_ore;
 	private int tSum;
-	private Date t_date;
+	private String t_date;
 	
 	public TuitionDTO() {}
 
-	public TuitionDTO(int std_code, int t_enter, int t_class, int t_std, int t_grd, int t_ore, int tSum, Date t_date) {
+	public TuitionDTO(int std_code, int t_enter, int t_class, int t_std, int t_grd, int t_ore, int tSum,
+			String t_date) {
 		super();
 		this.std_code = std_code;
 		this.t_enter = t_enter;
@@ -82,15 +84,15 @@ public class TuitionDTO {
 		this.tSum = tSum;
 	}
 
-	public Date getT_date() {
+	public String getT_date() {
 		return t_date;
 	}
 
-	public void setT_date(Date t_date) {
+	public void setT_date(String t_date) {
 		this.t_date = t_date;
 	}
+
 	
-	
-	
+		
 	
 }

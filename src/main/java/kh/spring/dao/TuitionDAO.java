@@ -18,4 +18,8 @@ public class TuitionDAO {
 		System.out.println("DAO 확인");
 		return session.insert("Tuition.insertTuition", list);
 	}
+	
+	public TuitionDTO selectByStd_code(String std_code) {
+		return session.selectOne("Tuition.selectByStd_code",std_code);
+	}
 }

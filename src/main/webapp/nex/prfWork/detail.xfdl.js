@@ -18,7 +18,7 @@
             
             // Object(Dataset, ExcelExportObject) Initialize
             obj = new Dataset("ds_class", this);
-            obj._setContents("<ColumnInfo><Column id=\"chk\" type=\"STRING\" size=\"256\"/><Column id=\"classPart\" type=\"STRING\" size=\"256\"/><Column id=\"className\" type=\"STRING\" size=\"256\"/><Column id=\"classSeq\" type=\"INT\" size=\"256\"/><Column id=\"classPoint\" type=\"STRING\" size=\"256\"/><Column id=\"proCode\" type=\"STRING\" size=\"256\"/><Column id=\"proName\" type=\"STRING\" size=\"256\"/><Column id=\"dept\" type=\"STRING\" size=\"256\"/><Column id=\"classTime\" type=\"STRING\" size=\"256\"/><Column id=\"classRoom\" type=\"STRING\" size=\"256\"/><Column id=\"limit\" type=\"STRING\" size=\"256\"/><Column id=\"classGoal\" type=\"STRING\" size=\"256\"/><Column id=\"classReferences\" type=\"STRING\" size=\"256\"/><Column id=\"classMethod\" type=\"STRING\" size=\"256\"/><Column id=\"classEvaluation\" type=\"STRING\" size=\"256\"/><Column id=\"grade\" type=\"STRING\" size=\"256\"/><Column id=\"reqState\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"chk\" type=\"STRING\" size=\"256\"/><Column id=\"classPart\" type=\"STRING\" size=\"256\"/><Column id=\"className\" type=\"STRING\" size=\"256\"/><Column id=\"classSeq\" type=\"INT\" size=\"256\"/><Column id=\"classPoint\" type=\"STRING\" size=\"256\"/><Column id=\"passFail\" type=\"STRING\" size=\"256\"/><Column id=\"proCode\" type=\"STRING\" size=\"256\"/><Column id=\"proName\" type=\"STRING\" size=\"256\"/><Column id=\"dept\" type=\"STRING\" size=\"256\"/><Column id=\"classTime\" type=\"STRING\" size=\"256\"/><Column id=\"classRoom\" type=\"STRING\" size=\"256\"/><Column id=\"limit\" type=\"STRING\" size=\"256\"/><Column id=\"basketLimit\" type=\"STRING\" size=\"256\"/><Column id=\"classGoal\" type=\"STRING\" size=\"256\"/><Column id=\"classReferences\" type=\"STRING\" size=\"256\"/><Column id=\"classMethod\" type=\"STRING\" size=\"256\"/><Column id=\"classEvaluation\" type=\"STRING\" size=\"256\"/><Column id=\"grade\" type=\"STRING\" size=\"256\"/><Column id=\"reqState\" type=\"STRING\" size=\"256\"/><Column id=\"reg_date\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
 
 
@@ -33,7 +33,7 @@
 
 
             obj = new Dataset("ds_point", this);
-            obj._setContents("<ColumnInfo><Column id=\"id\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"id\">1</Col><Col id=\"name\">1학점</Col></Row><Row><Col id=\"id\">2</Col><Col id=\"name\">2학점</Col></Row><Row><Col id=\"id\">3</Col><Col id=\"name\">3학점</Col></Row><Row><Col id=\"id\">4</Col><Col id=\"name\">Pass/Fail</Col></Row></Rows>");
+            obj._setContents("<ColumnInfo><Column id=\"id\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"id\">1</Col><Col id=\"name\">1학점</Col></Row><Row><Col id=\"id\">2</Col><Col id=\"name\">2학점</Col></Row><Row><Col id=\"id\">3</Col><Col id=\"name\">3학점</Col></Row></Rows>");
             this.addChild(obj.name, obj);
 
 
@@ -48,7 +48,7 @@
 
 
             obj = new Dataset("ds_dept", this);
-            obj._setContents("<ColumnInfo><Column id=\"id\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"id\">01</Col><Col id=\"name\">정보통신학과</Col></Row><Row><Col id=\"id\">02</Col><Col id=\"name\">간호학과</Col></Row><Row><Col id=\"id\">03</Col><Col id=\"name\">경찰경호화과</Col></Row><Row><Col id=\"id\">04</Col><Col id=\"name\">산업디지인과</Col></Row><Row><Col id=\"id\">05</Col><Col id=\"name\">교양학부</Col></Row></Rows>");
+            obj._setContents("<ColumnInfo><Column id=\"id\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"id\">01</Col><Col id=\"name\">정보통신학과</Col></Row><Row><Col id=\"id\">02</Col><Col id=\"name\">간호학과</Col></Row><Row><Col id=\"id\">03</Col><Col id=\"name\">경찰경호학과</Col></Row><Row><Col id=\"id\">04</Col><Col id=\"name\">산업디자인과</Col></Row><Row><Col id=\"id\">05</Col><Col id=\"name\">교양학부</Col></Row></Rows>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -159,7 +159,7 @@
             obj.set_textAlign("center");
             this.Div00.form.classPlanTab.classPlan.addChild(obj.name, obj);
 
-            obj = new Combo("co_point","799","49","150","39",null,null,null,null,null,null,this.Div00.form.classPlanTab.classPlan.form);
+            obj = new Combo("co_point","799","49","90","39",null,null,null,null,null,null,this.Div00.form.classPlanTab.classPlan.form);
             obj.set_taborder("8");
             obj.set_innerdataset("ds_point");
             obj.set_codecolumn("id");
@@ -438,6 +438,14 @@
             obj.set_codecolumn("id");
             obj.set_datacolumn("name");
             obj.set_text("");
+            this.Div00.form.classPlanTab.classPlan.addChild(obj.name, obj);
+
+            obj = new CheckBox("chk_pf","894","58","85","20",null,null,null,null,null,null,this.Div00.form.classPlanTab.classPlan.form);
+            obj.set_taborder("54");
+            obj.set_text("Pass/Fail");
+            obj.set_falsevalue("F");
+            obj.set_truevalue("P");
+            obj.set_value("F");
             this.Div00.form.classPlanTab.classPlan.addChild(obj.name, obj);
 
             obj = new Tabpage("classSchedule",this.Div00.form.classPlanTab);
@@ -883,6 +891,7 @@
         //-------------------------------------------수업계획서 작성-------------------------------------------
         this.classPlanTab_classPlan_btnSave_onclick = function(obj,e)
         {
+
         	var sum = classForm.sta_sum.text;
         	var sum2 = classForm.sta_sum2.text
         	var part = classForm.co_part.text;
@@ -890,6 +899,7 @@
         	var className = classForm.edt_className.text;
         	var classSeq = classForm.edt_classSeq.text;
         	var point = classForm.co_point.text;
+        	var passFail = classForm.chk_pf.value;
         	var proCode = classForm.sta_proCode.text;
         	var proName = classForm.sta_proName.text;
         	var dept =classForm.co_dept.text;
@@ -924,6 +934,7 @@
         		this.ds_class.setColumn(nRow,"className",className);
         		this.ds_class.setColumn(nRow,"classSeq",classSeq);
         		this.ds_class.setColumn(nRow,"classPoint",point);
+        		this.ds_class.setColumn(nRow,"passFail",passFail);
         		this.ds_class.setColumn(nRow,"proCode",proCode);
         		this.ds_class.setColumn(nRow,"proName",proName);
         		this.ds_class.setColumn(nRow,"dept",dept);
@@ -932,6 +943,7 @@
         		this.ds_class.setColumn(nRow,"classRoom",classRoom);
         		this.ds_class.setColumn(nRow,"classGoal",goal);
         		this.ds_class.setColumn(nRow,"limit",limit);
+        		this.ds_class.setColumn(nRow,"basketLimit",limit);
         		this.ds_class.setColumn(nRow,"classMethod",method);
         		this.ds_class.setColumn(nRow,"classEvaluation",evaluation);
         		this.ds_class.setColumn(nRow,"classReferences",references);
@@ -1033,7 +1045,7 @@
         			,"classSeq="+nexacro.wrapQuote(classSeq)
         			,"fn_class_callback"
         		);
-        		classForm.edt_classSeq.set_readonly(true);
+        			classForm.edt_classSeq.set_readonly(true);
         		if(view == 'Y'){
         			classForm.btnSave.set_visible( false );
         		}
@@ -1082,7 +1094,6 @@
         			times += time[i]+" ";
         			week = classForm.classTimeList.form.Grid00.getCellProperty("Head",[j+1],"text");
         			weekTime[j] = week + "(" + times.substring(0,times.length-1) +")";
-
         		}
         	}
         	weekTimes = weekTime[0]+ weekTime[1] + weekTime[2] + weekTime[3] + weekTime[4] + weekTime[5];
@@ -1102,9 +1113,10 @@
         	classForm.edt_className.set_value(this.ds_class.getColumn(0,"className"));
         	classForm.edt_classSeq.set_value(this.ds_class.getColumn(0,"classSeq"));
         	classForm.co_point.set_text(this.ds_class.getColumn(0,"classPoint"));
+        	classForm.chk_pf.set_value(this.ds_class.getColumn(0,"passFail"));
         	classForm.sta_proCode.set_text(this.ds_class.getColumn(0,"proCode"));
         	classForm.sta_proName.set_text(this.ds_class.getColumn(0,"proName"));
-        	classForm.co_dept.set_value(this.ds_class.getColumn(0,"dept"));
+        	classForm.co_dept.set_text(this.ds_class.getColumn(0,"dept"));
         	classForm.co_grade.set_text(this.ds_class.getColumn(0,"grade"));
         	classForm.edt_classTime.set_value(this.ds_class.getColumn(0,"classTime"));
         	classForm.edt_classRoom.set_value(this.ds_class.getColumn(0,"classRoom"));

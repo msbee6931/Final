@@ -91,7 +91,6 @@ public class ScholarshipDTO {
 		this.s_date = s_date;
 	}
 	
-	
-	
+		
 	
 }

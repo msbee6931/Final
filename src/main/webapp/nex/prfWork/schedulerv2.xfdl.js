@@ -279,6 +279,8 @@
         this.fn_callback_insert = function() {
         	//데이터셋 정보로 일정 그리기
         	this.gfnLoadScheduler(this.grpScheduler);
+
+
         }
 
         /**************************************************************************

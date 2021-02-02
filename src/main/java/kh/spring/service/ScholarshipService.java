@@ -120,4 +120,10 @@ public class ScholarshipService {
 		  return file;
 		}
 	
+
+
+	public ScholarshipDTO selectDTOByStd_Code(int std_code) {
+		return sDao.selectDTOByStd_Code(std_code);
+	}
+	
 }

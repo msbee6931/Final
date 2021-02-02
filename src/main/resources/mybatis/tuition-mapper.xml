@@ -9,4 +9,9 @@
 	into tuition(std_code,t_enter,t_class,t_std,t_grd,t_ore,tSum,t_date) values (#{i.std_code},#{i.t_enter},#{i.t_class},#{i.t_std},#{i.t_grd},#{i.t_ore},#{i.tSum},sysdate)
 	</foreach>
 </insert>
+
+<select id="selectByStd_code" resultType="kh.spring.dto.TuitionDTO">
+select * from tuition where std_code=#{std_code}
+</select>
+
 </mapper>
