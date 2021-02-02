@@ -26,6 +26,27 @@ public class ChattingDAO {
 	public List<FriendDTO> getFriendsList(String userId){
 		return session.selectList("chatting.getFriendsList", userId);
 	}
+	
+	// Friend
+	public List<UserDTO> searchFriend(String searchId) {
+		return session.selectList("chatting.searchFriend", searchId);
+	}
+	
+	public FriendDTO isFriendExist(String userId, String friendId) {
+		Map<String,String> param = new HashMap<>();
+		param.put("userId", userId);
+		param.put("friendId", friendId);
+		return session.selectOne("chatting.isFriendExist", param);
+	}
+
+	public int insertFriend(String userId, String userName, String friendId, String friendName) {
+		Map<String,String> param = new HashMap<>();
+		param.put("userId", userId);
+		param.put("userName", userName);
+		param.put("friendId", friendId);
+		param.put("friendName", friendName);
+		return session.insert("chatting.insertFriend",param);
+	}
 
 	// Chat
 	public int insertMessage(String userId, String message, String roomNumber) {

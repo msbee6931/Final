@@ -1,7 +1,9 @@
 package kh.spring.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.JsonObject;
 
 import kh.spring.dto.FriendDTO;
 import kh.spring.dto.MessageDTO;
@@ -40,10 +45,10 @@ public class ChatController {
 		UserDTO user = service.getUserInfo(userId);
 		
 		// 친구리스트
-		List<FriendDTO> list = service.getFriendsList(userId); 
+		List<FriendDTO> friendList = service.getFriendsList(userId); 
 		
 		model.addAttribute("user", user);
-		model.addAttribute("list",list);
+		model.addAttribute("friendList",friendList);
 		
 		return "Chat/chatHome";
 	}
@@ -54,8 +59,8 @@ public class ChatController {
 		UserDTO user = service.getUserInfo(userId);
 		
 		// 모든 채팅방 목록 반환
-		List<RoomDTO> list = service.findAllRoomByUserId(userId);
-		model.addAttribute("list",list);
+		List<RoomDTO> roomList = service.findAllRoomByUserId(userId);
+		model.addAttribute("roomList",roomList);
 		model.addAttribute("user",user);
 		return "Chat/chatList";
 	}
@@ -71,6 +76,31 @@ public class ChatController {
 		model.addAttribute("userId", userId);
 		model.addAttribute("roomNumber",roomNumber);
 		return "Chat/chat";
+	}
+	
+	// ----------------------------------------------------------------------- friend	
+	@RequestMapping("searchFriend")
+	public String searchFriend(String searchId,Model model) {
+		String userId = (String) session.getAttribute("userId");
+		List<UserDTO> list = service.searchFriend(searchId);
+		model.addAttribute("userId", userId);
+		model.addAttribute("list",list);
+		return "Chat/searchFriend";
+	}
+	
+	@RequestMapping("friendAdd")
+	public void friendAdd(String friendId,String friendName,String userName,ServletResponse response) throws Exception{
+		String userId = (String) session.getAttribute("userId");
+		FriendDTO result = service.isFriendExist(userId,friendId);
+		PrintWriter pw = response.getWriter();
+		JsonObject obj = new JsonObject();
+		if(result!=null) {
+			obj.addProperty("msg", "이미 친구인 사용자입니다.");
+		}else {
+			service.insertFriend(userId,userName,friendId,friendName);
+			obj.addProperty("msg", "친구목록에 추가되었습니다.");
+		}
+		pw.append(obj.toString());
 	}
 
 	// ----------------------------------------------------------------------- chat
@@ -108,9 +138,6 @@ public class ChatController {
 	// 특정 채팅방 조회
 	@RequestMapping("roomCheck")
 	public String roomInfo(String userId,String friendId,String userName,String friendName,Model model) {
-		System.out.println("여기는 룸체크 userId는 "+userId);
-		System.out.println("여기는 룸체크 friendId는 "+friendId);
-		
 		String roomNumber = userId+"_"+friendId;
 		String roomName = userName+"와 "+friendName+"의 채팅방";
 		RoomDTO dto = service.findRoomById(userId, friendId);

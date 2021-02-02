@@ -13,6 +13,19 @@
  		select * from friend where userId=#{userId}
  	</select>
 	
+	<!-- FRIEND -->
+	<select id="searchFriend" resultType="kh.spring.dto.UserDTO">
+		select * from chatUser where userId like '%'||#{searchId}||'%'
+	</select>
+	
+	<select id="isFriendExist" resultType="kh.spring.dto.FriendDTO">
+		select * from friend where userId=#{userId} and friendId=#{friendId}
+	</select>
+	
+	<insert id="insertFriend">
+		insert into friend values(#{userId},#{userName},#{friendId},#{friendName})
+	</insert>
+	
 	<!-- Chat -->
  	<insert id="insertMessage">
  		insert into chatMessage values(chatMessage_seq.nextval,#{userId},#{message},#{roomNumber})
