@@ -19,6 +19,11 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping("/nex")
+	   public String Nex() {
+	      return "redirect:/nex/index.html";
+	   }
+	
 		@ExceptionHandler
 		public String ExceptionHandler(Exception e) {
 			e.printStackTrace();
