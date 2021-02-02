@@ -46,9 +46,9 @@
 					<c:when test="${list != null }">
 						<c:forEach var="dto" items="${list }">
 							<div class="friend">
-								<div class="profileImg friend">이미지</div>
-								<div class="friendName" id="friendName">${dto.getFriendName() }</div>
-								<input type="hidden" value="${dto.getFriendId() }" class="friendId" id="friendId">				
+								<div class="profileImg other">이미지</div>
+								<div class="friendName">${dto.getFriendName() }</div>
+								<input type="hidden" value="${dto.getFriendId() }" class="friendId">				
 							</div>
 						</c:forEach>
 					</c:when>
@@ -65,13 +65,14 @@
 	</div>
 	
 	<script>
-	$("#friendName").on("dblclick",function(){
+	$(document).on("dblclick",".friend",function(){
 		var userId = $("#userId").val();
-		var friendId = $("#friendId").val();
+		var friendId = $(this).children(".friendId").val();
 		var userName = $("#userName").text();
-		var friendName = $("#friendName").text();
+		var friendName = $(this).children(".friendName").text();
+		// console.log(userId + ":" + userName + ":" + friendId + ":" + friendName);
 		location.href="/chatting/roomCheck?userId="+userId+"&friendId="+friendId+"&userName="+userName+"&friendName="+friendName;
-	});
+	 });
 	</script>
 </body>
 </html>

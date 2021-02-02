@@ -25,10 +25,10 @@
 			<c:choose>
 				<c:when test="${list != null }">
 					<c:forEach var="dto" items="${list}">
-						<tr id="enter">
+						<tr class="enter">
 							<td>이미지</td>
-							<td id="roomNumber">${dto.getRoomNumber() }</td>
-							<td id="roomName">${dto.getRoomName() }</td>
+							<td class="roomNumber">${dto.getRoomNumber() }</td>
+							<td class="roomName">${dto.getRoomName() }</td>
 						</tr>
 					</c:forEach>
 				</c:when>
@@ -38,8 +38,8 @@
 	</div>
 	
 	<script>
-		$("#enter").on("click",function(){
-			var roomNumber = $("#roomNumber").text();
+		$(document).on("dblclick",".enter",function(){
+			var roomNumber = $(this).children(".roomNumber").text();
 			location.href="/chatting/chatDetail?roomNumber="+roomNumber;
 		});
 	</script>
