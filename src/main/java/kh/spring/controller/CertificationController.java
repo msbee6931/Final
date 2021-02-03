@@ -180,11 +180,11 @@ public class CertificationController {
 			
 		//장학금 총액 구하기
 				ScholarshipDTO dto3 = Scservice.selectDTOByStd_Code(dto.getS_seq());
-				int scholarship = dto3.getSsum();
+				int scholarship = dto3.getsSum();
 				
 		// 청구 총액 구하기
 				
-				int finalsum = dto2.getTsum()-scholarship;
+				int finalsum = dto2.gettSum()-scholarship;
 		
 		model.addAttribute("finalsum",finalsum);
 		model.addAttribute("scholarship",scholarship);		
