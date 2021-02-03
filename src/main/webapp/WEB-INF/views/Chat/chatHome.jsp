@@ -16,7 +16,7 @@
 		margin: 0px;
 	}
 	/* CONTAINER */
-	.container{
+	#container{
 		display: flex;
 	}
 	/* Profile */
@@ -38,7 +38,7 @@
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="container" id="container">
 		<div class="profile">
 			<div class="myProfile">
 				<div class="profileImg user">이미지</div>
@@ -73,7 +73,7 @@
 	</div>
 	
 	<script>
-	$(document).on("dblclick",".friend",function(){
+	$(document).on("click",".friend",function(){
 		var userId = $("#userId").val();
 		var friendId = $(this).children(".friendId").val();
 		var userName = $("#userName").text();

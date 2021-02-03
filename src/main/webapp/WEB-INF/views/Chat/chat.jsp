@@ -10,6 +10,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="https://kit.fontawesome.com/a24c081181.js" crossorigin="anonymous"></script>
 <style>
 	*{
 		box-sizing: border-box;
@@ -24,6 +25,10 @@
 	}
 	.contents .others{
 		text-align: left;
+	}
+	.etc{
+		display: flex;
+		justify-content: space-around;
 	}
 </style>
 </head>
@@ -44,6 +49,16 @@
 					</c:choose>
 				</c:forEach>
 			</c:if>
+		</div>
+		<div class="etc">
+			<div id="fileWrapper">
+				<i class="far fa-file-alt" id="fileIcon"></i>
+				<form name="signform" method="POST" ENCTYPE="multipart/form-data" action="">
+    				<input type="file" id="file" name="file" style="display:none;" onchange="changeValue(this)">
+				</form>	
+			</div>
+			<div id="img"><i class="far fa-file-image"></i></div>
+			<div id="codeblock"><i class="fas fa-code"></i></div>
 		</div>
 		<div class="sendMsg">
 			<input type="text" id="message">
@@ -75,6 +90,14 @@
 			$("#message").val("");
 			client.send("/app/chat",{},JSON.stringify({userId:userId,message:msg,roomNumber:roomNumber})); // 세번째 인자값은 보내려는 메세지(String 혹은 json 형태로)
 		});
+		
+		$("#fileIcon").on("click",function(){
+			 $('#file').click();
+		});
+		
+		function changeValue(obj){
+			document.signform.submit();
+		}
 	</script>
 </body>
 </html>
