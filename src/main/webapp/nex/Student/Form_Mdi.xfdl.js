@@ -65,9 +65,7 @@
         this.tab_menu_onchanged = function(obj,e)
         {
         	var sFormId = obj.tabpages[e.postindex].name;
-
         	this.av_FrameSet[sFormId].form.setFocus();
-
         };
 
         this.tab_menu_onextrabuttonclick = function(obj,e)

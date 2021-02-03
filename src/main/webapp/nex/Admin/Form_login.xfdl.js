@@ -85,12 +85,11 @@
         this.Div00_Button00_onclick = function(obj,e)
         {
         	this.objApp.mainframe.VFrameSet00.set_separatesize("0,50,*,60");
-
         };
 
         this.Button00_onclick = function(obj,e)
         {
-        	trace(this.objApp.mainframe.VFrameSet00.TopFrame.formurl);
+
         	this.objApp.mainframe.VFrameSet00.TopFrame.set_formurl("Student::Form_Top.xfdl");
         	this.objApp.mainframe.VFrameSet00.HFrameSet00.LeftFrame.set_formurl("Student::Form_Left.xfdl");
         	this.objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.ChildFrame00.set_formurl("Student::Form_Mdi.xfdl");
@@ -100,7 +99,6 @@
 
         this.Button00_00_onclick = function(obj,e)
         {
-        	trace(this.objApp.mainframe.VFrameSet00.HFrameSet00.LeftFrame.formurl);
         	this.objApp.mainframe.VFrameSet00.TopFrame.set_formurl("Professor::Form_Top.xfdl");
         	this.objApp.mainframe.VFrameSet00.HFrameSet00.LeftFrame.set_formurl("Professor::Form_Left.xfdl");
         	this.objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.ChildFrame00.set_formurl("Professor::Form_Mdi.xfdl");

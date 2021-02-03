@@ -20,6 +20,11 @@
             obj = new Dataset("ds_menu", this);
             obj._setContents("");
             this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("pf_alarm", this);
+            obj._setContents("<ColumnInfo><Column id=\"confirm\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
             obj = new Static("Static00","0","0","200","50",null,null,null,null,null,null,this);
@@ -46,6 +51,11 @@
             obj.set_text("로그아웃");
             this.addChild(obj.name, obj);
 
+            obj = new Button("alarm_btn","1126","14","61","27",null,null,null,null,null,null,this);
+            obj.set_taborder("4");
+            obj.set_text("알람");
+            this.addChild(obj.name, obj);
+
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","",1280,50,this,function(p){});
@@ -53,7 +63,9 @@
             this.addLayout(obj.name, obj);
             
             // BindItem Information
-
+            obj = new BindItem("item1","alarm_btn","text","pf_alarm","confirm");
+            this.addChild(obj.name, obj);
+            obj.bind();
         };
         
         this.loadPreloadList = function()
@@ -63,12 +75,35 @@
         
         // User Script
         this.registerScript("Form_Top.xfdl", function() {
+        this.fn_callback = function(id,ErrorCode,ErrorMsg){
+        	trace(id);
+        	trace(ErrorMsg);
+        	trace(ErrorCode);
+        }
+
+
+
+
         this.objApp = nexacro.getApplication();
 
         this.Form_Top_onload = function(obj,e)
         {
         	this.fn_setTopMenu();
+
+        		this.transaction(
+        			"alarm" //id
+        			,"/alarm.nex"//url
+        			,""// inData
+        			,"pf_alarm=out_ds"// outData
+        			,""//strArg
+        			,"fn_callback"//callback
+        		);
+
+
         };
+
+
+
 
         //innerDataSet은 ds_menu 나머지 바인딩 셋은 글로벌 셋으로 세팅
         this.fn_setTopMenu = function()
@@ -105,6 +140,27 @@
         	this.objApp.mainframe.VFrameSet00.set_separatesize("*,0,0,0");
         };
 
+        this.alarm_btn_onclick = function(obj,e)
+        {
+
+
+        	var ObjCF = new ChildFrame();
+        	ObjCF.init("pop_CorpDept", 0, 0, 800, 600);
+        	ObjCF.set_formurl("prfWork::alarm_professor.xfdl");
+
+        	ObjCF.showModal(this.getOwnerFrame(), {}, this, "fn_callback_pop");
+        };
+
+        this.fn_callback_pop= function(){
+        	this.transaction(
+        			"alarm" //id
+        			,"/alarm.nex"//url
+        			,""// inData
+        			,"pf_alarm=out_ds"// outData
+        			,""//strArg
+        			,"fn_callback"//callback
+        		);
+        }
         });
         
         // Regist UI Components Event
@@ -114,6 +170,7 @@
             this.Menu00.addEventHandler("onmenuclick",this.Menu00_onmenuclick,this);
             this.Menu00.addEventHandler("onrbuttondown",this.Menu00_onrbuttondown,this);
             this.btn_logout.addEventHandler("onclick",this.btn_logout_onclick,this);
+            this.alarm_btn.addEventHandler("onclick",this.alarm_btn_onclick,this);
         };
 
         this.loadIncludeScript("Form_Top.xfdl");

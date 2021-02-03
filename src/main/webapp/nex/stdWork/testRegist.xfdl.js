@@ -38,19 +38,19 @@
 
 
             obj = new Dataset("ds_stdTimeTable", this);
-            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"time\" type=\"STRING\" size=\"256\"/><Column id=\"mon\" type=\"STRING\" size=\"256\"/><Column id=\"tue\" type=\"STRING\" size=\"256\"/><Column id=\"wed\" type=\"STRING\" size=\"256\"/><Column id=\"thu\" type=\"STRING\" size=\"256\"/><Column id=\"fri\" type=\"STRING\" size=\"256\"/><Column id=\"sat\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"time\">1교시</Col></Row><Row><Col id=\"time\">2교시</Col></Row><Row><Col id=\"time\">3교시</Col></Row><Row><Col id=\"time\">4교시</Col></Row><Row><Col id=\"time\">5교시</Col></Row><Row><Col id=\"time\">6교시</Col></Row><Row><Col id=\"time\">7교시</Col></Row><Row><Col id=\"time\">8교시</Col></Row><Row><Col id=\"time\">9교시</Col></Row><Row><Col id=\"time\">10교시</Col></Row><Row><Col id=\"time\">11교시</Col></Row><Row><Col id=\"time\">12교시</Col></Row></Rows>");
+            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"time\" type=\"STRING\" size=\"256\"/><Column id=\"mon\" type=\"STRING\" size=\"256\"/><Column id=\"tue\" type=\"STRING\" size=\"256\"/><Column id=\"wed\" type=\"STRING\" size=\"256\"/><Column id=\"thu\" type=\"STRING\" size=\"256\"/><Column id=\"fri\" type=\"STRING\" size=\"256\"/><Column id=\"sat\" type=\"STRING\" size=\"256\"/><Column id=\"sun\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"time\">1교시</Col></Row><Row><Col id=\"time\">2교시</Col></Row><Row><Col id=\"time\">3교시</Col></Row><Row><Col id=\"time\">4교시</Col></Row><Row><Col id=\"time\">5교시</Col></Row><Row><Col id=\"time\">6교시</Col></Row><Row><Col id=\"time\">7교시</Col></Row><Row><Col id=\"time\">8교시</Col></Row><Row><Col id=\"time\">9교시</Col></Row><Row><Col id=\"time\">10교시</Col></Row><Row><Col id=\"time\">11교시</Col></Row><Row><Col id=\"time\">12교시</Col></Row></Rows>");
             this.addChild(obj.name, obj);
 
 
             obj = new Dataset("ds_stdTimeTableCopy", this);
             obj.set_useclientlayout("true");
-            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"time\" type=\"STRING\" size=\"256\"/><Column id=\"mon\" type=\"STRING\" size=\"256\"/><Column id=\"tue\" type=\"STRING\" size=\"256\"/><Column id=\"wed\" type=\"STRING\" size=\"256\"/><Column id=\"thu\" type=\"STRING\" size=\"256\"/><Column id=\"fri\" type=\"STRING\" size=\"256\"/><Column id=\"sat\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"time\" type=\"STRING\" size=\"256\"/><Column id=\"mon\" type=\"STRING\" size=\"256\"/><Column id=\"tue\" type=\"STRING\" size=\"256\"/><Column id=\"wed\" type=\"STRING\" size=\"256\"/><Column id=\"thu\" type=\"STRING\" size=\"256\"/><Column id=\"fri\" type=\"STRING\" size=\"256\"/><Column id=\"sat\" type=\"STRING\" size=\"256\"/><Column id=\"sun\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
 
 
             obj = new Dataset("ds_stdClass", this);
             obj.set_useclientlayout("true");
-            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"basket\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"sName\" type=\"STRING\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"basket\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
 
 
@@ -135,7 +135,7 @@
 
             obj = new Static("sta_name","89","129","100","30",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("10");
-            obj.set_text("");
+            obj.set_text("박종혁");
             obj.set_border("1px solid black");
             obj.set_padding("0px 0px 0px 5px");
             this.Div00.addChild(obj.name, obj);
@@ -156,7 +156,7 @@
 
             obj = new Static("sta_sSeq","89","99","100","30",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("13");
-            obj.set_text("1234");
+            obj.set_text("12345");
             obj.set_border("1px solid black");
             obj.set_padding("0px 0px 0px 5px");
             this.Div00.addChild(obj.name, obj);
@@ -327,6 +327,7 @@
         	var Thu = new Array();
         	var Fri = new Array();
         	var Sat = new Array();
+        	var Sun = new Array();
         	for(var i=this.ds_stdTimeTableCopy.getRowCount()-1; i >=0; i--){
         		Time[i] = this.ds_stdTimeTableCopy.getColumn(i,"time");
         		Time[i] = Time[i].replace("교시","")-1;
@@ -336,12 +337,15 @@
         		Thu[i] = this.ds_stdTimeTableCopy.getColumn(i,"thu");
         		Fri[i] = this.ds_stdTimeTableCopy.getColumn(i,"fri");
         		Sat[i] = this.ds_stdTimeTableCopy.getColumn(i,"sat");
+        		Sun[i] = this.ds_stdTimeTableCopy.getColumn(i,"sun");
+
         		var mon = this.ds_stdTimeTable.getColumn(Time[i],"mon");
         		var tue = this.ds_stdTimeTable.getColumn(Time[i],"tue");
         		var wed = this.ds_stdTimeTable.getColumn(Time[i],"wed");
         		var thu = this.ds_stdTimeTable.getColumn(Time[i],"thu");
         		var fri = this.ds_stdTimeTable.getColumn(Time[i],"fri");
         		var sat = this.ds_stdTimeTable.getColumn(Time[i],"sat");
+        		var sun = this.ds_stdTimeTable.getColumn(Time[i],"sun");
 
         		if(mon == null || mon == ""){this.ds_stdTimeTable.setColumn(Time[i],"mon",Mon[i]);}
         		if(tue == null || tue == ""){this.ds_stdTimeTable.setColumn(Time[i],"tue",Tue[i]);}
@@ -349,6 +353,7 @@
         		if(thu == null || thu == ""){this.ds_stdTimeTable.setColumn(Time[i],"thu",Thu[i]);}
         		if(fri == null || fri == ""){this.ds_stdTimeTable.setColumn(Time[i],"fri",Fri[i]);}
         		if(sat == null || sat == ""){this.ds_stdTimeTable.setColumn(Time[i],"sat",Sat[i]);}
+        		if(sun == null || sun == ""){this.ds_stdTimeTable.setColumn(Time[i],"sun",Sun[i]);}
         	}
         	//화면 로드시 해당 학과 과목이 보여짐
         	var dept = this.Div00.form.sta_dept.text;
@@ -414,6 +419,7 @@
         					else if(weeks[0] =="목"){col="thu"}
         					else if(weeks[0] =="금"){col="fri"}
         					else if(weeks[0] =="토"){col="sat"}
+        					else if(weeks[0] =="일"){col="sun"}
         					for(var j=0; j<week.length; j++){
         						var cName = this.ds_stdTimeTable.getColumn(week[j]-1,col);
         						if(cName=="" || cName == null){
@@ -438,8 +444,10 @@
         				this.ds_myBasket.copyRow(addRow,this.ds_class,nRow);
 
         				//insert studentClass 추가
+        				var sName = this.Div00.form.sta_name.text;
         				var addRow2 = this.ds_stdClass.addRow();
         				this.ds_stdClass.setColumn(addRow2,"sCode",sCode);
+        				this.ds_stdClass.setColumn(addRow2,"sName",sName);
         				this.ds_stdClass.setColumn(addRow2,"classCode",classCode);
         				this.ds_stdClass.setColumn(addRow2,"basket",'Y');
         				this.transaction(
@@ -543,10 +551,10 @@
         this.Div00_classTime_onclick = function(obj,e)
         {
         	var sCode = this.Div00.form.sta_sSeq.text;
-        	var x = this.width/2-360;
+        	var x = this.width/2-410;
         	var y = this.height/2-220;
         	var objCF = new ChildFrame();
-        	objCF.init("popTimeTable",x,y,720,440,0,0,"stdWork::studentSchedule.xfdl");
+        	objCF.init("popTimeTable",x,y,820,440,0,0,"stdWork::studentSchedule.xfdl");
         	objCF.set_showtitlebar(false);
 
         	objCF.showModal(this.getOwnerFrame(),{sCode:sCode},this,"fn_callback");
