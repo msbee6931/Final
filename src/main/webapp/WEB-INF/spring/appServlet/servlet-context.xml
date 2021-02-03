@@ -20,6 +20,7 @@
 	<resources mapping="/nex/**" location="/nex/" />
 	<resources mapping="/nex/_resource_/_theme_/" location="/nex/_resource_/_theme_/" />
 	<resources mapping="/files/**" location="/resources/files/" />
+	<resources mapping="/img/**" location="/img/" />
 	<resources location="/WEB-INF/views/ckeditor/" mapping="/ckeditor/**"></resources>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
@@ -53,8 +54,7 @@
          </beans:list>
       </beans:property>
    </beans:bean>
-
-	
+   
 	<context:component-scan base-package="kh.spring" />
 
 
