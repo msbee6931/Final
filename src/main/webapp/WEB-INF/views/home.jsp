@@ -78,7 +78,7 @@ nav {
 			<div class="col-8 col-md-9"></div>
 			<div class="col-2 col-md-1">로그인</div>
 			<div class="col-2 col-md-1" id="pop">팝업창</div>
-			<div class="col-0 col-md-1"></div>
+			<div class="col-0 col-md-1"><a href="/nex">종합정보 페이지</a></div>
 		</div>
 		<div class="row headt2 p-2">
 			<nav class="navbar navbar-expand-xl navbar-light"
