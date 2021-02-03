@@ -94,24 +94,19 @@ nav {
 					</button>
 					<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link active"
+							<li class="nav-item p-3"><a class="nav-link active"
 								aria-current="page" href="introduce.home"><b>학교소개</b></a></li>
-							<li class="nav-item"><a class="nav-link active" href="#"
+							<li class="nav-item p-3"><a class="nav-link active" href="#"
 								tabindex="-1"><b>공지사항</b></a></li>
-							<li class="nav-item"><a class="nav-link active" href="#"
+							<li class="nav-item p-3"><a class="nav-link active" href="#"
 								tabindex="-1"><b>학사스케쥴</b></a></li>
-							<li class="nav-item"><a class="nav-link active" href="#"
+							<li class="nav-item p-3"><a class="nav-link active" href="#"
 								tabindex="-1"><b>게시판</b></a></li>
-							<li class="nav-item"><a class="nav-link active" href="#"
+							<li class="nav-item p-3"><a class="nav-link active" href="#"
 								tabindex="-1"><b>자료실</b></a></li>
-							<li class="nav-item"><a class="nav-link active" href="#"
+							<li class="nav-item p-3"><a class="nav-link active" href="#"
 								tabindex="-1"><b>채팅</b></a></li>
 						</ul>
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="검색어를 입력하세요" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">검색</button>
-						</form>
 					</div>
 				</div>
 			</nav>
