@@ -1,5 +1,7 @@
 package kh.spring.dto;
 
+import java.sql.Date;
+
 public class StdTimeTableDTO {
 
 	private int sCode;
@@ -11,10 +13,11 @@ public class StdTimeTableDTO {
 	private String thu;
 	private String fri;
 	private String sat;
+	private String sun;
 	private String reg_date;
 	public StdTimeTableDTO() {}
 	public StdTimeTableDTO(int sCode, int classCode, String time, String mon, String tue, String wed, String thu,
-			String fri, String sat, String reg_date) {
+			String fri, String sat, String sun, String reg_date) {
 		this.sCode = sCode;
 		this.classCode = classCode;
 		this.time = time;
@@ -24,6 +27,7 @@ public class StdTimeTableDTO {
 		this.thu = thu;
 		this.fri = fri;
 		this.sat = sat;
+		this.sun = sun;
 		this.reg_date = reg_date;
 	}
 	public int getsCode() {
@@ -79,6 +83,12 @@ public class StdTimeTableDTO {
 	}
 	public void setSat(String sat) {
 		this.sat = sat;
+	}
+	public String getSun() {
+		return sun;
+	}
+	public void setSun(String sun) {
+		this.sun = sun;
 	}
 	public String getReg_date() {
 		return reg_date;

@@ -6,7 +6,6 @@ if (nexacro.Environment)
     {
         this.set_themeid("theme::default");
         this.set_datatyperule("2.0");
-        this.set_filesecurelevel("all");
     };
 
     env.on_initEvent = function ()
@@ -29,8 +28,6 @@ if (nexacro.Environment)
         nexacro._addService("stdWork", "form", "./stdWork/", "session", null, "", "0", "0");
         nexacro._addService("Professor", "form", "./Professor/", "session", null, "", "0", "0");
         nexacro._addService("prfWork", "form", "./prfWork/", "session", null, "", "0", "0");
-        nexacro._addService("lib", "form", "./lib/", "session", null, "", "0", "0");
-        nexacro._addService("lib_techtip", "form", "./lib_techtip/", "session", null, "", "0", "0");
 
     	nexacro._component_uri = (nexacro._arg_compurl ? nexacro._arg_compurl : "./nexacro17lib/component/");
     	nexacro._theme_uri = "./_resource_/_theme_/";
@@ -61,10 +58,7 @@ if (nexacro.Environment)
         		{"id":"Dataset", "classname":"nexacro.NormalDataset", "type":"JavaScript"},
         		{"id":"ListView", "classname":"nexacro.ListView", "type":"JavaScript"},
         		{"id":"Graphics", "classname":"nexacro.Graphics", "type":"JavaScript"},
-        		{"id":"WebBrowser", "classname":"nexacro.WebBrowser", "type":"JavaScript"},
-        		{"id":"FileDialog", "classname":"nexacro.FileDialog", "type":"JavaScript"},
-        		{"id":"FileDownTransfer", "classname":"nexacro.FileDownTransfer", "type":"JavaScript"},
-        		{"id":"FileUpTransfer", "classname":"nexacro.FileUpTransfer", "type":"JavaScript"}
+        		{"id":"WebBrowser", "classname":"nexacro.WebBrowser", "type":"JavaScript"}
         ];
     	nexacro._addClasses(registerclass);
     };

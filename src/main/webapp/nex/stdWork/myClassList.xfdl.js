@@ -155,10 +155,10 @@
         	}
         	trace(startTime +":"+endTime);
         	var sCode = "12345";//학번
-        	var x = this.width/2-360;
+        	var x = this.width/2-410;
         	var y = this.height/2-220;
         	var objCF = new ChildFrame();
-        	objCF.init("popTimeTable",x,y,720,440,0,0,"stdWork::studentSchedule.xfdl");
+        	objCF.init("popTimeTable",x,y,820,440,0,0,"stdWork::studentSchedule.xfdl");
         	objCF.set_showtitlebar(false);
 
         	objCF.showModal(this.getOwnerFrame(),{sCode:sCode,myClass:"Y",startTime : startTime, endTime:endTime},this,"fn_callback");

@@ -13,7 +13,7 @@
             this.set_titletext("New Form");
             if (Form == this.constructor)
             {
-                this._setFormPosition(1080,520);
+                this._setFormPosition(1080,570);
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
@@ -34,7 +34,7 @@
 
             obj = new Dataset("ds_stdClass", this);
             obj.set_useclientlayout("true");
-            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"basket\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"sName\" type=\"STRING\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"basket\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -93,7 +93,7 @@
 
             // Layout Functions
             //-- Default Layout : this
-            obj = new Layout("default","",1080,520,this,function(p){});
+            obj = new Layout("default","",1080,570,this,function(p){});
             obj.set_mobileorientation("landscape");
             this.addLayout(obj.name, obj);
             
