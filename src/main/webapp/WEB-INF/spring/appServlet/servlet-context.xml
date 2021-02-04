@@ -54,8 +54,7 @@
          </beans:list>
       </beans:property>
    </beans:bean>
-
-	
+   
 	<context:component-scan base-package="kh.spring" />
 
 

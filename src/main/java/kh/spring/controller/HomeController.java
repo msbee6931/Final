@@ -18,6 +18,7 @@ public class HomeController {
 
 		return "home";
 	}
+
 	@RequestMapping("/nex")
 	public String Nex() {
 		return "redirect:/nex/index.html";
