@@ -13,14 +13,19 @@ public class AttendService {
 
 	@Autowired
 	private AttendDAO dao;
-	
-	public List<AttendDTO> attendListDay(AttendDTO dto){
-		return dao.attendListDay(dto);
+	public List<AttendDTO> attendDayList(AttendDTO dto){
+		return dao.attendDayList(dto);
+	}
+	public List<AttendDTO> attendList(AttendDTO dto){
+		return dao.attendList(dto);
 	}
 	public int attendInsert(List<AttendDTO> list) {
 		return dao.attendInsert(list);
 	}
 	public int attendUpd(AttendDTO dto) {
 		return dao.attendUpd(dto);
+	}
+	public int attendDel(AttendDTO dto) {
+		return dao.attendDel(dto);
 	}
 }
