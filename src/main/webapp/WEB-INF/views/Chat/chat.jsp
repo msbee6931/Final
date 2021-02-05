@@ -41,10 +41,24 @@
 				<c:forEach var="dto" items="${list}">
 					<c:choose>
 						<c:when test="${dto.getUserId() == userId}">
-							<div class="me">${dto.getMessage() }</div>
+							<c:choose>
+								<c:when test="${dto.getOriName() == null }">
+									<div class="me">${dto.getMessage() }</div>
+								</c:when>
+								<c:otherwise>
+									<div class="me"><a href="/chatting/download?seq=${dto.getSeq() }&oriName=${dto.getOriName() }&savedName=${dto.getSavedName() }&roomNumber=${dto.getRoomNumber() }&uploadDate=${dto.getUploadDate() }">${dto.getOriName() }</a></div>
+								</c:otherwise>
+							</c:choose>
 						</c:when>
 						<c:otherwise>
-							<div class="others">${dto.getUserId() } : ${dto.getMessage() }</div>
+							<c:choose>
+								<c:when test="${dto.getOriName() == null }">
+									<div class="others">${dto.getMessage() }</div>
+								</c:when>
+								<c:otherwise>
+									<div class="others"><a href="/chatting/download?seq=${dto.getSeq() }&oriName=${dto.getOriName() }&savedName=${dto.getSavedName() }&roomNumber=${dto.getRoomNumber() }&uploadDate=${dto.getUploadDate() }">${dto.getOriName() }</a></div>
+								</c:otherwise>
+							</c:choose>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>

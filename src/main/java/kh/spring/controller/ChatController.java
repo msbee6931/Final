@@ -29,7 +29,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 
-import kh.spring.dto.ChatFileDTO;
 import kh.spring.dto.FriendDTO;
 import kh.spring.dto.MessageDTO;
 import kh.spring.dto.RoomDTO;
@@ -147,7 +146,7 @@ public class ChatController {
 		File(filesPath.getAbsoluteFile()+"/"+savedName);
 		FileCopyUtils.copy(file.getBytes(), targetLoc); // in에는 업로드하는 파일의 바이트, out에는 저장할 경로
 		
-		ChatFileDTO dto = service.getFile(savedName);
+		MessageDTO dto = service.getFile(savedName);
 		String time = dto.getUploadDate().toString();
 		dto.setUploadDate(time);
 		template.convertAndSend("/topic/file/"+roomNumber,dto); 
@@ -156,7 +155,7 @@ public class ChatController {
 	
 	@RequestMapping("download")
 	@ResponseBody
-	public void download(HttpServletResponse resp,ChatFileDTO dto) throws Exception{		
+	public void download(HttpServletResponse resp,MessageDTO dto) throws Exception{		
 		String filePath = session.getServletContext().getRealPath("files");
 		File targetFile = new File(filePath+"/"+dto.getSavedName()); 
 		
@@ -199,17 +198,28 @@ public class ChatController {
 	// 특정 채팅방 조회
 	@RequestMapping("roomCheck")
 	public String roomInfo(String userId,String friendId,String userName,String friendName,Model model) {
-		String roomNumber = userId+"_"+friendId;
-		String roomName = userName+"와 "+friendName+"의 채팅방";
 		RoomDTO dto = service.findRoomById(userId, friendId);
 		
 		if(dto == null) {
+			// 채팅방이 없을시 채팅방 생성
+			String roomNumber = userId+"_"+friendId;
+			String roomName = userName+"와 "+friendName+"의 채팅방";
 			int result = service.insertRoom(roomNumber,roomName);
+			List<MessageDTO> list = service.getChatting(roomNumber);
+			
+			model.addAttribute("list",list);
+			model.addAttribute("userId", userId);
+			model.addAttribute("roomNumber",roomNumber);
+		}else {
+			// 채팅방이 있을시
+			String roomNumber = dto.getRoomNumber();
+			List<MessageDTO> list = service.getChatting(roomNumber);
+			
+			model.addAttribute("list",list);
+			model.addAttribute("userId", userId);
+			model.addAttribute("roomNumber",roomNumber);
 		}
-		List<MessageDTO> list = service.getChatting(roomNumber);
-		model.addAttribute("list",list);
-		model.addAttribute("userId", userId);
-		model.addAttribute("roomNumber",roomNumber);
+
 		return "Chat/chat";
 	}
 	

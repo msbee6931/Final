@@ -28,19 +28,19 @@
 	
 	<!-- Chat -->
  	<insert id="insertMessage">
- 		insert into chatMessage values(chatMessage_seq.nextval,#{userId},#{message},#{roomNumber})
+ 		insert into chatMessage(seq,userId,message,roomNumber) values(chatMessage_seq.nextval,#{userId},#{message},#{roomNumber})
  	</insert>
  	
  	<select id="getChatting" resultType="kh.spring.dto.MessageDTO">
- 		select * from chatMessage where roomNumber=#{roomNumber} order by seq
+ 		select * from chatMessage where roomNumber=#{roomNumber} order by uploadDate
  	</select>
  	
  	<insert id="insertChatFile">
- 		insert into chatFile values(chatFile_seq.nextval,#{roomNumber},#{oriName},#{savedName},default,#{userId})
+ 		insert into chatMessage(seq,roomNumber,oriName,savedName,uploadDate,userId) values(chatFile_seq.nextval,#{roomNumber},#{oriName},#{savedName},default,#{userId})
  	</insert>
  	
- 	<select id="getFile" resultType="kh.spring.dto.ChatFileDTO">
- 		select * from chatFile where savedName = #{savedName}
+ 	<select id="getFile" resultType="kh.spring.dto.MessageDTO">
+ 		select * from chatMessage where savedName = #{savedName}
  	</select>
  	
  	<!-- Room -->

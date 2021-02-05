@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kh.spring.dto.ChatFileDTO;
 import kh.spring.dto.FriendDTO;
 import kh.spring.dto.MessageDTO;
 import kh.spring.dto.RoomDTO;
@@ -72,7 +71,7 @@ public class ChattingDAO {
 	}
 	
 
-	public ChatFileDTO getFile(String savedName) {
+	public MessageDTO getFile(String savedName) {
 		return session.selectOne("chatting.getFile", savedName);
 	}
 	
