@@ -20,7 +20,6 @@
 
         	//스케줄러 설정 함수 호출
         	this.gfnSetScheduler(objGraphics);
-
         }
 
         /**
@@ -33,7 +32,7 @@
         {
         	var i, j;
 
-        	var nRightGap = 0;
+        	var nRightGap = 0
         	var nBottomGap = 0;
 
         	//스케줄러 설정 정보 가져오기
@@ -443,7 +442,6 @@
         	for(i=0;i<objDs.rowcount;i++)
         	{
         		//일정 데이터 가져오기
-        		sSeq=onjDs.getColumn(i,"seq");
         		sId = objDs.getColumn(i, "id");
         		sSDate = objDs.getColumn(i, "sdate");
         		sEDate = objDs.getColumn(i, "edate");
