@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.spring.dao.ChattingDAO;
+import kh.spring.dto.ChatFileDTO;
 import kh.spring.dto.FriendDTO;
 import kh.spring.dto.MessageDTO;
 import kh.spring.dto.RoomDTO;
@@ -47,7 +48,14 @@ public class ChattingService {
 	public List<MessageDTO> getChatting(String roomNumber) {
 		return dao.getChatting(roomNumber);
 	}
+	
+	public int insertChatFile(String roomNumber, String oriName, String savedName, String userId) {
+		return dao.insertChatFile(roomNumber,oriName,savedName,userId);
+	}
 
+	public ChatFileDTO getFile(String savedName) {
+		return dao.getFile(savedName);
+	}
 	
 	// Room
 	public List<RoomDTO> findAllRoomByUserId(String userId) {

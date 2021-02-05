@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.spring.dto.ChatFileDTO;
 import kh.spring.dto.FriendDTO;
 import kh.spring.dto.MessageDTO;
 import kh.spring.dto.RoomDTO;
@@ -61,6 +62,20 @@ public class ChattingDAO {
 		return session.selectList("chatting.getChatting",roomNumber);
 	}
 	
+	public int insertChatFile(String roomNumber, String oriName, String savedName,String userId) {
+		Map<String,String> param = new HashMap<>();
+		param.put("userId", userId);
+		param.put("roomNumber", roomNumber);
+		param.put("oriName", oriName);
+		param.put("savedName", savedName);
+		return session.insert("chatting.insertChatFile",param);
+	}
+	
+
+	public ChatFileDTO getFile(String savedName) {
+		return session.selectOne("chatting.getFile", savedName);
+	}
+	
 	// Room
 	public List<RoomDTO> findAllRoomByUserId(String userId) {
 		return session.selectList("chatting.findAllRoomByUserId",userId);
@@ -83,4 +98,5 @@ public class ChattingDAO {
 		param.put("friendId", friendId);		
 		return session.selectOne("chatting.findRoomById",param);
 	}
+
 }

@@ -1,10 +1,16 @@
 package kh.spring.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.PrintWriter;
+import java.nio.ByteBuffer;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -15,12 +21,15 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 
+import kh.spring.dto.ChatFileDTO;
 import kh.spring.dto.FriendDTO;
 import kh.spring.dto.MessageDTO;
 import kh.spring.dto.RoomDTO;
@@ -119,7 +128,59 @@ public class ChatController {
 		int result = service.insertMessage(dto.getUserId(),dto.getMessage(),dto.getRoomNumber());
 		if(result>0) {
 			template.convertAndSend("/topic/chat/"+dto.getRoomNumber(),dto);
+		}
+	}
+	
+	@RequestMapping("upload")
+	@ResponseBody
+	public void upload(MultipartFile file,String roomNumber,String userId) throws Exception{ 
+		String realPath = session.getServletContext().getRealPath("files"); File
+		filesPath = new File(realPath); if(!filesPath.exists()) {filesPath.mkdir();}
+		
+		String oriName = file.getOriginalFilename();
+		String uId = UUID.randomUUID().toString().replaceAll("-", ""); 
+		String savedName = uId + "_" + oriName;
+		  
+		int result = service.insertChatFile(roomNumber,oriName,savedName,userId);
+ 
+		if(result > 0) { File targetLoc = new
+		File(filesPath.getAbsoluteFile()+"/"+savedName);
+		FileCopyUtils.copy(file.getBytes(), targetLoc); // in에는 업로드하는 파일의 바이트, out에는 저장할 경로
+		
+		ChatFileDTO dto = service.getFile(savedName);
+		String time = dto.getUploadDate().toString();
+		dto.setUploadDate(time);
+		template.convertAndSend("/topic/file/"+roomNumber,dto); 
+		 }
+	}
+	
+	@RequestMapping("download")
+	@ResponseBody
+	public void download(HttpServletResponse resp,ChatFileDTO dto) throws Exception{		
+		String filePath = session.getServletContext().getRealPath("files");
+		File targetFile = new File(filePath+"/"+dto.getSavedName()); 
+		
+		if(targetFile.exists() && targetFile.isFile()) {
 			
+			resp.setContentType("application/octet-stream; charset=utf8");
+			// 파일의 내용 형식을 바꿔주는 것. 기본값은 text/html이다.
+			// 여기서 보내려는건 파일의 내용이고 이것이 html로 랜더링 되면 안되니 꼭 타입을 바꿔줘야함
+			resp.setContentLength((int)targetFile.length());
+			String oriName = new String(dto.getOriName().getBytes("UTF-8"), "ISO-8859-1");
+			dto.setOriName(oriName);
+			resp.setHeader("Content-Disposition","attachment; filename=\""+dto.getOriName()+"\"");
+			// 파일을 다운로드할때 하단에 뜨는 곳에 나오는 정보(헤더 정보가 나옴)
+			
+			FileInputStream fis = new FileInputStream(targetFile);
+			// targetFile을 ram으로 불러오기 위한 통로
+			ServletOutputStream sos = resp.getOutputStream();
+			// resp가 데이터를 들고 클라이언트에게 가는 통로
+			FileCopyUtils.copy(fis,sos);
+			fis.close();
+			
+			sos.flush(); // fis의 데이터가 담긴 sos통로를 보내는 것
+			sos.close();
+			// fis에서 나오는 데이터를 sos에 복사해라
 		}
 	}
 	

@@ -53,8 +53,8 @@
 		<div class="etc">
 			<div id="fileWrapper">
 				<i class="far fa-file-alt" id="fileIcon"></i>
-				<form name="signform" method="POST" ENCTYPE="multipart/form-data" action="">
-    				<input type="file" id="file" name="file" style="display:none;" onchange="changeValue(this)">
+				<form name="signform" id="signform" method="POST" ENCTYPE="multipart/form-data" action="">
+    				<input type="file" id="file" name="file" style="display:none;" onchange="upload()" >
 				</form>	
 			</div>
 			<div id="img"><i class="far fa-file-image"></i></div>
@@ -81,6 +81,14 @@
 					$(".contents").append("<p class='others'>"+result.userId+" : "+result.message+"</p>");
 				}
 			});
+			client.subscribe("/topic/file/"+roomNumber,function(msg){ // 구독할 url 넣기
+				var result = JSON.parse(msg.body);
+				if(result.userId == $("#userId").val()){
+					$(".contents").append("<p class='me'><a href='/chatting/download?seq="+result.seq+"&oriName="+result.oriName+"&savedName="+result.savedName+"&roomNumber="+result.roomNumber+"&uploadDate="+result.uploadDate+"'>"+result.oriName+"</a></p>");
+				}else{
+					$(".contents").append("<p class='others'><a href='/chatting/download?seq="+result.seq+"&oriName="+result.oriName+"&savedName="+result.savedName+"&roomNumber="+result.roomNumber+"&uploadDate="+result.uploadDate+"'>"+result.oriName+"</a></p>");
+				}
+			});
 		});
 		
 		$("#send").on("click",function(){
@@ -95,9 +103,32 @@
 			 $('#file').click();
 		});
 		
-		function changeValue(obj){
-			document.signform.submit();
+		function upload(){
+			var roomNumber = $("#roomNumber").val();
+			var userId = $("#userId").val();
+			var formData = new FormData($("#signform")[0]);
+			formData.append("file", $("#file")[0].files[0]);
+			
+			$.ajax({
+				type: 'POST', 
+				url: '/chatting/upload?roomNumber='+roomNumber+'&userId='+userId, 
+				processData: false, // 필수 
+				contentType: false, // 필수 
+				data: formData, 
+				success: function(data) { console.log("success!")}
+			});
 		}
+		
+		$(document).on("click","#download",function(){
+			var savedName = $(this).children(".savedName").val();
+			console.log(savedName);
+			$.ajax({
+				type: 'POST', 
+				url: '/chatting/download',
+				data: {savedName: savedName}, 
+				success: function(data) { console.log("success!")}
+			});
+		});
 	</script>
 </body>
 </html>
