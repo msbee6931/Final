@@ -10,10 +10,11 @@ public class MessageDTO {
 	private String oriName;
 	private String savedName;
 	private String uploadDate;
+	private String format;
 	
 	public MessageDTO() {}
 	public MessageDTO(int seq, String userId, String roomNumber, String message, String oriName, String savedName,
-			String uploadDate) {
+			String uploadDate, String format) {
 		super();
 		this.seq = seq;
 		this.userId = userId;
@@ -22,6 +23,7 @@ public class MessageDTO {
 		this.oriName = oriName;
 		this.savedName = savedName;
 		this.uploadDate = uploadDate;
+		this.format = format;
 	}
 	
 	public int getSeq() {
@@ -65,5 +67,11 @@ public class MessageDTO {
 	}
 	public void setUploadDate(String uploadDate) {
 		this.uploadDate = uploadDate;
+	}
+	public String getFormat() {
+		return format;
+	}
+	public void setFormat(String format) {
+		this.format = format;
 	}
 }

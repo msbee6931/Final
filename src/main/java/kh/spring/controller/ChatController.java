@@ -121,9 +121,10 @@ public class ChatController {
 	}
 
 	// 채팅 메세지 전달
-	@MessageMapping("chat") // 리퀘스트가 http를 통해 접속하는 경우 쓰임. 웹소켓 접속은 다른 어노테이션
+	@MessageMapping("chat/{roomNumber}") // 리퀘스트가 http를 통해 접속하는 경우 쓰임. 웹소켓 접속은 다른 어노테이션
 	// @SendTo("/topic") // Proc 메서드 작업이 끝나면 response를 구독하는 사람한테만 메세지 보내는 설정 가능
 	public void chat(MessageDTO dto) {
+		System.out.println("메세지가 들어온 방정보는 " + dto.getRoomNumber());
 		int result = service.insertMessage(dto.getUserId(),dto.getMessage(),dto.getRoomNumber());
 		if(result>0) {
 			template.convertAndSend("/topic/chat/"+dto.getRoomNumber(),dto);
@@ -133,8 +134,9 @@ public class ChatController {
 	@RequestMapping("upload")
 	@ResponseBody
 	public void upload(MultipartFile file,String roomNumber,String userId) throws Exception{ 
-		String realPath = session.getServletContext().getRealPath("files"); File
-		filesPath = new File(realPath); if(!filesPath.exists()) {filesPath.mkdir();}
+		String realPath = session.getServletContext().getRealPath("resources/files");
+		File filesPath = new File(realPath);
+		if(!filesPath.exists()) {filesPath.mkdir();}
 		
 		String oriName = file.getOriginalFilename();
 		String uId = UUID.randomUUID().toString().replaceAll("-", ""); 
@@ -149,14 +151,22 @@ public class ChatController {
 		MessageDTO dto = service.getFile(savedName);
 		String time = dto.getUploadDate().toString();
 		dto.setUploadDate(time);
-		template.convertAndSend("/topic/file/"+roomNumber,dto); 
-		 }
+		
+		String format = oriName.substring(oriName.lastIndexOf(".")+1);
+		// System.out.println("업로드한 파일은 포맷은 "+format);
+		if(format.contentEquals("gif")||format.contentEquals("jpg")||format.contentEquals("png")||format.contentEquals("bpm")||format.contentEquals("tif")||format.contentEquals("tiff")||format.contentEquals("raw")||format.contentEquals("rle")||format.contentEquals("dib")) {
+			template.convertAndSend("/topic/img/"+roomNumber,dto); 
+		}else {
+			template.convertAndSend("/topic/file/"+roomNumber,dto); 
+		}
+		
+		}
 	}
 	
 	@RequestMapping("download")
 	@ResponseBody
 	public void download(HttpServletResponse resp,MessageDTO dto) throws Exception{		
-		String filePath = session.getServletContext().getRealPath("files");
+		String filePath = session.getServletContext().getRealPath("resources/files");
 		File targetFile = new File(filePath+"/"+dto.getSavedName()); 
 		
 		if(targetFile.exists() && targetFile.isFile()) {

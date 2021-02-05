@@ -30,6 +30,10 @@
 		display: flex;
 		justify-content: space-around;
 	}
+	img{
+		width: 100px;
+		height: 100px;s
+	}
 </style>
 </head>
 <body>
@@ -45,6 +49,9 @@
 								<c:when test="${dto.getOriName() == null }">
 									<div class="me">${dto.getMessage() }</div>
 								</c:when>
+								<c:when test="${dto.getFormat()=='gif' or dto.getFormat()=='png' or dto.getFormat()=='jpg' or dto.getFormat()=='raw' or dto.getFormat()=='tif' or dto.getFormat()=='tiff' or dto.getFormat()=='bpm' or dto.getFormat()=='rle' or dto.getFormat()=='dib'}">
+									<div class='me'><img src='/files/${dto.getSavedName() }'><br><a href='/chatting/download?seq=${dto.getSeq() }&oriName=${dto.getOriName() }&savedName=${dto.getSavedName() }&roomNumber=${dto.getRoomNumber() }&uploadDate=${dto.getUploadDate() }'>${dto.getOriName() }</a></div>
+								</c:when>
 								<c:otherwise>
 									<div class="me"><a href="/chatting/download?seq=${dto.getSeq() }&oriName=${dto.getOriName() }&savedName=${dto.getSavedName() }&roomNumber=${dto.getRoomNumber() }&uploadDate=${dto.getUploadDate() }">${dto.getOriName() }</a></div>
 								</c:otherwise>
@@ -54,6 +61,9 @@
 							<c:choose>
 								<c:when test="${dto.getOriName() == null }">
 									<div class="others">${dto.getMessage() }</div>
+								</c:when>
+								<c:when test="${dto.getFormat()=='gif' or dto.getFormat()=='png' or dto.getFormat()=='jpg' or dto.getFormat()=='raw' or dto.getFormat()=='tif' or dto.getFormat()=='tiff' or dto.getFormat()=='bpm' or dto.getFormat()=='rle' or dto.getFormat()=='dib'}">
+									<div class='others'><img src='/files/${dto.getSavedName() }'><br><a href='/chatting/download?seq=${dto.getSeq() }&oriName=${dto.getOriName() }&savedName=${dto.getSavedName() }&roomNumber=${dto.getRoomNumber() }&uploadDate=${dto.getUploadDate() }'>${dto.getOriName() }</a></div>
 								</c:when>
 								<c:otherwise>
 									<div class="others"><a href="/chatting/download?seq=${dto.getSeq() }&oriName=${dto.getOriName() }&savedName=${dto.getSavedName() }&roomNumber=${dto.getRoomNumber() }&uploadDate=${dto.getUploadDate() }">${dto.getOriName() }</a></div>
@@ -67,11 +77,10 @@
 		<div class="etc">
 			<div id="fileWrapper">
 				<i class="far fa-file-alt" id="fileIcon"></i>
-				<form name="signform" id="signform" method="POST" ENCTYPE="multipart/form-data" action="">
+				<form name="signform" id="signform" method="POST" ENCTYPE="multipart/form-data">
     				<input type="file" id="file" name="file" style="display:none;" onchange="upload()" >
 				</form>	
 			</div>
-			<div id="img"><i class="far fa-file-image"></i></div>
 			<div id="codeblock"><i class="fas fa-code"></i></div>
 		</div>
 		<div class="sendMsg">
@@ -90,17 +99,25 @@
 			client.subscribe("/topic/chat/"+roomNumber,function(msg){ // 구독할 url 넣기
 				var result = JSON.parse(msg.body);
 				if(result.userId == $("#userId").val()){
-					$(".contents").append("<p class='me'>"+result.message+"</p>");
+					$(".contents").append("<div class='me'>"+result.message+"</div>");
 				}else{
-					$(".contents").append("<p class='others'>"+result.userId+" : "+result.message+"</p>");
+					$(".contents").append("<div class='others'>"+result.userId+" : "+result.message+"</div>");
 				}
 			});
 			client.subscribe("/topic/file/"+roomNumber,function(msg){ // 구독할 url 넣기
 				var result = JSON.parse(msg.body);
 				if(result.userId == $("#userId").val()){
-					$(".contents").append("<p class='me'><a href='/chatting/download?seq="+result.seq+"&oriName="+result.oriName+"&savedName="+result.savedName+"&roomNumber="+result.roomNumber+"&uploadDate="+result.uploadDate+"'>"+result.oriName+"</a></p>");
+					$(".contents").append("<div class='me'><a href='/chatting/download?seq="+result.seq+"&oriName="+result.oriName+"&savedName="+result.savedName+"&roomNumber="+result.roomNumber+"&uploadDate="+result.uploadDate+"'>"+result.oriName+"</a></div>");
 				}else{
-					$(".contents").append("<p class='others'><a href='/chatting/download?seq="+result.seq+"&oriName="+result.oriName+"&savedName="+result.savedName+"&roomNumber="+result.roomNumber+"&uploadDate="+result.uploadDate+"'>"+result.oriName+"</a></p>");
+					$(".contents").append("<div class='others'><a href='/chatting/download?seq="+result.seq+"&oriName="+result.oriName+"&savedName="+result.savedName+"&roomNumber="+result.roomNumber+"&uploadDate="+result.uploadDate+"'>"+result.oriName+"</a></div>");
+				}
+			});
+			client.subscribe("/topic/img/"+roomNumber,function(msg){ // 구독할 url 넣기
+				var result = JSON.parse(msg.body);
+				if(result.userId == $("#userId").val()){
+					$(".contents").append("<div class='me'><img src='/files/"+result.savedName+"'><br><a href='/chatting/download?seq="+result.seq+"&oriName="+result.oriName+"&savedName="+result.savedName+"&roomNumber="+result.roomNumber+"&uploadDate="+result.uploadDate+"'>"+result.oriName+"</a></div>");
+				}else{
+					$(".contents").append("<div class='others'><img src='/files/"+result.savedName+"'><br><a href='/chatting/download?seq="+result.seq+"&oriName="+result.oriName+"&savedName="+result.savedName+"&roomNumber="+result.roomNumber+"&uploadDate="+result.uploadDate+"'>"+result.oriName+"</a></div>");
 				}
 			});
 		});
@@ -110,7 +127,7 @@
 			var msg = $("#message").val();
 			var roomNumber = $("#roomNumber").val();
 			$("#message").val("");
-			client.send("/app/chat",{},JSON.stringify({userId:userId,message:msg,roomNumber:roomNumber})); // 세번째 인자값은 보내려는 메세지(String 혹은 json 형태로)
+			client.send("/app/chat/"+roomNumber,{},JSON.stringify({userId:userId,message:msg,roomNumber:roomNumber})); // 세번째 인자값은 보내려는 메세지(String 혹은 json 형태로)
 		});
 		
 		$("#fileIcon").on("click",function(){
