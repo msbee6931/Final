@@ -65,9 +65,13 @@
         this.tab_menu_onchanged = function(obj,e)
         {
         	var sFormId = obj.tabpages[e.postindex].name;
+<<<<<<< HEAD
 
         	this.av_FrameSet[sFormId].form.setFocus();
 
+=======
+        	this.av_FrameSet[sFormId].form.setFocus();
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
         };
 
         this.tab_menu_onextrabuttonclick = function(obj,e)

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -39,11 +39,48 @@
 
 
 <style>
+@font-face {
+	font-family: 'GmarketSansBold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'GmarketSansLight';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+a {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
 * {
 	box-sizing: border-box;
+	
 }
 
 .headt1 {
+font-family: 'GmarketSansMedium';
 	font-size: 13px;
 	text-align: center;
 	color: white;
@@ -51,6 +88,7 @@
 }
 
 .headt2 {
+font-family: 'GmarketSansLight';
 	background-color: white;
 }
 
@@ -85,8 +123,7 @@ nav {
 			<nav class="navbar navbar-expand-xl navbar-light"
 				style="background-color: white">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="#"><img
-						src="/img/logo.PNG"></a>
+					<a class="navbar-brand" href="#"><img src="/img/logo.PNG"></a>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
 						aria-controls="navbarTogglerDemo02" aria-expanded="false"
@@ -95,24 +132,19 @@ nav {
 					</button>
 					<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link active"
+							<li class="nav-item p-3"><a class="nav-link active"
 								aria-current="page" href="introduce.home"><b>학교소개</b></a></li>
-							<li class="nav-item"><a class="nav-link active" href="#"
+							<li class="nav-item p-3"><a class="nav-link active" href="#"
 								tabindex="-1"><b>공지사항</b></a></li>
-							<li class="nav-item"><a class="nav-link active" href="#"
+							<li class="nav-item p-3"><a class="nav-link active" href="#"
 								tabindex="-1"><b>학사스케쥴</b></a></li>
-							<li class="nav-item"><a class="nav-link active" href="#"
+							<li class="nav-item p-3"><a class="nav-link active" href="#"
 								tabindex="-1"><b>게시판</b></a></li>
-							<li class="nav-item"><a class="nav-link active" href="#"
+							<li class="nav-item p-3"><a class="nav-link active" href="#"
 								tabindex="-1"><b>자료실</b></a></li>
-							<li class="nav-item"><a class="nav-link active" href="#"
+							<li class="nav-item p-3"><a class="nav-link active" href="#"
 								tabindex="-1"><b>채팅</b></a></li>
 						</ul>
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="검색어를 입력하세요" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">검색</button>
-						</form>
 					</div>
 				</div>
 			</nav>
@@ -123,16 +155,13 @@ nav {
 					data-bs-ride="carousel">
 					<div class="carousel-inner">
 						<div class="carousel-item active" data-bs-interval="10000">
-							<img src="/img/carousel1.jpg" class="d-block w-100"
-								alt="...">
+							<img src="/img/carousel1.jpg" class="d-block w-100" alt="...">
 						</div>
 						<div class="carousel-item" data-bs-interval="5000">
-							<img src="/img/carousel2.jpg" class="d-block w-100"
-								alt="...">
+							<img src="/img/carousel2.jpg" class="d-block w-100" alt="...">
 						</div>
 						<div class="carousel-item">
-							<img src="/img/carousel3.jpg" class="d-block w-100"
-								alt="...">
+							<img src="/img/carousel3.jpg" class="d-block w-100" alt="...">
 						</div>
 					</div>
 					<a class="carousel-control-prev" href="#carouselExampleInterval"
@@ -147,19 +176,20 @@ nav {
 				</div>
 			</div>
 		</div>
-		<div class="row footer">
-			<div class="col"></div>
-		</div>
+		<!-- footer -->
+		<footer>
+			<jsp:include page="/WEB-INF/views/footer.jsp" />
+		</footer>
 
-		<input type=button id=enroll value=재학증명서>
-		<input type=button id=graduate value=졸업증명서>
-		<input type=button id=payment value= "납부 영수증">
-		<input type=button id=transcript value=성적증명서>
+		<input type=button id=enroll value=재학증명서> <input type=button
+			id=graduate value=졸업증명서> <input type=button id=payment
+			value="납부 영수증"> <input type=button id=transcript value=성적증명서>
 		<input type=button id=free value=자유게시판>
 
 		<!-- 채팅을 위해 임시 아이디 생성 -->
-		<input id="userId" type="text" placeholder="채팅을 위한 임시아이디 입력하고 버튼클릭시 채팅으로 이동">
-		<input type="button" value="send" id="sendBtn">
+		<input id="userId" type="text"
+			placeholder="채팅을 위한 임시아이디 입력하고 버튼클릭시 채팅으로 이동"> <input
+			type="button" value="send" id="sendBtn">
 	</div>
 
 </body>

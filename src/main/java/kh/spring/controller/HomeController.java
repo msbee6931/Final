@@ -18,6 +18,7 @@ public class HomeController {
 
 		return "home";
 	}
+
 	@RequestMapping("/nex")
 	public String Nex() {
 		return "redirect:/nex/index.html";
@@ -38,6 +39,18 @@ public class HomeController {
 	@RequestMapping("admission.home")
 	public String Admission() {
 		return "Admission";
+	}
+	@RequestMapping("PersonalInfomation.home")
+	public String PersonalInfomation() {
+		return "PersonalInfomation";
+	}
+	@RequestMapping("EmailNegative.home")
+	public String EmailNegative() {
+		return "EmailNegative";
+	}
+	@RequestMapping("LawOfOffical.home")
+	public String LawOfOffical() {
+		return "LawOfOffical";
 	}
 
 	@ExceptionHandler

@@ -1,5 +1,6 @@
 package kh.spring.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,9 +67,9 @@ public class ClassController {
 		return nr;
 	}
 	@RequestMapping("/classListProCode.nex")
-	public NexacroResult classListProCode(@ParamVariable(name="proCode")String proCode) {
+	public NexacroResult classListProCode(@ParamVariable(name="proCode")String proCode,@ParamVariable(name="startTime")String startTime,@ParamVariable(name="endTime")String endTime) {
 		NexacroResult nr = new NexacroResult();
-		List<ClassDTO> list = service.classListProCode(proCode);
+		List<ClassDTO> list = service.classListProCode(proCode,startTime,endTime);
 		nr.addDataSet("out_ds",list);
 		return nr;
 	}
@@ -358,7 +359,6 @@ public class ClassController {
 			ClassDTO dto = service.classListSeq(classSeq);
 			String[] limit = dto.getBasketLimit().split("/");
 			int count = service.stdClassCount(list2.get(i));
-			System.out.println(count);
 			dto.setBasketLimit(count+"/"+limit[1]);
 			service.limitBasketUpd(dto);
 		}
@@ -369,6 +369,27 @@ public class ClassController {
 		NexacroResult nr = new NexacroResult();
 		service.stdClassSeqDel(list);
 		service.stdTimeTableSeqDel(list);
+		return nr;
+	}
+	@RequestMapping("/proClassList.nex")
+	public NexacroResult proClassList(@ParamVariable(name="proCode")String proCode,@ParamVariable(name="startTime")String startTime,@ParamVariable(name="endTime")String endTime) {
+		NexacroResult nr = new NexacroResult();
+		 List<ClassDTO> list = service.proClassList(proCode,startTime,endTime);
+		 nr.addDataSet("out_ds",list);
+		return nr;
+	}
+	@RequestMapping("/stdListSeq.nex")
+	public NexacroResult stdListSeq(@ParamVariable(name="classCode")int classCode) {
+		NexacroResult nr = new NexacroResult();
+		StudentClassDTO dto = new StudentClassDTO();
+		dto.setClassCode(classCode);
+		List<StudentClassDTO> list = service.stdListSeq(dto);
+		if(list.size() > 0) {
+			nr.addDataSet("out_ds",list);
+		}else {
+			List<StudentClassDTO> list2 = new ArrayList<>();
+			nr.addDataSet("out_ds",list2);
+		}
 		return nr;
 	}
 }

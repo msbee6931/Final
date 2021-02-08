@@ -70,7 +70,10 @@
 
         	//화면 띄울 프레임 지정
         	av_FrameSet = this.objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.FrameSet00;
+<<<<<<< HEAD
 
+=======
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
         	av_FrameSet[formId].form.setFocus();
 
         };
