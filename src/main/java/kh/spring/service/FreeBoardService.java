@@ -82,6 +82,10 @@ public class FreeBoardService {
 		 return dao.deleteBySeq(seq);
 	 }
 	 
+	 public int deleteList(List<FreeBoardDTO> list) {
+		 return dao.deleteList(list);
+	 }
+	 
 	 public int insert(FreeBoardDTO dto) {
 		 return dao.insert(dto);
 	 }

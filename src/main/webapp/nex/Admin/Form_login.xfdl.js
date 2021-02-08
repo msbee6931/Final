@@ -23,7 +23,22 @@
 
 
             obj = new Dataset("ds_login", this);
-            obj._setContents("<ColumnInfo><Column id=\"id\" type=\"STRING\" size=\"256\"/><Column id=\"pw\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"s_seq\" type=\"STRING\" size=\"256\"/><Column id=\"p_seq\" type=\"STRING\" size=\"256\"/><Column id=\"a_seq\" type=\"STRING\" size=\"256\"/><Column id=\"pw\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("ds_students", this);
+            obj._setContents("<ColumnInfo><Column id=\"chk\" type=\"STRING\" size=\"256\"/><Column id=\"s_seq\" type=\"STRING\" size=\"256\"/><Column id=\"gender\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/><Column id=\"age\" type=\"STRING\" size=\"256\"/><Column id=\"email\" type=\"STRING\" size=\"256\"/><Column id=\"contact\" type=\"STRING\" size=\"256\"/><Column id=\"address\" type=\"STRING\" size=\"256\"/><Column id=\"scholarship\" type=\"STRING\" size=\"256\"/><Column id=\"rest\" type=\"STRING\" size=\"256\"/><Column id=\"grade\" type=\"STRING\" size=\"256\"/><Column id=\"birth\" type=\"DATE\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("ds_professor", this);
+            obj._setContents("<ColumnInfo><Column id=\"chk\" type=\"STRING\" size=\"256\"/><Column id=\"p_seq\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/><Column id=\"age\" type=\"STRING\" size=\"256\"/><Column id=\"email\" type=\"STRING\" size=\"256\"/><Column id=\"contact\" type=\"STRING\" size=\"256\"/><Column id=\"address\" type=\"STRING\" size=\"256\"/><Column id=\"lecture\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("ds_admin", this);
+            obj._setContents("<ColumnInfo><Column id=\"a_seq\" type=\"STRING\" size=\"256\"/><Column id=\"pw\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -97,10 +112,60 @@
         this.registerScript("Form_login.xfdl", function() {
         this.objApp = nexacro.getApplication();
 
-        this.fn_callback = function(id,ErrorCode,ErrorMsg){	//콜백함수
+        this.fn_callbackStu = function(id,ErrorCode,ErrorMsg,out_ds,nr){	//콜백함수
         	trace(id);
         	trace(ErrorMsg);
         	trace(ErrorCode);
+
+
+
+        	trace(this.ds_students.getCount("s_seq"));
+
+
+
+        	if(this.ds_students.getCount("s_seq") > 0){
+        	this.objApp.mainframe.VFrameSet00.TopFrame.set_formurl("Student::Form_Top.xfdl");
+        	this.objApp.mainframe.VFrameSet00.HFrameSet00.LeftFrame.set_formurl("Student::Form_Left.xfdl");
+        	this.objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.ChildFrame00.set_formurl("Student::Form_Mdi.xfdl");
+        	this.objApp.mainframe.VFrameSet00.BottomFrame.set_formurl("Student::Form_Bottom.xfdl");
+        	this.objApp.mainframe.VFrameSet00.set_separatesize("0,50,*,60");
+        	}else{
+        	this.alert("아이디,비밀번호를 확인하세요.")
+        	return;
+        	}
+        }
+        this.fn_callbackPro=function(id,ErrorCode,ErrorMsg){
+        	trace(id);
+        	trace(ErrorMsg);
+        	trace(ErrorCode);
+
+        	trace(this,this.ds_professor.getCount("p_seq"));
+        	if(this.ds_professor.getCount("p_seq") > 0){
+        	this.objApp.mainframe.VFrameSet00.TopFrame.set_formurl("Professor::Form_Top.xfdl");
+        	this.objApp.mainframe.VFrameSet00.HFrameSet00.LeftFrame.set_formurl("Professor::Form_Left.xfdl");
+        	this.objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.ChildFrame00.set_formurl("Professor::Form_Mdi.xfdl");
+        	this.objApp.mainframe.VFrameSet00.BottomFrame.set_formurl("Professor::Form_Bottom.xfdl");
+        	this.objApp.mainframe.VFrameSet00.set_separatesize("0,50,*,60");
+        	}else{
+        	this.alert("아이디,비밀번호를 확인하세요.")
+        	return;
+        	}
+        }
+        this.fn_callbackAdm=function(id,ErrorCode,ErrorMsg){
+        	trace(id);
+        	trace(ErrorMsg);
+        	trace(ErrorCode);
+        	trace(this.ds_admin.getCount("a_seq"));
+        	if(this.ds_admin.getCount("a_seq") > 0){
+        	this.objApp.mainframe.VFrameSet00.TopFrame.set_formurl("Admin::Form_Top.xfdl");
+        	this.objApp.mainframe.VFrameSet00.HFrameSet00.LeftFrame.set_formurl("Admin::Form_Left.xfdl");
+        	this.objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.ChildFrame00.set_formurl("Admin::Form_Mdi.xfdl");
+        	this.objApp.mainframe.VFrameSet00.BottomFrame.set_formurl("Admin::Form_Bottom.xfdl");
+        	this.objApp.mainframe.VFrameSet00.set_separatesize("0,50,*,60");
+        	}else{
+        	this.alert("아이디,비밀번호를 확인하세요.");
+        	return;
+        	}
         }
 
 
@@ -119,6 +184,7 @@
         	this.objApp.mainframe.VFrameSet00.TopFrame.set_formurl("Professor::Form_Top.xfdl");
         	this.objApp.mainframe.VFrameSet00.HFrameSet00.LeftFrame.set_formurl("Professor::Form_Left.xfdl");
         	this.objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.ChildFrame00.set_formurl("Professor::Form_Mdi.xfdl");
+        	this.objApp.mainframe.VFrameSet00.BottomFrame.set_formurl("Professor::Form_Bottom.xfdl");
         	this.objApp.mainframe.VFrameSet00.set_separatesize("0,50,*,60");
         };
 
@@ -160,17 +226,59 @@
         		trace(hash);
 
         		var addRow = this.ds_login.addRow();
-        		this.ds_login.setColumn(addRow,"id",id);
+        		this.ds_login.setColumn(addRow,"s_seq",id);
         		this.ds_login.setColumn(addRow,"pw",hash);
 
         		this.transaction(
 
-        					"ds_login" //1. strSvcID
+        					"ds_loginStu" //1. strSvcID
         					,"/loginStu.login" //2. strURL
         					,"in_ds=ds_login:U" //3.strInDatasets - I,U,D Sds=Fds:U 변경된값만보내겟다, :A, :N
-        					,"ds_login=out_ds" //4.strOutDatasets -select Fds=Sds
+        					,"ds_students=out_ds" //4.strOutDatasets -select Fds=Sds
         					,"" //5.strArgument text값
-        					,"fn_callback" //6.strCallbackFunc
+        					,"fn_callbackStu" //6.strCallbackFunc
+        				);
+        				trace(this.ds_login);
+        	}else if(this.loginForm.form.rad_chk.value == 2){
+        		trace("교수입니다");
+        		var shaObj = new jsSHA("SHA-256","TEXT");
+        		shaObj.update(pw);
+        		var hash = shaObj.getHash("HEX");
+        		trace(hash);
+
+        		var addRow = this.ds_login.addRow();
+        		this.ds_login.setColumn(addRow,"p_seq",id);
+        		this.ds_login.setColumn(addRow,"pw",hash);
+
+        		this.transaction(
+
+        					"ds_loginPro" //1. strSvcID
+        					,"/loginPro.login" //2. strURL
+        					,"in_ds=ds_login:U" //3.strInDatasets - I,U,D Sds=Fds:U 변경된값만보내겟다, :A, :N
+        					,"ds_professor=out_ds" //4.strOutDatasets -select Fds=Sds
+        					,"" //5.strArgument text값
+        					,"fn_callbackPro" //6.strCallbackFunc
+        				);
+        				trace(this.ds_login);
+        	}else{
+        		trace("관리잡니다");
+        		var shaObj = new jsSHA("SHA-256","TEXT");
+        		shaObj.update(pw);
+        		var hash = shaObj.getHash("HEX");
+        		trace(hash);
+
+        		var addRow = this.ds_login.addRow();
+        		this.ds_login.setColumn(addRow,"a_seq",id);
+        		this.ds_login.setColumn(addRow,"pw",hash);
+
+        		this.transaction(
+
+        					"ds_loginAdm" //1. strSvcID
+        					,"/loginAdm.login" //2. strURL
+        					,"in_ds=ds_login:U" //3.strInDatasets - I,U,D Sds=Fds:U 변경된값만보내겟다, :A, :N
+        					,"ds_admin=out_ds" //4.strOutDatasets -select Fds=Sds
+        					,"" //5.strArgument text값
+        					,"fn_callbackAdm" //6.strCallbackFunc
         				);
         				trace(this.ds_login);
         	}
