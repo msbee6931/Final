@@ -11,9 +11,13 @@ import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
 import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
 
 import kh.spring.dto.FacultyDTO;
+import kh.spring.dto.FreeBoardDTO;
 import kh.spring.dto.ProfessorDTO;
+import kh.spring.dto.RequestBoardDTO;
 import kh.spring.dto.StudentsDTO;
 import kh.spring.service.AdminService;
+import kh.spring.service.FreeBoardService;
+import kh.spring.service.RequestBoardService;
 import kh.spring.util.EncryptUtils;
 
 @Controller
@@ -22,6 +26,11 @@ public class AdminController {
 	@Autowired
 	private AdminService aService;
 	
+	@Autowired
+	private RequestBoardService RBservice;
+	
+	@Autowired
+	private FreeBoardService FBservice;
 	//students
 	@RequestMapping("studentslist.nex")
 	public NexacroResult studentsList() {
@@ -124,11 +133,66 @@ public class AdminController {
 		int result = aService.insertFac(list);
 		return nr;
 	}
+
+	
+	
+	@RequestMapping("ReplyUpd.nex")
+	public NexacroResult updReply(@ParamDataSet(name="in_ds")RequestBoardDTO dto) {
+		//-- login session update 이후 바꿔 줘야함
+		String id= "0101005";
+		
+		NexacroResult nr = new NexacroResult();
+		RBservice.updateReply(dto);
+		List<RequestBoardDTO> list = RBservice.selectAll();
+		nr.addDataSet("out_ds",list);		
+		
+		return nr;
+
+	}
+	
+	@RequestMapping("RBLoad.nex")
+	public NexacroResult RBNexLoad() {
+		//-- login session update 이후 바꿔 줘야함
+		String id= "0101005";
+		NexacroResult nr = new NexacroResult();
+		List<RequestBoardDTO> list = RBservice.selectAll();
+		nr.addDataSet("out_ds",list);
+		return nr;
+
+	}	
+	
+	@RequestMapping("RBDel.nex")
+	public NexacroResult RBNexDel(@ParamDataSet(name="in_ds")List<RequestBoardDTO> list) {
+		NexacroResult nr = new NexacroResult();
+		RBservice.deleteList(list);
+		return nr;
+	}
+	
+	@RequestMapping("FBLoad.nex")
+	public NexacroResult FBNexLoad() throws Exception {
+		//-- login session update 이후 바꿔 줘야함
+		String id= "0101005";
+		NexacroResult nr = new NexacroResult();
+		int cpage = 1;
+		List<FreeBoardDTO> list = FBservice.listByCpage(cpage);
+		nr.addDataSet("out_ds",list);
+		return nr;
+
+	}
+	
+	@RequestMapping("FBDel.nex")
+	public NexacroResult FBNexDel(@ParamDataSet(name="in_ds")List<FreeBoardDTO> list) {
+		NexacroResult nr = new NexacroResult();
+		FBservice.deleteList(list);
+		return nr;
+	}
+	
 	@ExceptionHandler
 	public String exceptionhandler(Exception e){
 		e.printStackTrace();
 		return "error";
 	}
+
 	
 	
 

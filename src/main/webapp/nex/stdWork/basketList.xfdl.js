@@ -24,7 +24,7 @@
 
             obj = new Dataset("ds_stdClass", this);
             obj.set_useclientlayout("true");
-            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"basket\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"sName\" type=\"STRING\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"basket\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
 
 
@@ -34,13 +34,13 @@
 
 
             obj = new Dataset("ds_stdTimeTable", this);
-            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"time\" type=\"STRING\" size=\"256\"/><Column id=\"mon\" type=\"STRING\" size=\"256\"/><Column id=\"tue\" type=\"STRING\" size=\"256\"/><Column id=\"wed\" type=\"STRING\" size=\"256\"/><Column id=\"thu\" type=\"STRING\" size=\"256\"/><Column id=\"fri\" type=\"STRING\" size=\"256\"/><Column id=\"sat\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"time\">1교시</Col></Row><Row><Col id=\"time\">2교시</Col></Row><Row><Col id=\"time\">3교시</Col></Row><Row><Col id=\"time\">4교시</Col></Row><Row><Col id=\"time\">5교시</Col></Row><Row><Col id=\"time\">6교시</Col></Row><Row><Col id=\"time\">7교시</Col></Row><Row><Col id=\"time\">8교시</Col></Row><Row><Col id=\"time\">9교시</Col></Row><Row><Col id=\"time\">10교시</Col></Row><Row><Col id=\"time\">11교시</Col></Row><Row><Col id=\"time\">12교시</Col></Row></Rows>");
+            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"time\" type=\"STRING\" size=\"256\"/><Column id=\"mon\" type=\"STRING\" size=\"256\"/><Column id=\"tue\" type=\"STRING\" size=\"256\"/><Column id=\"wed\" type=\"STRING\" size=\"256\"/><Column id=\"thu\" type=\"STRING\" size=\"256\"/><Column id=\"fri\" type=\"STRING\" size=\"256\"/><Column id=\"sat\" type=\"STRING\" size=\"256\"/><Column id=\"sun\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"time\">1교시</Col></Row><Row><Col id=\"time\">2교시</Col></Row><Row><Col id=\"time\">3교시</Col></Row><Row><Col id=\"time\">4교시</Col></Row><Row><Col id=\"time\">5교시</Col></Row><Row><Col id=\"time\">6교시</Col></Row><Row><Col id=\"time\">7교시</Col></Row><Row><Col id=\"time\">8교시</Col></Row><Row><Col id=\"time\">9교시</Col></Row><Row><Col id=\"time\">10교시</Col></Row><Row><Col id=\"time\">11교시</Col></Row><Row><Col id=\"time\">12교시</Col></Row></Rows>");
             this.addChild(obj.name, obj);
 
 
             obj = new Dataset("ds_stdTimeTableCopy", this);
             obj.set_useclientlayout("true");
-            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"time\" type=\"STRING\" size=\"256\"/><Column id=\"mon\" type=\"STRING\" size=\"256\"/><Column id=\"tue\" type=\"STRING\" size=\"256\"/><Column id=\"wed\" type=\"STRING\" size=\"256\"/><Column id=\"thu\" type=\"STRING\" size=\"256\"/><Column id=\"fri\" type=\"STRING\" size=\"256\"/><Column id=\"sat\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"time\" type=\"STRING\" size=\"256\"/><Column id=\"mon\" type=\"STRING\" size=\"256\"/><Column id=\"tue\" type=\"STRING\" size=\"256\"/><Column id=\"wed\" type=\"STRING\" size=\"256\"/><Column id=\"thu\" type=\"STRING\" size=\"256\"/><Column id=\"fri\" type=\"STRING\" size=\"256\"/><Column id=\"sat\" type=\"STRING\" size=\"256\"/><Column id=\"sun\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
 
 
@@ -169,6 +169,7 @@
         	var Thu = new Array();
         	var Fri = new Array();
         	var Sat = new Array();
+        	var Sun = new Array();
         	for(var i=this.ds_stdTimeTableCopy.getRowCount()-1; i >=0; i--){
         		Time[i] = this.ds_stdTimeTableCopy.getColumn(i,"time");
         		Time[i] = Time[i].replace("교시","")-1;
@@ -178,12 +179,15 @@
         		Thu[i] = this.ds_stdTimeTableCopy.getColumn(i,"thu");
         		Fri[i] = this.ds_stdTimeTableCopy.getColumn(i,"fri");
         		Sat[i] = this.ds_stdTimeTableCopy.getColumn(i,"sat");
+        		Sun[i] = this.ds_stdTimeTableCopy.getColumn(i,"sun");
+
         		var mon = this.ds_stdTimeTable.getColumn(Time[i],"mon");
         		var tue = this.ds_stdTimeTable.getColumn(Time[i],"tue");
         		var wed = this.ds_stdTimeTable.getColumn(Time[i],"wed");
         		var thu = this.ds_stdTimeTable.getColumn(Time[i],"thu");
         		var fri = this.ds_stdTimeTable.getColumn(Time[i],"fri");
         		var sat = this.ds_stdTimeTable.getColumn(Time[i],"sat");
+        		var sun = this.ds_stdTimeTable.getColumn(Time[i],"sun");
 
         		if(mon == null || mon == ""){this.ds_stdTimeTable.setColumn(Time[i],"mon",Mon[i]);}
         		if(tue == null || tue == ""){this.ds_stdTimeTable.setColumn(Time[i],"tue",Tue[i]);}
@@ -191,6 +195,7 @@
         		if(thu == null || thu == ""){this.ds_stdTimeTable.setColumn(Time[i],"thu",Thu[i]);}
         		if(fri == null || fri == ""){this.ds_stdTimeTable.setColumn(Time[i],"fri",Fri[i]);}
         		if(sat == null || sat == ""){this.ds_stdTimeTable.setColumn(Time[i],"sat",Sat[i]);}
+        		if(sun == null || sun == ""){this.ds_stdTimeTable.setColumn(Time[i],"sun",Sun[i]);}
         	}
         }
         this.Grid00_oncellclick = function(obj,e)
@@ -245,6 +250,7 @@
         					else if(weeks[0] =="목"){col="thu"}
         					else if(weeks[0] =="금"){col="fri"}
         					else if(weeks[0] =="토"){col="sat"}
+        					else if(weeks[0] =="일"){col="sun"}
         					for(var j=0; j<week.length; j++){
         						var cName = this.ds_stdTimeTable.getColumn(week[j]-1,col);
         						//인원수 확인
@@ -259,7 +265,9 @@
         					}//var j
         				} // var i
         				var addRow2 = this.ds_stdClass.addRow();
+        				var sName = this.parent.sName;
         				this.ds_stdClass.setColumn(addRow2,"sCode",sCode);
+        				this.ds_stdClass.setColumn(addRow2,"sName",sName);
         				this.ds_stdClass.setColumn(addRow2,"classCode",classCode);
         				this.ds_stdClass.setColumn(addRow2,"basket",'N');
         			}//point else
@@ -303,6 +311,7 @@
         			this.ds_stdTimeTableCopy.setColumn(arr2[j],"thu","");
         			this.ds_stdTimeTableCopy.setColumn(arr2[j],"fri","");
         			this.ds_stdTimeTableCopy.setColumn(arr2[j],"sat","");
+        			this.ds_stdTimeTableCopy.setColumn(arr2[j],"sun","");
         		}
         		var addRow2 = this.ds_stdClass.addRow();
         		this.ds_stdClass.setColumn(addRow2,"sCode",sCode);

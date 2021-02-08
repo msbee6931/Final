@@ -102,7 +102,10 @@
         this.on_initEvent = function()
         {
             this.addEventHandler("onload",this.absence_onload,this);
+<<<<<<< HEAD
+=======
             this.Div00.form.Button00.addEventHandler("onclick",this.Div00_Button00_onclick,this);
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
         };
 
         this.loadIncludeScript("transcript.xfdl");

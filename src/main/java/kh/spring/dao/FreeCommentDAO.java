@@ -18,7 +18,6 @@ public class FreeCommentDAO {
 	private SqlSession session;
 	
 	public int insert(FreeCommentDTO dto) {
-		Map<String,String> param = new HashMap<>();
 
 		return session.insert("fcomment.insert",dto);
 	}

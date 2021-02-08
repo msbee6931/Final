@@ -60,4 +60,8 @@ public class FreeBoardDAO {
 	   public List<FreeBoardDTO> searchByTitle(String title) {
 		   return session.selectList("Free.searchByTitle",title);
 	   }
+	   
+	   public int deleteList(List<FreeBoardDTO> list) {
+		   return session.delete("Free.deleteList",list);
+	   }
 }

@@ -20,7 +20,7 @@
 
             
             // UI Components Initialize
-            obj = new Tab("tab_menu","0","0",null,"30","0",null,null,null,null,null,this);
+            obj = new Tab("tab_menu","0","0","1080","30",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_tabindex("0");
             obj.set_showextrabutton("true");
@@ -65,9 +65,13 @@
         this.tab_menu_onchanged = function(obj,e)
         {
         	var sFormId = obj.tabpages[e.postindex].name;
+<<<<<<< HEAD
 
         	this.av_FrameSet[sFormId].form.setFocus();
 
+=======
+        	this.av_FrameSet[sFormId].form.setFocus();
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
         };
 
         this.tab_menu_onextrabuttonclick = function(obj,e)

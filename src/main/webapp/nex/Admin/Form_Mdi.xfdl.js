@@ -22,7 +22,7 @@
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
-            obj = new Tab("tab_menu","0","0",null,"30","0",null,null,null,null,null,this);
+            obj = new Tab("tab_menu","0","0","1080","30",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_tabindex("0");
             obj.set_showextrabutton("true");
@@ -70,7 +70,10 @@
 
         	//화면 띄울 프레임 지정
         	av_FrameSet = this.objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.FrameSet00;
+<<<<<<< HEAD
 
+=======
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
         	av_FrameSet[formId].form.setFocus();
 
         };

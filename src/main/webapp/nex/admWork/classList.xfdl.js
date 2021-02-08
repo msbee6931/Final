@@ -13,12 +13,16 @@
             this.set_titletext("New Form");
             if (Form == this.constructor)
             {
-                this._setFormPosition(1080,520);
+                this._setFormPosition(1080,570);
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
             obj = new Dataset("ds_class", this);
+<<<<<<< HEAD
+            obj._setContents("<ColumnInfo><Column id=\"chk\" type=\"STRING\" size=\"256\"/><Column id=\"classPart\" type=\"STRING\" size=\"256\"/><Column id=\"className\" type=\"STRING\" size=\"256\"/><Column id=\"classSeq\" type=\"INT\" size=\"256\"/><Column id=\"classPoint\" type=\"STRING\" size=\"256\"/><Column id=\"proCode\" type=\"STRING\" size=\"256\"/><Column id=\"proName\" type=\"STRING\" size=\"256\"/><Column id=\"dept\" type=\"STRING\" size=\"256\"/><Column id=\"classTime\" type=\"STRING\" size=\"256\"/><Column id=\"classRoom\" type=\"STRING\" size=\"256\"/><Column id=\"limit\" type=\"STRING\" size=\"256\"/><Column id=\"grade\" type=\"STRING\" size=\"256\"/><Column id=\"classGoal\" type=\"STRING\" size=\"256\"/><Column id=\"classMethod\" type=\"STRING\" size=\"256\"/><Column id=\"classEvaluation\" type=\"STRING\" size=\"256\"/><Column id=\"classReferences\" type=\"STRING\" size=\"256\"/><Column id=\"reqState\" type=\"STRING\" size=\"256\"/><Column id=\"rejectMsg\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+=======
             obj._setContents("<ColumnInfo><Column id=\"chk\" type=\"STRING\" size=\"256\"/><Column id=\"classPart\" type=\"STRING\" size=\"256\"/><Column id=\"className\" type=\"STRING\" size=\"256\"/><Column id=\"classSeq\" type=\"INT\" size=\"256\"/><Column id=\"classPoint\" type=\"STRING\" size=\"256\"/><Column id=\"proCode\" type=\"STRING\" size=\"256\"/><Column id=\"proName\" type=\"STRING\" size=\"256\"/><Column id=\"dept\" type=\"STRING\" size=\"256\"/><Column id=\"classTime\" type=\"STRING\" size=\"256\"/><Column id=\"classRoom\" type=\"STRING\" size=\"256\"/><Column id=\"limit\" type=\"STRING\" size=\"256\"/><Column id=\"grade\" type=\"STRING\" size=\"256\"/><Column id=\"classGoal\" type=\"STRING\" size=\"256\"/><Column id=\"classMethod\" type=\"STRING\" size=\"256\"/><Column id=\"classEvaluation\" type=\"STRING\" size=\"256\"/><Column id=\"classReferences\" type=\"STRING\" size=\"256\"/><Column id=\"reqState\" type=\"STRING\" size=\"256\"/><Column id=\"rejectMsg\" type=\"STRING\" size=\"256\"/><Column id=\"reg_date\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
             this.addChild(obj.name, obj);
 
 
@@ -28,13 +32,17 @@
 
 
             obj = new Dataset("ds_class_copy", this);
+<<<<<<< HEAD
+            obj._setContents("<ColumnInfo><Column id=\"chk\" type=\"STRING\" size=\"256\"/><Column id=\"classPart\" type=\"STRING\" size=\"256\"/><Column id=\"className\" type=\"STRING\" size=\"256\"/><Column id=\"classSeq\" type=\"INT\" size=\"256\"/><Column id=\"classPoint\" type=\"STRING\" size=\"256\"/><Column id=\"proCode\" type=\"STRING\" size=\"256\"/><Column id=\"proName\" type=\"STRING\" size=\"256\"/><Column id=\"dept\" type=\"STRING\" size=\"256\"/><Column id=\"classTime\" type=\"STRING\" size=\"256\"/><Column id=\"classRoom\" type=\"STRING\" size=\"256\"/><Column id=\"limit\" type=\"INT\" size=\"256\"/><Column id=\"grade\" type=\"STRING\" size=\"256\"/><Column id=\"classGoal\" type=\"STRING\" size=\"256\"/><Column id=\"classMethod\" type=\"STRING\" size=\"256\"/><Column id=\"classEvaluation\" type=\"STRING\" size=\"256\"/><Column id=\"classReferences\" type=\"STRING\" size=\"256\"/><Column id=\"reqState\" type=\"STRING\" size=\"256\"/><Column id=\"rejectMsg\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+=======
             obj._setContents("<ColumnInfo><Column id=\"chk\" type=\"STRING\" size=\"256\"/><Column id=\"classPart\" type=\"STRING\" size=\"256\"/><Column id=\"className\" type=\"STRING\" size=\"256\"/><Column id=\"classSeq\" type=\"INT\" size=\"256\"/><Column id=\"classPoint\" type=\"STRING\" size=\"256\"/><Column id=\"proCode\" type=\"STRING\" size=\"256\"/><Column id=\"proName\" type=\"STRING\" size=\"256\"/><Column id=\"dept\" type=\"STRING\" size=\"256\"/><Column id=\"classTime\" type=\"STRING\" size=\"256\"/><Column id=\"classRoom\" type=\"STRING\" size=\"256\"/><Column id=\"limit\" type=\"INT\" size=\"256\"/><Column id=\"grade\" type=\"STRING\" size=\"256\"/><Column id=\"classGoal\" type=\"STRING\" size=\"256\"/><Column id=\"classMethod\" type=\"STRING\" size=\"256\"/><Column id=\"classEvaluation\" type=\"STRING\" size=\"256\"/><Column id=\"classReferences\" type=\"STRING\" size=\"256\"/><Column id=\"reqState\" type=\"STRING\" size=\"256\"/><Column id=\"rejectMsg\" type=\"STRING\" size=\"256\"/><Column id=\"reg_date\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
             this.addChild(obj.name, obj);
 
 
             obj = new Dataset("ds_stdClass", this);
             obj.set_useclientlayout("true");
-            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"basket\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"sName\" type=\"STRING\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"basket\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -42,7 +50,11 @@
             obj.set_taborder("0");
             obj.set_binddataset("ds_class");
             obj.set_autofittype("col");
+<<<<<<< HEAD
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"41\"/><Column size=\"73\"/><Column size=\"193\"/><Column size=\"48\"/><Column size=\"103\"/><Column size=\"57\"/><Column size=\"85\"/><Column size=\"257\"/><Column size=\"114\"/><Column size=\"66\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"번호\"/><Cell col=\"1\" text=\"이수구분\"/><Cell col=\"2\" text=\"과목명\"/><Cell col=\"3\" text=\"학년\"/><Cell col=\"4\" text=\"과목코드\"/><Cell col=\"5\" text=\"학점\"/><Cell col=\"6\" text=\"담당교수\"/><Cell col=\"7\" text=\"강의시간\"/><Cell col=\"8\" text=\"강의실\"/><Cell col=\"9\" text=\"인원수\"/></Band><Band id=\"body\"><Cell text=\"expr:currow+1\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:classPart\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:className\" displaytype=\"normal\" textDecoration=\"underline\" cursor=\"pointer\" textAlign=\"center\"/><Cell col=\"3\" text=\"bind:grade\" textAlign=\"center\"/><Cell col=\"4\" text=\"bind:classSeq\" textAlign=\"center\" displaytype=\"mask\" maskeditmaskchar=\"########\"/><Cell col=\"5\" text=\"bind:classPoint\" textAlign=\"center\"/><Cell col=\"6\" text=\"bind:proName\" textAlign=\"center\"/><Cell col=\"7\" text=\"bind:classTime\" textAlign=\"center\"/><Cell col=\"8\" text=\"bind:classRoom\" textAlign=\"center\"/><Cell col=\"9\" text=\"bind:limit\" textAlign=\"center\"/></Band></Format></Formats>");
+=======
             obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"33\"/><Column size=\"41\"/><Column size=\"73\"/><Column size=\"193\"/><Column size=\"48\"/><Column size=\"103\"/><Column size=\"57\"/><Column size=\"85\"/><Column size=\"248\"/><Column size=\"94\"/><Column size=\"61\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell displaytype=\"checkboxcontrol\" edittype=\"checkbox\"/><Cell col=\"1\" text=\"번호\"/><Cell col=\"2\" text=\"이수구분\"/><Cell col=\"3\" text=\"과목명\"/><Cell col=\"4\" text=\"학년\"/><Cell col=\"5\" text=\"과목코드\"/><Cell col=\"6\" text=\"학점\"/><Cell col=\"7\" text=\"담당교수\"/><Cell col=\"8\" text=\"강의시간\"/><Cell col=\"9\" text=\"강의실\"/><Cell col=\"10\" text=\"인원수\"/></Band><Band id=\"body\"><Cell displaytype=\"checkboxcontrol\" edittype=\"checkbox\" text=\"bind:chk\"/><Cell col=\"1\" text=\"expr:currow+1\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:classPart\" textAlign=\"center\"/><Cell col=\"3\" text=\"bind:className\" displaytype=\"normal\" textDecoration=\"underline\" cursor=\"pointer\" textAlign=\"center\" wordWrap=\"english\"/><Cell col=\"4\" text=\"bind:grade\" textAlign=\"center\"/><Cell col=\"5\" text=\"bind:classSeq\" textAlign=\"center\" displaytype=\"mask\" maskeditmaskchar=\"########\"/><Cell col=\"6\" text=\"bind:classPoint\" textAlign=\"center\"/><Cell col=\"7\" text=\"bind:proName\" textAlign=\"center\"/><Cell col=\"8\" text=\"bind:classTime\" textAlign=\"center\" wordWrap=\"english\"/><Cell col=\"9\" text=\"bind:classRoom\" textAlign=\"center\"/><Cell col=\"10\" text=\"bind:limit\" textAlign=\"center\"/></Band></Format></Formats>");
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
             this.addChild(obj.name, obj);
 
             obj = new Combo("co_search","670","6","120","28",null,null,null,null,null,null,this);
@@ -66,6 +78,8 @@
             obj.set_text("검색");
             this.addChild(obj.name, obj);
 
+<<<<<<< HEAD
+=======
             obj = new Combo("co_year","410","7","120","28",null,null,null,null,null,null,this);
             obj.set_taborder("4");
             obj.set_codecolumn("codecolumn");
@@ -91,9 +105,10 @@
             obj.set_text("삭제");
             this.addChild(obj.name, obj);
 
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
             // Layout Functions
             //-- Default Layout : this
-            obj = new Layout("default","",1080,520,this,function(p){});
+            obj = new Layout("default","",1080,570,this,function(p){});
             obj.set_mobileorientation("landscape");
             this.addLayout(obj.name, obj);
             
@@ -111,6 +126,8 @@
 
         this.classList_onload = function(obj,e)
         {
+<<<<<<< HEAD
+=======
         	var objDate= new Date();
         	if(objDate.getMonth()+1 && objDate.getMonth()+1 < 8){
         		this.co_year.set_text(objDate.getFullYear()+"년");
@@ -119,12 +136,19 @@
         		this.co_year.set_text(objDate.getFullYear()+"년");
         		this.co_semester.set_text("2학기");
         	}
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
         	this.transaction(
         		"classList"
         		,"/classList.nex"
         		,""
         		,"ds_class=out_ds"
         		,""
+<<<<<<< HEAD
+        		,"fn_callback"
+        	);
+        };
+
+=======
         		,"fn_callback_fliter"
         	);
         };
@@ -147,6 +171,7 @@
         		this.ds_class.filter("reg_date >='"+mDate+"'&& reg_date <= '"+endDate+"'")
         	}
         }
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
 
         //개설강좌 상세보기
         this.Grid00_oncellclick = function(obj,e)
@@ -173,6 +198,13 @@
         {
         	let coValue = this.co_search.value;
         	let edtSearch = this.edt_search.text;
+<<<<<<< HEAD
+
+        	if(coValue == "className" || coValue == "proName" || coValue == "classTime" || coValue == "classRoom" ){
+        		this.ds_class.filter(coValue +".indexOf('"+edtSearch+"')>=0");
+        	}else{
+        		this.ds_class.filter("");
+=======
         	var year = this.co_year.value;
         	var semester = this.co_semester.value;
         	var startDate = year+ "0101";
@@ -191,12 +223,15 @@
         		}else{
         			this.ds_class.filter("reg_date >='"+mDate+"'&& reg_date <= '"+endDate+"'");
         		}
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
         	}
         };
 
         //개설강좌 정렬
         this.Grid00_onheadclick = function(obj,e)
         {
+<<<<<<< HEAD
+=======
         	let flag = obj.getCellProperty("Head",0,"text");
         	let check = flag==0?1:0;
         	if(e.cell==0){
@@ -205,6 +240,7 @@
         			this.ds_class.setColumn(i,"chk",check);
         		}
         	}
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
         	var objDs = this.objects[obj.binddataset];
         	for (var i = 1; i < obj.getCellCount("head"); i++)
         	{
@@ -239,6 +275,8 @@
         	}
         };
 
+<<<<<<< HEAD
+=======
         this.Button00_onclick = function(obj,e)
         {
 
@@ -302,6 +340,7 @@
         	}
         }
 
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
         });
         
         // Regist UI Components Event
@@ -312,8 +351,11 @@
             this.Grid00.addEventHandler("onheadclick",this.Grid00_onheadclick,this);
             this.co_search.addEventHandler("onitemchanged",this.classTab_classList_co_search_onitemchanged,this);
             this.btnSearch.addEventHandler("onclick",this.btnSearch_onclick,this);
+<<<<<<< HEAD
+=======
             this.co_year.addEventHandler("onitemchanged",this.Combo01_onitemchanged,this);
             this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
+>>>>>>> dcc692aff1bca234deba5d181fa1541219a8a378
         };
 
         this.loadIncludeScript("classList.xfdl");

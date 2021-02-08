@@ -1,5 +1,6 @@
 package kh.spring.dao;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ public class ClassDAO {
 
 	@Autowired
 	private SqlSession session;
-	
+
 	public int classInsert(ClassDTO dto) {
 		return session.insert("Class.classInsert",dto);
 	}
@@ -34,8 +35,12 @@ public class ClassDAO {
 	public List<ClassDTO> classReqList(){
 		return session.selectList("Class.classReqList");
 	}
-	public List<ClassDTO> classListProCode(String proCode){
-		return session.selectList("Class.classListProCode",proCode);
+	public List<ClassDTO> classListProCode(String proCode,String startTime,String endTime){
+		Map<String, Object> param = new HashMap<>();
+		param.put("proCode", proCode);
+		param.put("startTime", startTime);
+		param.put("endTime", endTime);
+		return session.selectList("Class.classListProCode",param);
 	}
 	public List<ClassDTO> classList(){
 		return session.selectList("Class.classList");
@@ -143,5 +148,15 @@ public class ClassDAO {
 	}
 	public int stdTimeTableSeqDel(List<StudentClassDTO> list) {
 		return session.delete("Class.stdTimeTableSeqDel",list);
+	}
+	public List<ClassDTO> proClassList(String proCode, String startTime, String endTime){
+		Map<String, String> param = new HashMap<>();
+		param.put("proCode", proCode);
+		param.put("startTime", startTime);
+		param.put("endTime",endTime);
+		return session.selectList("Class.proClassList",param);
+	}
+	public List<StudentClassDTO> stdListSeq(StudentClassDTO dto){
+		return session.selectList("Class.stdListSeq",dto);
 	}
 }
