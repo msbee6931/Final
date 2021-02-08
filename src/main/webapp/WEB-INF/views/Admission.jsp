@@ -45,11 +45,19 @@
 	text-align: center;
 	color: white;
 	background-color: #435a7c;
+	font-family: 'GmarketSansMedium';
 }
 
 .headt2 {
 	background-color: white;
 	border-bottom: 2px solid whitesmoke;
+	font-family: 'GmarketSansLight';
+}
+.head3 {
+	font-family: 'GmarketSansLight';
+}
+.row{
+	font-family: 'GmarketSansLight';
 }
 
 nav {
@@ -74,6 +82,7 @@ nav {
 
 .sub {
 	font-size: 20px;
+	font-family: 'GmarketSansLight';
 }
 
 .subtitle {
@@ -87,9 +96,10 @@ nav {
 	vertical-align: middle;
 }
 
-a {
+.a2 {
 	text-decoration: none;
 	color: white;
+	font-family: 'GmarketSansLight';
 }
 
 .bottom {
@@ -99,6 +109,36 @@ a {
 .bottoml {
 	border-bottom: 1px solid #266ed4;
 }
+@font-face {
+	font-family: 'GmarketSansBold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'GmarketSansLight';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+#dropdownMenuButton{
+	margin-left: 0;
+}
+
 </style>
 </head>
 
@@ -137,7 +177,7 @@ a {
             </nav>
         </div>
         <div class="row body p-5">
-            <div class="col-12 d-block d-lg-none">
+            <div class="col-12 d-block d-lg-none head3">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="introduce.home">학교소개</a>
@@ -162,18 +202,18 @@ a {
                 </nav>
             </div>
             <div class="row">
-                <div class="col-0 col-lg-3 p- d-none d-lg-block">
-                    <b class="title  p-5"><a href="introduce.home">학교소개</a></b>
+                <div class="col-0 col-lg-3 p- d-none d-lg-block head3">
+                    <b class="title  p-5"><a class="a2" href="introduce.home">학교소개</a></b>
                     <div class="dropdown pt-2">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="introduce.home">인사말</a></li>
-                            <li><a class="dropdown-item" href="department.home">학과소개</a></li>
-                            <li><a class="dropdown-item" href="admission.home">입학정보</a></li>
-                        </ul>
-                    </div>
+						<button class="btn btn-secondary dropdown-toggle" type="button"
+							id="dropdownMenuButton" data-bs-toggle="dropdown"
+							aria-expanded="false"></button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<li><a class="dropdown-item" href="introduce.home">인사말</a></li>
+							<li><a class="dropdown-item" href="department.home">학과소개</a></li>
+							<li><a class="dropdown-item" href="admission.home">입학정보</a></li>
+						</ul>
+					</div>
                 </div>
                 <div class="col-12 col-lg-9"><strong class="sub">수시모집</strong></div>
             </div>
@@ -258,13 +298,12 @@ a {
                     </div>
                 </div>
             </div>
-
-            <div class="row footer">
-                <div class="col"></div>
-            </div>
-
-
         </div>
+        <!-- footer -->
+		<footer>
+			<jsp:include page="/WEB-INF/views/footer.jsp" />
+		</footer>
+		</div>
 
 </body>
 <script>
