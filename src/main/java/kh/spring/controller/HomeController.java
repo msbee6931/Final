@@ -40,6 +40,18 @@ public class HomeController {
 	public String Admission() {
 		return "Admission";
 	}
+	@RequestMapping("PersonalInfomation.home")
+	public String PersonalInfomation() {
+		return "PersonalInfomation";
+	}
+	@RequestMapping("EmailNegative.home")
+	public String EmailNegative() {
+		return "EmailNegative";
+	}
+	@RequestMapping("LawOfOffical.home")
+	public String LawOfOffical() {
+		return "LawOfOffical";
+	}
 
 	@ExceptionHandler
 	public String ExceptionHandler(Exception e) {

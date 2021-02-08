@@ -9,16 +9,16 @@
 		insert into classSchedule values(#{classSeq},#{proCode},#{week1},#{week2},#{week3},#{week4},#{week5},#{week6},#{week7},#{week8},#{week9},#{week10},#{week11},#{week12},#{week13},#{week14},#{week15})
 	</insert>
 	<update id="classUpdate">
-		update class set classPart=#{classPart},className=#{className},classPoint=#{classPoint},dept=#{dept},classTime=#{classTime},classRoom=#{classRoom},limit= #{limit},basketLimit=#{basketLimit},grade=#{grade},classGoal=#{classGoal},classMethod=#{classMethod},classEvaluation=#{classEvaluation},classReferences=#{classReferences},reqState = 'AR' where classSeq=#{classSeq}  
+		update class set classPart=#{classPart,jdbcType=VARCHAR},className=#{className,jdbcType=VARCHAR},classPoint=#{classPoint,jdbcType=VARCHAR},dept=#{dept,jdbcType=VARCHAR},classTime=#{classTime,jdbcType=VARCHAR},classRoom=#{classRoom,jdbcType=VARCHAR},limit= #{limit,jdbcType=VARCHAR},basketLimit=#{basketLimit,jdbcType=VARCHAR},grade=#{grade,jdbcType=VARCHAR},classGoal=#{classGoal,jdbcType=VARCHAR},classMethod=#{classMethod,jdbcType=VARCHAR},classEvaluation=#{classEvaluation,jdbcType=VARCHAR},classReferences=#{classReferences,jdbcType=VARCHAR},reqState = 'AR' where classSeq=#{classSeq}  
 	</update>
 	<update id="classScheduleUpdate">
-		update classSchedule set week1=#{week1},week2=#{week2},week3=#{week3},week4=#{week4},week5=#{week5},week6=#{week6},week7=#{week7},week8=#{week8},week9=#{week9},week10=#{week10},week11=#{week11},week12=#{week12},week13=#{week13},week14=#{week14},week15=#{week15} where classSeq=#{classSeq}
+		update classSchedule set week1=#{week1,jdbcType=VARCHAR},week2=#{week2,jdbcType=VARCHAR},week3=#{week3,jdbcType=VARCHAR},week4=#{week4,jdbcType=VARCHAR},week5=#{week5,jdbcType=VARCHAR},week6=#{week6,jdbcType=VARCHAR},week7=#{week7,jdbcType=VARCHAR},week8=#{week8,jdbcType=VARCHAR},week9=#{week9,jdbcType=VARCHAR},week10=#{week10,jdbcType=VARCHAR},week11=#{week11,jdbcType=VARCHAR},week12=#{week12,jdbcType=VARCHAR},week13=#{week13,jdbcType=VARCHAR},week14=#{week14,jdbcType=VARCHAR},week15=#{week15,jdbcType=VARCHAR} where classSeq=#{classSeq,jdbcType=VARCHAR}
 	</update>
 	<select id="classReqList" resultType="kh.spring.dto.ClassDTO">
 		select * from class where reqState = 'AR'
 	</select>
 	<select id="classListProCode" resultType="kh.spring.dto.ClassDTO">
-		select * from class where proCode = #{proCode}
+		select * from class where proCode = #{proCode} and reg_date between to_date(#{startTime},'YYYYMMDD') and to_date(#{endTime},'YYYYMMDD')
 	</select>
 	<select id="classList" resultType="kh.spring.dto.ClassDTO">
 		select * from class where reqState ='A'
@@ -58,11 +58,11 @@
 		<foreach separator="," close=")" open="(" item="i" collection="list">#{i.classSeq} </foreach>
 	</update>
 	<select id="classListYear" resultType="kh.spring.dto.ClassDTO">
-		select * from class where reg_date between #{startTime} and #{endTime} and reqState ='A'
+		select * from class where reg_date between to_date(#{startTime},'YYYYMMDD') and to_date(#{endTime},'YYYYMMDD') and reqState ='A'
 	</select>
 	<insert id="stdTimeTableInsert" parameterType="java.util.List">
 		<foreach collection="list" item="i" open="INSERT ALL" close="SELECT * FROM DUAL" separator=" ">
-		 into stdTimeTable values(#{i.sCode},#{i.classCode},#{i.time},#{i.mon,jdbcType=VARCHAR},#{i.tue,jdbcType=VARCHAR},#{i.wed,jdbcType=VARCHAR},#{i.thu,jdbcType=VARCHAR},#{i.fri,jdbcType=VARCHAR},#{i.sat,jdbcType=VARCHAR},sysdate)
+		 into stdTimeTable values(#{i.sCode},#{i.classCode},#{i.time},#{i.mon,jdbcType=VARCHAR},#{i.tue,jdbcType=VARCHAR},#{i.wed,jdbcType=VARCHAR},#{i.thu,jdbcType=VARCHAR},#{i.fri,jdbcType=VARCHAR},#{i.sat,jdbcType=VARCHAR},#{i.sun,jdbcType=VARCHAR},sysdate)
 		 </foreach>
 	</insert>
 	<delete id="stdTimeTableDelete">
@@ -75,14 +75,14 @@
 		
 	</delete>
 	<select id="stdTimeTableList" resultType="kh.spring.dto.StdTimeTableDTO">
-		select * from stdTimeTable where sCode =#{dto.sCode} and reg_date between #{startTime} and #{endTime}
+		select * from stdTimeTable where sCode =#{dto.sCode} and reg_date between to_date(#{startTime},'YYYYMMDD') and to_date(#{endTime},'YYYYMMDD')
 	</select>
 	<insert id="stdClassInsert">
-		insert into studentClass values(#{sCode},#{classCode},#{basket},sysdate)
+		insert into studentClass values(#{sCode},#{sName},#{classCode},#{basket},sysdate)
 	</insert>
 	<insert id="stdClassesInsert">
 		<foreach collection="list" item="i" open="INSERT ALL" close="SELECT * FROM DUAL" separator=" ">
-		into studentClass values(#{i.sCode},#{i.classCode},#{i.basket},sysdate)
+		into studentClass values(#{i.sCode},#{i.sName},#{i.classCode},#{i.basket},sysdate)
 		</foreach>
 	</insert>
 	<select id="stdClassCount" resultType="int">
@@ -107,10 +107,10 @@
 	</update>
 
 	<select id="myClassList" resultType ="kh.spring.dto.StudentClassDTO">
-		select * from studentClass where sCode =#{dto.sCode} and reg_date between #{startTime} and #{endTime} and basket ='N'
+		select * from studentClass where sCode =#{dto.sCode} and reg_date between to_date(#{startTime},'YYYYMMDD') and to_date(#{endTime},'YYYYMMDD') and basket ='N'
 	</select>
 	<select id="myBasketList" resultType ="kh.spring.dto.StudentClassDTO">
-		select * from studentClass where sCode =#{dto.sCode} and reg_date between #{startTime} and #{endTime} and basket = 'Y'
+		select * from studentClass where sCode =#{dto.sCode} and reg_date between to_date(#{startTime},'YYYYMMDD') and to_date(#{endTime},'YYYYMMDD') and basket = 'Y'
 	</select>
 	<select id="myClassSeq" resultType="kh.spring.dto.ClassDTO">
 		select * from class where classSeq in
@@ -124,4 +124,10 @@
 			delete from stdTimeTable where classCode in
 		<foreach collection="list" item="i" open="(" close=")" separator=",">#{i.classCode}</foreach>
 	</delete>
+	<select id="proClassList" resultType="kh.spring.dto.ClassDTO">
+		select * from class where proCode = #{proCode} and reg_date between to_date(#{startTime},'YYYYMMDD') and to_date(#{endTime},'YYYYMMDD') and reqState ='A'
+	</select>
+	<select id="stdListSeq" resultType="kh.spring.dto.StudentClassDTO">
+		select * from studentClass where classCode =#{classCode}
+	</select>
 </mapper>

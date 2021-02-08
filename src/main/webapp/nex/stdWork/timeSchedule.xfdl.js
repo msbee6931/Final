@@ -18,6 +18,11 @@
             
             // Object(Dataset, ExcelExportObject) Initialize
             obj = new Dataset("ds_stdTimeTable", this);
+            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"time\" type=\"STRING\" size=\"256\"/><Column id=\"mon\" type=\"STRING\" size=\"256\"/><Column id=\"tue\" type=\"STRING\" size=\"256\"/><Column id=\"wed\" type=\"STRING\" size=\"256\"/><Column id=\"thu\" type=\"STRING\" size=\"256\"/><Column id=\"fri\" type=\"STRING\" size=\"256\"/><Column id=\"sat\" type=\"STRING\" size=\"256\"/><Column id=\"sun\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"time\">1교시</Col></Row><Row><Col id=\"time\">2교시</Col></Row><Row><Col id=\"time\">3교시</Col></Row><Row><Col id=\"time\">4교시</Col></Row><Row><Col id=\"time\">5교시</Col></Row><Row><Col id=\"time\">6교시</Col></Row><Row><Col id=\"time\">7교시</Col></Row><Row><Col id=\"time\">8교시</Col></Row><Row><Col id=\"time\">9교시</Col></Row><Row><Col id=\"time\">10교시</Col></Row><Row><Col id=\"time\">11교시</Col></Row><Row><Col id=\"time\">12교시</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("ds_stdTimeTableCopy", this);
             obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"time\" type=\"STRING\" size=\"256\"/><Column id=\"mon\" type=\"STRING\" size=\"256\"/><Column id=\"tue\" type=\"STRING\" size=\"256\"/><Column id=\"wed\" type=\"STRING\" size=\"256\"/><Column id=\"thu\" type=\"STRING\" size=\"256\"/><Column id=\"fri\" type=\"STRING\" size=\"256\"/><Column id=\"sat\" type=\"STRING\" size=\"256\"/><Column id=\"sun\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
             
@@ -74,7 +79,7 @@
         };
         
         // User Script
-        this.registerScript("timeSchule.xfdl", function() {
+        this.registerScript("timeSchedule.xfdl", function() {
 
         this.timeSchule_onload = function(obj,e)
         {
@@ -94,7 +99,7 @@
         		"stdTimeTableList"
         		,"/stdTimeTableList.nex"
         		,""
-        		,"ds_stdTimeTable=out_ds"
+        		,"ds_stdTimeTableCopy=out_ds"
         		,"sCode="+sCode + " startTime="+startTime+" endTime="+endTime
         		,"fn_callback_TimeTable"
         	);
@@ -105,6 +110,88 @@
         //데이터셋 수신 완료 시 실행할 콜백 함수
         this.fn_callback_TimeTable=function()
         {
+        	var Time = new Array();
+        	var Mon = new Array();
+        	var Tue = new Array();
+        	var Wed = new Array();
+        	var Thu = new Array();
+        	var Fri = new Array();
+        	var Sat = new Array();
+        	var Sun = new Array();
+        	//index가 0부터 시작하므로 -1 처리
+        	for(var i=this.ds_stdTimeTableCopy.getRowCount()-1; i >=0; i--){
+
+        		Time[i] = this.ds_stdTimeTableCopy.getColumn(i,"time");
+        		Time[i] = Time[i].replace("교시","")-1;
+
+        		Mon[i] = this.ds_stdTimeTableCopy.getColumn(i,"mon");
+        		Tue[i] = this.ds_stdTimeTableCopy.getColumn(i,"tue");
+        		Wed[i] = this.ds_stdTimeTableCopy.getColumn(i,"wed");
+        		Thu[i] = this.ds_stdTimeTableCopy.getColumn(i,"thu");
+        		Fri[i] = this.ds_stdTimeTableCopy.getColumn(i,"fri");
+        		Sat[i] = this.ds_stdTimeTableCopy.getColumn(i,"sat");
+        		Sun[i] = this.ds_stdTimeTableCopy.getColumn(i,"sun");
+
+        		if(Mon[i] !=null){
+        			if(Mon[i].substring(Mon[i].length-1,Mon[i].length)=="*"){
+        				this.ds_stdTimeTableCopy.setColumn(i,"mon","");
+        				Mon[i] = this.ds_stdTimeTableCopy.getColumn(i,"mon");
+        			}
+        		}
+        		if(Tue[i] !=null){
+        			if(Tue[i].substring(Tue[i].length-1,Tue[i].length)=="*"){
+        				this.ds_stdTimeTableCopy.setColumn(i,"tue","");
+        				Tue[i] = this.ds_stdTimeTableCopy.getColumn(i,"tue");
+        			}
+        		}
+        		if(Wed[i] !=null){
+        			if(Wed[i].substring(Wed[i].length-1,Wed[i].length)=="*"){
+        				this.ds_stdTimeTableCopy.setColumn(i,"wed","");
+        				Wed[i] = this.ds_stdTimeTableCopy.getColumn(i,"wed");
+        			}
+        		}
+        		if(Thu[i] !=null){
+        			if(Thu[i].substring(Thu[i].length-1,Thu[i].length)=="*"){
+        				this.ds_stdTimeTableCopy.setColumn(i,"thu","");
+        				Thu[i] = this.ds_stdTimeTableCopy.getColumn(i,"thu");
+        			}
+        		}
+        		if(Fri[i] !=null){
+        			if(Fri[i].substring(Fri[i].length-1,Fri[i].length)=="*"){
+        				this.ds_stdTimeTableCopy.setColumn(i,"fri","");
+        				Fri[i] = this.ds_stdTimeTableCopy.getColumn(i,"fri");
+        			}
+        		}
+        		if(Sat[i] !=null){
+        			if(Sat[i].substring(Sat[i].length-1,Sat[i].length)=="*"){
+        				this.ds_stdTimeTableCopy.setColumn(i,"sat","");
+        				Sat[i] = this.ds_stdTimeTableCopy.getColumn(i,"sat");
+        			}
+        		}
+        		if(Sun[i] !=null){
+        			if(Sun[i].substring(Sun[i].length-1,Sun[i].length)=="*"){
+        				this.ds_stdTimeTableCopy.setColumn(i,"sun","");
+        				Sun[i] = this.ds_stdTimeTableCopy.getColumn(i,"sun");
+        			}
+        		}
+
+        		var mon = this.ds_stdTimeTable.getColumn(Time[i],"mon");
+        		var tue = this.ds_stdTimeTable.getColumn(Time[i],"tue");
+        		var wed = this.ds_stdTimeTable.getColumn(Time[i],"wed");
+        		var thu = this.ds_stdTimeTable.getColumn(Time[i],"thu");
+        		var fri = this.ds_stdTimeTable.getColumn(Time[i],"fri");
+        		var sat = this.ds_stdTimeTable.getColumn(Time[i],"sat");
+        		var sun = this.ds_stdTimeTable.getColumn(Time[i],"sun");
+
+        		if(mon == null || mon == ""){this.ds_stdTimeTable.setColumn(Time[i],"mon",Mon[i]);}
+        		if(tue == null || tue == ""){this.ds_stdTimeTable.setColumn(Time[i],"tue",Tue[i]);}
+        		if(wed == null || wed == ""){this.ds_stdTimeTable.setColumn(Time[i],"wed",Wed[i]);}
+        		if(thu == null || thu == ""){this.ds_stdTimeTable.setColumn(Time[i],"thu",Thu[i]);}
+        		if(fri == null || fri == ""){this.ds_stdTimeTable.setColumn(Time[i],"fri",Fri[i]);}
+        		if(sat == null || sat == ""){this.ds_stdTimeTable.setColumn(Time[i],"sat",Sat[i]);}
+        		if(sun == null || sun == ""){this.ds_stdTimeTable.setColumn(Time[i],"sun",Sun[i]);}
+        	}
+
 
         };
 
@@ -118,7 +205,7 @@
             this.addEventHandler("onload",this.timeSchule_onload,this);
         };
 
-        this.loadIncludeScript("timeSchule.xfdl");
+        this.loadIncludeScript("timeSchedule.xfdl");
         this.loadPreloadList();
         
         // Remove Reference

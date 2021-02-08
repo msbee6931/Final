@@ -1,5 +1,6 @@
 package kh.spring.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,8 @@ public class ClassService {
 	public List<ClassDTO> classReqList(){
 		return dao.classReqList();
 	}
-	public List<ClassDTO> classListProCode(String proCode){
-		return dao.classListProCode(proCode);
+	public List<ClassDTO> classListProCode(String proCode,String startTime,String endTime){
+		return dao.classListProCode(proCode,startTime,endTime);
 	}
 	public List<ClassDTO> classList(){
 		return dao.classList();
@@ -124,6 +125,11 @@ public class ClassService {
 	public int stdTimeTableSeqDel(List<StudentClassDTO>list) {
 		return dao.stdTimeTableSeqDel(list);
 	}
-	
+	public List<ClassDTO> proClassList(String proCode,String startTime,String endTime){
+		return dao.proClassList(proCode,startTime,endTime);
+	}
+	public List<StudentClassDTO> stdListSeq(StudentClassDTO dto){
+		return dao.stdListSeq(dto);
+	}
 
 }

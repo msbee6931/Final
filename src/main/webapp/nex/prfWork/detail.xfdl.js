@@ -43,7 +43,7 @@
 
 
             obj = new Dataset("ds_classTimeList", this);
-            obj._setContents("<ColumnInfo><Column id=\"Time\" type=\"STRING\" size=\"256\"/><Column id=\"Mon\" type=\"STRING\" size=\"256\"/><Column id=\"Tue\" type=\"STRING\" size=\"256\"/><Column id=\"Wed\" type=\"STRING\" size=\"256\"/><Column id=\"Thu\" type=\"STRING\" size=\"256\"/><Column id=\"Fri\" type=\"STRING\" size=\"256\"/><Column id=\"Sat\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"Time\">1교시</Col></Row><Row><Col id=\"Time\">2교시</Col></Row><Row><Col id=\"Time\">3교시</Col></Row><Row><Col id=\"Time\">4교시</Col></Row><Row><Col id=\"Time\">5교시</Col></Row><Row><Col id=\"Time\">6교시</Col></Row><Row><Col id=\"Time\">7교시</Col></Row><Row><Col id=\"Time\">8교시</Col></Row><Row><Col id=\"Time\">9교시</Col></Row><Row><Col id=\"Time\">10교시</Col></Row><Row><Col id=\"Time\">11교시</Col></Row><Row><Col id=\"Time\">12교시</Col></Row></Rows>");
+            obj._setContents("<ColumnInfo><Column id=\"Time\" type=\"STRING\" size=\"256\"/><Column id=\"Mon\" type=\"STRING\" size=\"256\"/><Column id=\"Tue\" type=\"STRING\" size=\"256\"/><Column id=\"Wed\" type=\"STRING\" size=\"256\"/><Column id=\"Thu\" type=\"STRING\" size=\"256\"/><Column id=\"Fri\" type=\"STRING\" size=\"256\"/><Column id=\"Sat\" type=\"STRING\" size=\"256\"/><Column id=\"Sun\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"Time\">1교시</Col></Row><Row><Col id=\"Time\">2교시</Col></Row><Row><Col id=\"Time\">3교시</Col></Row><Row><Col id=\"Time\">4교시</Col></Row><Row><Col id=\"Time\">5교시</Col></Row><Row><Col id=\"Time\">6교시</Col></Row><Row><Col id=\"Time\">7교시</Col></Row><Row><Col id=\"Time\">8교시</Col></Row><Row><Col id=\"Time\">9교시</Col></Row><Row><Col id=\"Time\">10교시</Col></Row><Row><Col id=\"Time\">11교시</Col></Row><Row><Col id=\"Time\">12교시</Col></Row></Rows>");
             this.addChild(obj.name, obj);
 
 
@@ -372,14 +372,14 @@
             obj.set_text("");
             this.Div00.form.classPlanTab.classPlan.addChild(obj.name, obj);
 
-            obj = new PopupDiv("classTimeList","351","167","340","315",null,null,null,null,null,null,this.Div00.form.classPlanTab.classPlan.form);
+            obj = new PopupDiv("classTimeList","351","167","382","315",null,null,null,null,null,null,this.Div00.form.classPlanTab.classPlan.form);
             obj.set_visible("false");
             this.Div00.form.classPlanTab.classPlan.addChild(obj.name, obj);
 
-            obj = new Grid("Grid00","0","0","340","315",null,null,null,null,null,null,this.Div00.form.classPlanTab.classPlan.form.classTimeList.form);
+            obj = new Grid("Grid00","0","0","382","315",null,null,null,null,null,null,this.Div00.form.classPlanTab.classPlan.form.classTimeList.form);
             obj.set_taborder("0");
             obj.set_binddataset("ds_classTimeList");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"48\"/><Column size=\"48\"/><Column size=\"48\"/><Column size=\"48\"/><Column size=\"48\"/><Column size=\"48\"/><Column size=\"48\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"교시\"/><Cell col=\"1\" text=\"월\"/><Cell col=\"2\" text=\"화\"/><Cell col=\"3\" text=\"수\"/><Cell col=\"4\" text=\"목\"/><Cell col=\"5\" text=\"금\"/><Cell col=\"6\" text=\"토\"/></Band><Band id=\"body\"><Cell text=\"bind:Time\"/><Cell col=\"1\" text=\"bind:Mon\" displaytype=\"checkboxcontrol\" edittype=\"checkbox\"/><Cell col=\"2\" text=\"bind:Tue\" displaytype=\"checkboxcontrol\" edittype=\"checkbox\"/><Cell col=\"3\" text=\"bind:Wed\" displaytype=\"checkboxcontrol\" edittype=\"checkbox\"/><Cell col=\"4\" text=\"bind:Thu\" displaytype=\"checkboxcontrol\" edittype=\"checkbox\"/><Cell col=\"5\" text=\"bind:Fri\" displaytype=\"checkboxcontrol\" edittype=\"checkbox\"/><Cell col=\"6\" text=\"bind:Sat\" displaytype=\"checkboxcontrol\" edittype=\"checkbox\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"48\"/><Column size=\"48\"/><Column size=\"48\"/><Column size=\"48\"/><Column size=\"48\"/><Column size=\"48\"/><Column size=\"48\"/><Column size=\"44\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"교시\"/><Cell col=\"1\" text=\"월\"/><Cell col=\"2\" text=\"화\"/><Cell col=\"3\" text=\"수\"/><Cell col=\"4\" text=\"목\"/><Cell col=\"5\" text=\"금\"/><Cell col=\"6\" text=\"토\" color=\"blue\"/><Cell col=\"7\" text=\"일\" color=\"red\"/></Band><Band id=\"body\"><Cell text=\"bind:Time\"/><Cell col=\"1\" text=\"bind:Mon\" displaytype=\"checkboxcontrol\" edittype=\"checkbox\"/><Cell col=\"2\" text=\"bind:Tue\" displaytype=\"checkboxcontrol\" edittype=\"checkbox\"/><Cell col=\"3\" text=\"bind:Wed\" displaytype=\"checkboxcontrol\" edittype=\"checkbox\"/><Cell col=\"4\" text=\"bind:Thu\" displaytype=\"checkboxcontrol\" edittype=\"checkbox\"/><Cell col=\"5\" text=\"bind:Fri\" displaytype=\"checkboxcontrol\" edittype=\"checkbox\"/><Cell col=\"6\" text=\"bind:Sat\" displaytype=\"checkboxcontrol\" edittype=\"checkbox\"/><Cell col=\"7\" text=\"bind:Sun\" displaytype=\"checkboxcontrol\" edittype=\"checkbox\"/></Band></Format></Formats>");
             this.Div00.form.classPlanTab.classPlan.form.classTimeList.addChild(obj.name, obj);
 
             obj = new Static("sta_proCode","686","10","65","34",null,null,null,null,null,null,this.Div00.form.classPlanTab.classPlan.form);
@@ -1067,7 +1067,7 @@
         this.Div00_classPlanTab_classPlan_Button00_onclick = function(obj,e)
         {
         	nLeft = -classForm.edt_classTime.getOffsetWidth();
-        	classForm.classTimeList.trackPopupByComponent(obj,nLeft, obj.getOffsetHeight(), 340, 315);
+        	classForm.classTimeList.trackPopupByComponent(obj,nLeft, obj.getOffsetHeight(), 382, 315);
         };
 
         this.Div00_classPlanTab_classPlan_classTimeList_oncloseup = function(obj,e)
@@ -1084,6 +1084,7 @@
         	arr[3] = this.ds_classTimeList.extractRows("Thu==1");
         	arr[4] = this.ds_classTimeList.extractRows("Fri==1");
         	arr[5] = this.ds_classTimeList.extractRows("Sat==1");
+        	arr[6] = this.ds_classTimeList.extractRows("Sun==1");
         	for(var j=0; j<arr.length; j++){
         		weekTime[j]="";
         		var times="";
@@ -1096,7 +1097,7 @@
         			weekTime[j] = week + "(" + times.substring(0,times.length-1) +")";
         		}
         	}
-        	weekTimes = weekTime[0]+ weekTime[1] + weekTime[2] + weekTime[3] + weekTime[4] + weekTime[5];
+        	weekTimes = weekTime[0]+ weekTime[1] + weekTime[2] + weekTime[3] + weekTime[4] + weekTime[5] + weekTime[6];
         	classTime.set_value(weekTimes);
         };
 
