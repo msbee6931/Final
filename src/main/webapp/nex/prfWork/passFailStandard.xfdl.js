@@ -43,7 +43,6 @@
 
             obj = new Edit("edt_score","105","60","105","40",null,null,null,null,null,null,this);
             obj.set_taborder("3");
-            obj.set_value("80");
             obj.set_textAlign("center");
             obj.set_text("80");
             this.addChild(obj.name, obj);
@@ -67,14 +66,16 @@
         this.registerScript("passFailStandard.xfdl", function() {
 
         var objApp = nexacro.getApplication();
-        this.passFailStandard_onload = function(obj,e)
+
+        this.edt_score_onchanged = function(obj,e)
         {
         	for(var i=0; i<objApp.ds_grades.getRowCount(); i++){
         		var total = objApp.ds_grades.getColumn(i,"total");
+        		trace(this.edt_score.value);
         		if(total >= this.edt_score.value){
-        			objApp.ds_grades.setColumn(i,"grade","PASS");
+        			objApp.ds_grades.setColumn(i,"grade","P");
         		}else{
-        			objApp.ds_grades.setColumn(i,"grade","FAIL");
+        			objApp.ds_grades.setColumn(i,"grade","F");
         		}
         	}
         };
@@ -85,6 +86,7 @@
         this.on_initEvent = function()
         {
             this.addEventHandler("onload",this.passFailStandard_onload,this);
+            this.edt_score.addEventHandler("onchanged",this.edt_score_onchanged,this);
         };
 
         this.loadIncludeScript("passFailStandard.xfdl");

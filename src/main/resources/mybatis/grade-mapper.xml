@@ -16,4 +16,7 @@
 	<select id="stdGradeList" resultType="kh.spring.dto.GradeDTO">
 		select * from grade where classCode = #{classCode}
 	</select>
+	<update id="stdGradeUpd">
+		update grade set grade =#{grade} where classCode = #{classCode} and sCode = #{sCode}
+	</update>
 </mapper>

@@ -43,7 +43,7 @@
 
             obj = new Static("sta_A","105","43","105","35",null,null,null,null,null,null,this);
             obj.set_taborder("3");
-            obj.set_text("");
+            obj.set_text("0");
             obj.set_border("1px solid black");
             obj.set_textAlign("center");
             this.addChild(obj.name, obj);
@@ -57,7 +57,7 @@
 
             obj = new Static("sta_B","105","78","105","35",null,null,null,null,null,null,this);
             obj.set_taborder("5");
-            obj.set_text("");
+            obj.set_text("0");
             obj.set_border("1px solid black");
             obj.set_textAlign("center");
             this.addChild(obj.name, obj);
@@ -71,7 +71,7 @@
 
             obj = new Static("sta_C","105","113","105","35",null,null,null,null,null,null,this);
             obj.set_taborder("7");
-            obj.set_text("");
+            obj.set_text("0");
             obj.set_border("1px solid black");
             obj.set_textAlign("center");
             this.addChild(obj.name, obj);

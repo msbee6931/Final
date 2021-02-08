@@ -23,4 +23,7 @@ public class GradeDAO {
 	public List<GradeDTO> stdGradeList(GradeDTO dto){
 		return session.selectList("Grade.stdGradeList",dto);
 	}
+	public int stdGradeUpd(GradeDTO dto) {
+		return session.update("Grade.stdGradeUpd",dto);
+	}
 }

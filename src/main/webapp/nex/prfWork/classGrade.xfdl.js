@@ -574,7 +574,6 @@
         			objCF.showModal(this.getOwnerFrame(),{classCode:classCode},this,"fn_callback_evalUpd");
         		}
         	}else if(sId=="stdGradeRank"){
-
         		objApp.ds_grades.copyData(this.ds_grade)
         		if(objApp.ds_grades.getRowCount()> 0){
         			var nRow = this.ds_class.rowposition;
@@ -584,8 +583,8 @@
         				this.div_rank.set_url("prfWork::rankStandard.xfdl");
         				var nCount = objApp.ds_grades.getRowCount();
         				var A = nexacro.ceil(nCount * 0.3);
-        				var B = nexacro.ceil(nCount * 0.7) - A;
-        				var C =	nCount - (A+B)
+        				var B = nexacro.ceil(nCount * 0.7);
+        				var C =	nCount;
         				this.div_rank.form.sta_A.set_text(A);
         				this.div_rank.form.sta_B.set_text(B);
         				this.div_rank.form.sta_C.set_text(C);
@@ -601,22 +600,21 @@
         						}
         						objApp.ds_grades.setColumn(i,"rank",rank);
         						var nRank = objApp.ds_grades.getColumn(i,"rank");
-        						if(nRank <= nCount){
-        							objApp.ds_grades.setColumn(i,"grade","C+");
-        							if(nRank <= A+B){
-        								objApp.ds_grades.setColumn(i,"grade","B+");
-        								if(nRank <= A){
-        									objApp.ds_grades.setColumn(i,"grade","A+");
+        						var grade =  objApp.ds_grades.getColumn(i,"grade");
+        						if(grade == null){
+        							if(nRank <= nCount){
+        								objApp.ds_grades.setColumn(i,"grade","C+");
+        								if(nRank <= A+B){
+        									objApp.ds_grades.setColumn(i,"grade","B+");
+        									if(nRank <= A){
+        										objApp.ds_grades.setColumn(i,"grade","A+");
+        									}
         								}
         							}
         						}
         					}
         				}
         			}
-        		}else{
-        			this.div_rank.form.sta_A.set_text(0);
-        			this.div_rank.form.sta_B.set_text(0);
-        			this.div_rank.form.sta_C.set_text(0);
         		}
         	}
         }
@@ -868,10 +866,36 @@
         			B +=1;
         		}
         	}
-        	if(A > this.div_rank.form.sta_A.text || B > this.div_rank.form.sta_B.text){
-        		this.alert("등급별 최대인원을 초과했습니다")
+        	if(this.Grid03.formatid == "default"){
+        		var RankA = this.div_rank.form.sta_A.text;
+        		var RankB = this.div_rank.form.sta_B.text;
+        		if(A > RankA || A+B > RankB ){
+        			this.alert("등급별 최대인원을 초과했습니다")
+        		}else{
+        			if(objApp.ds_grades.getRowCount() > 0){
+        				var nCount = this.ds_grade.copyData(objApp.ds_grades);
+        				this.transaction(
+        					"stdGradeUpd"
+        					,"/stdGradeUpd.nex"
+        					,"in_ds=ds_grade:A"
+        					,""
+        					,""
+        					,"fn_callback"
+        				);
+        			}
+        		}
         	}else{
-        		//저장
+        		if(objApp.ds_grades.getRowCount() > 0){
+        			var nCount = this.ds_grade.copyData(objApp.ds_grades);
+        			this.transaction(
+        				"stdGradeUpd"
+        				,"/stdGradeUpd.nex"
+        				,"in_ds=ds_grade:A"
+        				,""
+        				,""
+        				,"fn_callback"
+        			);
+        		}
         	}
         }
 

@@ -43,5 +43,12 @@ public class GradeController {
 		nr.addDataSet("out_ds",list);
 		return nr;
 	}
-	
+	@RequestMapping("/stdGradeUpd.nex")
+	public NexacroResult stdGradeUpd(@ParamDataSet(name="in_ds")List<GradeDTO> list) {
+		NexacroResult nr = new NexacroResult();
+		for(GradeDTO dto : list) {
+			service.stdGradeUpd(dto);
+		}
+		return nr;
+	}
 }

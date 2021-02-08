@@ -339,13 +339,26 @@
         		var weeks = time[i].split("(");
         		weekTime += weeks[0];
         	}
-        	var arr = this.ds_cal.extractRows("datecolumn=="+this.cal.value);
-        	if(weekTime.length <= vArr.length && arr.length == 0){ //이미 등록한 요일 제외하고 요일 개수만큼만 한 주에 등록 가능
-        		alert("이번주차 수업을 더이상 등록할 수 없습니다");
-        	}else{
-        		if(weekTime.indexOf(week) < 0){ // 수업하는 요일 체크
-        			if(arr.length == 0){
-        				if(this.confirm("수업이 없습니다.\n수업을 추가하시겠습니까?")){
+        	if(this.ds_attend.getRowCount() > 0 ){
+        		var arr = this.ds_cal.extractRows("datecolumn=="+this.cal.value);
+        		if(weekTime.length <= vArr.length && arr.length == 0){ //이미 등록한 요일 제외하고 요일 개수만큼만 한 주에 등록 가능
+        			alert("이번주차 수업을 더이상 등록할 수 없습니다");
+        		}else{
+        			if(weekTime.indexOf(week) < 0){ // 수업하는 요일 체크
+        				if(arr.length == 0){
+        					if(this.confirm("수업이 없습니다.\n수업을 추가하시겠습니까?")){
+        						this.transaction(
+        							"stdList"
+        							,"/stdListSeq.nex"
+        							,""
+        							,"ds_stdClass=out_ds"
+        							,"classCode="+classCode
+        							,"fn_callback_stdList"
+        						);
+        					}else{
+        						this.ds_attend.deleteAll();
+        					}
+        				}else{
         					this.transaction(
         						"stdList"
         						,"/stdListSeq.nex"
@@ -354,8 +367,6 @@
         						,"classCode="+classCode
         						,"fn_callback_stdList"
         					);
-        				}else{
-        					this.ds_attend.deleteAll();
         				}
         			}else{
         				this.transaction(
@@ -367,16 +378,9 @@
         					,"fn_callback_stdList"
         				);
         			}
-        		}else{
-        			this.transaction(
-        				"stdList"
-        				,"/stdListSeq.nex"
-        				,""
-        				,"ds_stdClass=out_ds"
-        				,"classCode="+classCode
-        				,"fn_callback_stdList"
-        			);
         		}
+        	}else{
+        		alert("수업을 선택해주세요");
         	}
         };
 
