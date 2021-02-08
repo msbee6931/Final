@@ -14,7 +14,7 @@
 		</foreach>
 	</insert>
 	<update id="attendUpd" >	
-		update attend set attendState = #{attendState}, absenceReason = #{absenceReason,jdbcType=VARCHAR} where sCode = #{sCode} and attendDay = #{attendDay}
+		update attend set attendState = #{attendState}, absenceReason = #{absenceReason,jdbcType=VARCHAR} where classCode =#{classCode} and sCode = #{sCode} and attendDay = #{attendDay}
 	</update>
 	<delete id="attendDel">
 		delete from attend where attendDay = #{attendDay} and classCode =#{classCode}
