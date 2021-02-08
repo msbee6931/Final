@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import kh.spring.dao.ClassDAO;
 import kh.spring.dto.ClassDTO;
 import kh.spring.dto.ClassScheduleDTO;
+import kh.spring.dto.StdTimeTableDTO;
+import kh.spring.dto.StudentClassDTO;
 
 @Service
 public class ClassService {
@@ -50,10 +52,10 @@ public class ClassService {
 	public int reqUpdDRtoDC(List<ClassDTO> list) {
 		return dao.reqUpdDRtoDC(list);
 	}
-	public List<ClassDTO>classListSeq(int classSeq){
+	public ClassDTO classListSeq(int classSeq){
 		return dao.classListSeq(classSeq);
 	}
-	public List<ClassScheduleDTO> classScheduleSeq(int classSeq){
+	public ClassScheduleDTO classScheduleSeq(int classSeq){
 		return dao.classScheduleSeq(classSeq);
 	}
 	public List<ClassDTO> classReqListA(){
@@ -62,4 +64,66 @@ public class ClassService {
 	public int rejectMsgInsert(List<ClassDTO> list,String rejectMsg) {
 		return dao.rejectMsgInsert(list,rejectMsg);
 	}
+	public List<ClassDTO> classListYear(String startTime, String endTime){
+		return dao.classListYear(startTime, endTime);
+	}
+	public int stdTimeTableInsert(List<StdTimeTableDTO>list) {
+		return dao.stdTimeTableInsert(list);
+	}
+	public int stdTimeTableUpdate(StdTimeTableDTO dto) {
+		return dao.stdTimeTableUpdate(dto);
+	}
+	public int stdTimeTableDelete(StdTimeTableDTO dto) {
+		return dao.stdTimeTableDelete(dto);
+	}
+	public int stdTimeTablesDelete(List<StdTimeTableDTO> list) {
+		return dao.stdTimeTablesDelete(list);
+	}
+	public List<StdTimeTableDTO> stdTimeTableList(StdTimeTableDTO dto,String startTime, String endTime){
+		return dao.stdTimeTableList(dto,startTime,endTime);
+	}
+	public int stdClassInsert(StudentClassDTO dto) {
+		return dao.stdClassInsert(dto);
+	}
+	public int stdClassesInsert(List<StudentClassDTO>list) {
+		return dao.stdClassesInsert(list);
+	}
+	public int stdClassUpdate(StudentClassDTO dto) {
+		return dao.stdClassUpdate(dto);
+	}
+	public int stdClassCount(StudentClassDTO dto) {
+		return dao.stdClassCount(dto);
+	}
+	public int stdBasketCount(StudentClassDTO dto) {
+		return dao.stdBasketCount(dto);
+	}
+	public int stdClassDelete(StdTimeTableDTO dto) {
+		return dao.stdClassDelete(dto);
+	}
+	public int stdClassesDelete(List<StudentClassDTO> list) {
+		return dao.stdClassesDelete(list);
+	}
+	public int limitUpd(ClassDTO dto) {
+		return dao.limitUpd(dto);
+	}
+	public int limitBasketUpd(ClassDTO dto) {
+		return dao.limitBasketUpd(dto);
+	}
+	public List<StudentClassDTO>myClassList(StudentClassDTO dto,String startTime,String endTime){
+		return dao.myClassList(dto,startTime,endTime);
+	}
+	public List<StudentClassDTO>myBasketList(StudentClassDTO dto,String startTime,String endTime){
+		return dao.myBasketList(dto,startTime,endTime);
+	}
+	public List<ClassDTO>myClassSeq(List<StudentClassDTO>list){
+		return dao.myClassSeq(list);
+	}
+	public int stdClassSeqDel(List<StudentClassDTO> list) {
+		return dao.stdClassSeqDel(list);	
+	}
+	public int stdTimeTableSeqDel(List<StudentClassDTO>list) {
+		return dao.stdTimeTableSeqDel(list);
+	}
+	
+
 }

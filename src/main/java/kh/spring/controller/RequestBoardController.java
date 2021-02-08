@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
+
 import kh.spring.dto.FreeBoardDTO;
 import kh.spring.dto.FreeCommentDTO;
+import kh.spring.dto.PostMessageDTO;
 import kh.spring.dto.RequestBoardDTO;
 import kh.spring.service.RequestBoardService;
 
@@ -199,4 +202,7 @@ public class RequestBoardController {
 
 		return "Board/RequestList";
 	}
+	
+
+
 }

@@ -27,6 +27,10 @@ public class RequestBoardDAO {
 	public int delete(RequestBoardDTO dto) {
 		return session.delete("Request.delete",dto);
 	}
+	
+	public int deleteList(List<RequestBoardDTO> list) {
+		return session.delete("Request.deleteList",list);
+	}
 	public List<RequestBoardDTO> selectAll(){
 		return session.selectList("Request.selectAll");
 	}
@@ -64,4 +68,5 @@ public class RequestBoardDAO {
 	 public RequestBoardDTO selectBySeq(String seq) {
 		 return session.selectOne("Request.selectBySeq",seq);
 	 }
+	 
 }

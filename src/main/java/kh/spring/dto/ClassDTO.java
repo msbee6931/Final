@@ -1,17 +1,21 @@
 package kh.spring.dto;
 
+import java.sql.Date;
+
 public class ClassDTO {
 	private String chk;
 	private String classPart;
 	private String className;
 	private int classSeq;
 	private String classPoint;
+	private String passFail;
 	private String proCode;
 	private String proName;
 	private String dept;
 	private String classTime;
 	private String classRoom;
 	private String limit;
+	private String basketLimit;
 	private String grade;
 	private String classGoal;
 	private String classMethod;
@@ -21,21 +25,23 @@ public class ClassDTO {
 	private String rejectMsg;
 	private String reg_date;
 	public ClassDTO() {}
-	public ClassDTO(String chk, String classPart, String className, int classSeq, String classPoint, String proCode,
-			String proName, String dept, String classTime, String classRoom, String limit, String grade,
-			String classGoal, String classMethod, String classEvaluation, String classReferences, String reqState,
-			String rejectMsg, String reg_date) {
+	public ClassDTO(String chk, String classPart, String className, int classSeq, String classPoint, String passFail,
+			String proCode, String proName, String dept, String classTime, String classRoom, String limit,
+			String basketLimit, String grade, String classGoal, String classMethod, String classEvaluation,
+			String classReferences, String reqState, String rejectMsg, String reg_date) {
 		this.chk = chk;
 		this.classPart = classPart;
 		this.className = className;
 		this.classSeq = classSeq;
 		this.classPoint = classPoint;
+		this.passFail = passFail;
 		this.proCode = proCode;
 		this.proName = proName;
 		this.dept = dept;
 		this.classTime = classTime;
 		this.classRoom = classRoom;
 		this.limit = limit;
+		this.basketLimit = basketLimit;
 		this.grade = grade;
 		this.classGoal = classGoal;
 		this.classMethod = classMethod;
@@ -75,6 +81,12 @@ public class ClassDTO {
 	public void setClassPoint(String classPoint) {
 		this.classPoint = classPoint;
 	}
+	public String getPassFail() {
+		return passFail;
+	}
+	public void setPassFail(String passFail) {
+		this.passFail = passFail;
+	}
 	public String getProCode() {
 		return proCode;
 	}
@@ -110,6 +122,12 @@ public class ClassDTO {
 	}
 	public void setLimit(String limit) {
 		this.limit = limit;
+	}
+	public String getBasketLimit() {
+		return basketLimit;
+	}
+	public void setBasketLimit(String basketLimit) {
+		this.basketLimit = basketLimit;
 	}
 	public String getGrade() {
 		return grade;
@@ -159,5 +177,6 @@ public class ClassDTO {
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
+	
 	
 }

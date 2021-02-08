@@ -15,6 +15,11 @@ update requestboard set reply=#{reply} where seq = #{seq}
 <delete id="delete">
 delete from requestboard where seq = #{seq}
 </delete>
+
+<delete id="deleteList">
+delete from requestboard where seq in
+	<foreach separator="," close=")" open="(" item="i" collection="list">#{i.seq} </foreach>
+</delete>
 <select id="selectAll" resultType="kh.spring.dto.RequestBoardDTO">
 select * from requestboard order by 1 desc
 </select>

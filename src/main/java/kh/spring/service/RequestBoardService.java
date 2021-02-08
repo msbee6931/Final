@@ -101,4 +101,8 @@ public class RequestBoardService {
 	 public RequestBoardDTO selectBySeq(String seq) {
 		 return dao.selectBySeq(seq);
 	 }
+	 
+	 public int deleteList(List<RequestBoardDTO> list) {
+		 return dao.deleteList(list);
+	 }
 }
