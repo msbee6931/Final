@@ -130,4 +130,7 @@
 	<select id="stdListSeq" resultType="kh.spring.dto.StudentClassDTO">
 		select * from studentClass where classCode =#{classCode}
 	</select>
+	<update id="classEvalUpd">
+		update class set classEvaluation = #{classEvaluation} where classSeq =#{classSeq}
+	</update>
 </mapper>
