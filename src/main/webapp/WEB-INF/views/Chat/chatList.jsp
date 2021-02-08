@@ -38,10 +38,10 @@
 	</div>
 	
 	<script>
-		$(document).on("dblclick",".enter",function(){
+		$(document).on("click",".enter",function(){
 			var roomNumber = $(this).children(".roomNumber").text();
-			//location.href="/chatting/chatDetail?roomNumber="+roomNumber;
-			$("#main").load("chatDetail?roomNumber="+roomNumber);
+			location.href="/chatting/chatDetail?roomNumber="+roomNumber;
+			//$("#main").load("chatDetail?roomNumber="+roomNumber);
 		});
 	</script>
 </body>

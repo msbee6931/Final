@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Search Friend</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <style>
 	.searchOutput .profile{
 		display: flex;
@@ -45,8 +47,14 @@
 				data: {friendId:friendId,friendName:friendName,userName:userName},
 				dataType: "json"
 			}).done(function(resp){
-				alert(resp.msg);
-			});
+				if(resp.msg == "이미 친구인 사용자입니다."){
+					alert("이미 친구인 사용자입니다.");
+				}else{
+					alert("친구목록에 추가되었습니다.");
+					location.href="/chatting/chatHome?userId="+resp.userId;
+				}
+			}); 
+			// location.href="/chatting/friendAdd?friendId="+friendId+"&friendName="+friendName+"&userName="+userName;
 		});
 	</script>
 </body>

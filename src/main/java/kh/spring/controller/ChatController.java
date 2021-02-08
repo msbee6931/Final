@@ -107,6 +107,7 @@ public class ChatController {
 		}else {
 			service.insertFriend(userId,userName,friendId,friendName);
 			obj.addProperty("msg", "친구목록에 추가되었습니다.");
+			obj.addProperty("userId", userId);
 		}
 		pw.append(obj.toString());
 	}
@@ -133,7 +134,8 @@ public class ChatController {
 	
 	@RequestMapping("upload")
 	@ResponseBody
-	public void upload(MultipartFile file,String roomNumber,String userId) throws Exception{ 
+	public void upload(MultipartFile file,String roomNumber,String userId) throws Exception{
+		System.out.println("여기는 컨트롤러 파일의 이름은 " + file.getOriginalFilename());
 		String realPath = session.getServletContext().getRealPath("resources/files");
 		File filesPath = new File(realPath);
 		if(!filesPath.exists()) {filesPath.mkdir();}

@@ -79,17 +79,19 @@
 		var userName = $("#userName").text();
 		var friendName = $(this).children(".friendName").text();
 		// console.log(userId + ":" + userName + ":" + friendId + ":" + friendName);
-		// location.href="/chatting/roomCheck?userId="+userId+"&friendId="+friendId+"&userName="+userName+"&friendName="+friendName;
-		$("#main").load("roomCheck?userId="+userId+"&friendId="+friendId+"&userName="+userName+"&friendName="+friendName);
+		location.href="/chatting/roomCheck?userId="+userId+"&friendId="+friendId+"&userName="+userName+"&friendName="+friendName;
+		//$("#main").load("roomCheck?userId="+userId+"&friendId="+friendId+"&userName="+userName+"&friendName="+friendName);
 	 });
 	
 	$("#inputBtn").on("click",function(){
 		var searchId = $("#inputTxt").val();
-		$("#main").load("searchFriend?searchId="+searchId);
+		//$("#main").load("searchFriend?searchId="+searchId);
+		location.href="searchFriend?searchId="+searchId;
 	});
 	
 	$("#goChatList").on("click",function(){
-		$("#main").load("chatList");
+		//$("#main").load("chatList");
+		location.href="chatList";
 	});
 	
 	</script>

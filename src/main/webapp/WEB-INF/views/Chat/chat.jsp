@@ -135,6 +135,7 @@
 		});
 		
 		function upload(){
+			console.log("자바스크립트 업로드 요청 도착! ");
 			var roomNumber = $("#roomNumber").val();
 			var userId = $("#userId").val();
 			var formData = new FormData($("#signform")[0]);

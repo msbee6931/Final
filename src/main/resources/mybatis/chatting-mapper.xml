@@ -10,7 +10,7 @@
  	</select>
  	
  	<select id="getFriendsList" resultType="kh.spring.dto.FriendDTO">
- 		select * from friend where userId=#{userId}
+ 		select * from friend where userId=#{userId} order by friendName
  	</select>
 	
 	<!-- FRIEND -->
