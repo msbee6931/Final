@@ -48,7 +48,7 @@
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
-            obj = new Grid("Grid00","75","67","930","155",null,null,null,null,null,null,this);
+            obj = new Grid("Grid00","75","67","930","143",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_binddataset("ds_class");
             obj.set_autofittype("col");
@@ -173,9 +173,8 @@
         };
         this.Grid00_oncellclick = function(obj,e)
         {
-        	var nRow = this.ds_class.rowposition
-        	var classCode = this.ds_class.getColumn(nRow,"classSeq");
-        	var className = this.ds_class.getColumn(nRow,"className");
+        	var classCode = this.ds_class.getColumn(e.row,"classSeq");
+        	var className = this.ds_class.getColumn(e.row,"className");
         	this.sta_label.set_text("학생리스트(" +className+")");
         	this.transaction(
         		"stdListSeq"
@@ -328,6 +327,10 @@
         {
         	var cal = this.cal.text;
         	var week = cal.substring(cal.length-1,cal.length);
+        	var val = this.cal.value;
+        	var start = val - this.cal.getDayOfWeek();
+        	var end = start + 6;
+        	var vArr = this.ds_cal.extractRows("datecolumn>='"+start+"'&&datecolumn<='"+end+"'");
         	var nRow = this.ds_class.rowposition;
         	var classCode = this.ds_class.getColumn(nRow,"classSeq");
         	var time = this.ds_class.getColumn(nRow,"classTime").split(")");
@@ -336,10 +339,25 @@
         		var weeks = time[i].split("(");
         		weekTime += weeks[0];
         	}
-        	if(weekTime.indexOf(week) < 0){
-        		var arr = this.ds_cal.extractRows("datecolumn=="+this.cal.value);
-        		if(arr.length == 0){
-        			if(this.confirm("수업이 없습니다.\n수업을 추가하시겠습니까?")){
+        	var arr = this.ds_cal.extractRows("datecolumn=="+this.cal.value);
+        	if(weekTime.length <= vArr.length && arr.length == 0){ //이미 등록한 요일 제외하고 요일 개수만큼만 한 주에 등록 가능
+        		alert("이번주차 수업을 더이상 등록할 수 없습니다");
+        	}else{
+        		if(weekTime.indexOf(week) < 0){ // 수업하는 요일 체크
+        			if(arr.length == 0){
+        				if(this.confirm("수업이 없습니다.\n수업을 추가하시겠습니까?")){
+        					this.transaction(
+        						"stdList"
+        						,"/stdListSeq.nex"
+        						,""
+        						,"ds_stdClass=out_ds"
+        						,"classCode="+classCode
+        						,"fn_callback_stdList"
+        					);
+        				}else{
+        					this.ds_attend.deleteAll();
+        				}
+        			}else{
         				this.transaction(
         					"stdList"
         					,"/stdListSeq.nex"
@@ -348,8 +366,6 @@
         					,"classCode="+classCode
         					,"fn_callback_stdList"
         				);
-        			}else{
-        				this.ds_attend.deleteAll();
         			}
         		}else{
         			this.transaction(
@@ -361,15 +377,6 @@
         				,"fn_callback_stdList"
         			);
         		}
-        	}else{
-        		this.transaction(
-        			"stdList"
-        			,"/stdListSeq.nex"
-        			,""
-        			,"ds_stdClass=out_ds"
-        			,"classCode="+classCode
-        			,"fn_callback_stdList"
-        		);
         	}
         };
 

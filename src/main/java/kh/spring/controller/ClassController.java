@@ -392,4 +392,10 @@ public class ClassController {
 		}
 		return nr;
 	}
+	@RequestMapping("/classEvalUpd.nex")
+	public NexacroResult classEvalUpd(@ParamDataSet(name="in_ds")ClassDTO dto) {
+		NexacroResult nr = new NexacroResult();
+		service.classEvalUpd(dto);
+		return nr;
+	}
 }
