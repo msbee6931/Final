@@ -17,37 +17,52 @@
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_radio", this);
+            obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"date\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"code\">1</Col><Col id=\"date\">학생</Col></Row><Row><Col id=\"code\">2</Col><Col id=\"date\">교수</Col></Row><Row><Col id=\"code\">3</Col><Col id=\"date\">관리자</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
 
+
+            obj = new Dataset("ds_login", this);
+            obj._setContents("<ColumnInfo><Column id=\"id\" type=\"STRING\" size=\"256\"/><Column id=\"pw\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
-            obj = new Div("Div00","385","155","580","350",null,null,null,null,null,null,this);
+            obj = new Div("loginForm","385","155","580","350",null,null,null,null,null,null,this);
             obj.set_taborder("1");
             obj.set_text("Div00");
             obj.set_border("1px solid #c1c1c1");
             this.addChild(obj.name, obj);
 
-            obj = new Static("Static00","80","111","55","30",null,null,null,null,null,null,this.Div00.form);
+            obj = new Static("Static00","80","111","55","30",null,null,null,null,null,null,this.loginForm.form);
             obj.set_taborder("0");
             obj.set_text("ID");
-            this.Div00.addChild(obj.name, obj);
+            this.loginForm.addChild(obj.name, obj);
 
-            obj = new Static("Static00_00","79","172","55","30",null,null,null,null,null,null,this.Div00.form);
+            obj = new Static("Static00_00","79","172","55","30",null,null,null,null,null,null,this.loginForm.form);
             obj.set_taborder("1");
             obj.set_text("PW");
-            this.Div00.addChild(obj.name, obj);
+            this.loginForm.addChild(obj.name, obj);
 
-            obj = new Edit("Edit00","160","115","300","30",null,null,null,null,null,null,this.Div00.form);
+            obj = new Edit("edt_id","160","115","300","30",null,null,null,null,null,null,this.loginForm.form);
             obj.set_taborder("2");
-            this.Div00.addChild(obj.name, obj);
+            this.loginForm.addChild(obj.name, obj);
 
-            obj = new Edit("Edit00_00","160","174","300","30",null,null,null,null,null,null,this.Div00.form);
+            obj = new Edit("edt_pw","160","174","300","30",null,null,null,null,null,null,this.loginForm.form);
             obj.set_taborder("3");
-            this.Div00.addChild(obj.name, obj);
+            this.loginForm.addChild(obj.name, obj);
 
-            obj = new Button("Button00","481","116","85","90",null,null,null,null,null,null,this.Div00.form);
+            obj = new Button("btn_login","481","116","85","90",null,null,null,null,null,null,this.loginForm.form);
             obj.set_taborder("4");
             obj.set_text("로그인");
-            this.Div00.addChild(obj.name, obj);
+            this.loginForm.addChild(obj.name, obj);
+
+            obj = new Radio("rad_chk","85","240","400","30",null,null,null,null,null,null,this.loginForm.form);
+            obj.set_taborder("5");
+            obj.set_innerdataset("ds_radio");
+            obj.set_codecolumn("code");
+            obj.set_datacolumn("date");
+            obj.set_rowcount("1");
+            this.loginForm.addChild(obj.name, obj);
 
             obj = new Button("Button00","390","60","120","50",null,null,null,null,null,null,this);
             obj.set_taborder("1");
@@ -82,10 +97,12 @@
         this.registerScript("Form_login.xfdl", function() {
         this.objApp = nexacro.getApplication();
 
-        this.Div00_Button00_onclick = function(obj,e)
-        {
-        	this.objApp.mainframe.VFrameSet00.set_separatesize("0,50,*,60");
-        };
+        this.fn_callback = function(id,ErrorCode,ErrorMsg){	//콜백함수
+        	trace(id);
+        	trace(ErrorMsg);
+        	trace(ErrorCode);
+        }
+
 
         this.Button00_onclick = function(obj,e)
         {
@@ -114,12 +131,60 @@
         	this.objApp.mainframe.VFrameSet00.set_separatesize("0,50,*,60");
         };
 
+
+
+
+        this.loginForm_btn_login_onclick = function(obj,e)
+        {
+        	var id = this.loginForm.form.edt_id.value;
+        	var pw = this.loginForm.form.edt_pw.value;
+        	trace(id);
+        	trace(pw);
+        	trace(this.loginForm.form.rad_chk.value);
+
+
+        	if(this.loginForm.form.rad_chk.value == null){
+        	alert("셋중 하나 선택해 주세요.")
+        	return;
+        	}
+        	if(id == undefined || id == ""){
+        		this.alert("아이디 입력해주세요.")
+        	}else if(pw == undefined || pw == ""){
+        		this.alert("비밀번호를 입력해주세요");
+        	}
+        	else{
+        	if(this.loginForm.form.rad_chk.value == 1){
+        		var shaObj = new jsSHA("SHA-256","TEXT");
+        		shaObj.update(pw);
+        		var hash = shaObj.getHash("HEX");
+        		trace(hash);
+
+        		var addRow = this.ds_login.addRow();
+        		this.ds_login.setColumn(addRow,"id",id);
+        		this.ds_login.setColumn(addRow,"pw",hash);
+
+        		this.transaction(
+
+        					"ds_login" //1. strSvcID
+        					,"/loginStu.login" //2. strURL
+        					,"in_ds=ds_login:U" //3.strInDatasets - I,U,D Sds=Fds:U 변경된값만보내겟다, :A, :N
+        					,"ds_login=out_ds" //4.strOutDatasets -select Fds=Sds
+        					,"" //5.strArgument text값
+        					,"fn_callback" //6.strCallbackFunc
+        				);
+        				trace(this.ds_login);
+        	}
+
+        	}
+        };
+
         });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
-            this.Div00.form.Button00.addEventHandler("onclick",this.Div00_Button00_onclick,this);
+            this.loginForm.form.btn_login.addEventHandler("onclick",this.loginForm_btn_login_onclick,this);
+            this.loginForm.form.rad_chk.addEventHandler("onitemchanged",this.Div00_Radio00_onitemchanged,this);
             this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
             this.Button00_00.addEventHandler("onclick",this.Button00_00_onclick,this);
             this.Button00_01.addEventHandler("onclick",this.Button00_01_onclick,this);

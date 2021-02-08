@@ -20,7 +20,7 @@
 
             
             // UI Components Initialize
-            obj = new Static("Static00","0","0","1280","60",null,null,null,null,null,null,this);
+            obj = new Static("Static00","0","0",null,"60","0",null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_text("Footer");
             obj.set_background("#c1c1c1");

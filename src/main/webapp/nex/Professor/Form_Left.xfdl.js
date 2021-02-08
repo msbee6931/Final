@@ -20,7 +20,7 @@
 
             
             // UI Components Initialize
-            obj = new Grid("Grid00","0","30","200","520",null,null,null,null,null,null,this);
+            obj = new Grid("Grid00","0","30","200",null,null,"0",null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_binddataset("prf_menu");
             obj.set_autofittype("col");

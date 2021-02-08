@@ -13,7 +13,7 @@
             this.set_titletext("New Form");
             if (Form == this.constructor)
             {
-                this._setFormPosition(1080,570);
+                this._setFormPosition(1080,520);
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
@@ -93,7 +93,7 @@
 
             // Layout Functions
             //-- Default Layout : this
-            obj = new Layout("default","",1080,570,this,function(p){});
+            obj = new Layout("default","",1080,520,this,function(p){});
             obj.set_mobileorientation("landscape");
             this.addLayout(obj.name, obj);
             
@@ -239,6 +239,7 @@
         	}
         };
 
+
         this.Button00_onclick = function(obj,e)
         {
 
@@ -302,6 +303,7 @@
         	}
         }
 
+
         });
         
         // Regist UI Components Event
@@ -311,6 +313,7 @@
             this.Grid00.addEventHandler("oncellclick",this.Grid00_oncellclick,this);
             this.Grid00.addEventHandler("onheadclick",this.Grid00_onheadclick,this);
             this.co_search.addEventHandler("onitemchanged",this.classTab_classList_co_search_onitemchanged,this);
+            this.edt_search.addEventHandler("onchanged",this.edt_search_onchanged,this);
             this.btnSearch.addEventHandler("onclick",this.btnSearch_onclick,this);
             this.co_year.addEventHandler("onitemchanged",this.Combo01_onitemchanged,this);
             this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
