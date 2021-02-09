@@ -79,19 +79,10 @@
             obj.set_rowcount("1");
             this.loginForm.addChild(obj.name, obj);
 
-            obj = new Button("Button00","390","60","120","50",null,null,null,null,null,null,this);
+            obj = new Static("Static00","387","107","180","50",null,null,null,null,null,null,this);
             obj.set_taborder("1");
-            obj.set_text("학생");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("Button00_00","531","60","120","50",null,null,null,null,null,null,this);
-            obj.set_taborder("2");
-            obj.set_text("교수");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("Button00_01","670","60","120","50",null,null,null,null,null,null,this);
-            obj.set_taborder("3");
-            obj.set_text("관리자");
+            obj.set_text("2//qwer");
+            obj.set_font("20px/normal \"Arial\",\"-윤고딕320\"");
             this.addChild(obj.name, obj);
 
             // Layout Functions
@@ -167,38 +158,6 @@
         	return;
         	}
         }
-
-
-        this.Button00_onclick = function(obj,e)
-        {
-
-        	this.objApp.mainframe.VFrameSet00.TopFrame.set_formurl("Student::Form_Top.xfdl");
-        	this.objApp.mainframe.VFrameSet00.HFrameSet00.LeftFrame.set_formurl("Student::Form_Left.xfdl");
-        	this.objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.ChildFrame00.set_formurl("Student::Form_Mdi.xfdl");
-        	this.objApp.mainframe.VFrameSet00.BottomFrame.set_formurl("Student::Form_Bottom.xfdl");
-        	this.objApp.mainframe.VFrameSet00.set_separatesize("0,50,*,60");
-        };
-
-        this.Button00_00_onclick = function(obj,e)
-        {
-        	this.objApp.mainframe.VFrameSet00.TopFrame.set_formurl("Professor::Form_Top.xfdl");
-        	this.objApp.mainframe.VFrameSet00.HFrameSet00.LeftFrame.set_formurl("Professor::Form_Left.xfdl");
-        	this.objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.ChildFrame00.set_formurl("Professor::Form_Mdi.xfdl");
-        	this.objApp.mainframe.VFrameSet00.BottomFrame.set_formurl("Professor::Form_Bottom.xfdl");
-        	this.objApp.mainframe.VFrameSet00.set_separatesize("0,50,*,60");
-        };
-
-        this.Button00_01_onclick = function(obj,e)
-        {
-        	this.objApp.mainframe.VFrameSet00.TopFrame.set_formurl("Admin::Form_Top.xfdl");
-        	this.objApp.mainframe.VFrameSet00.HFrameSet00.LeftFrame.set_formurl("Admin::Form_Left.xfdl");
-        	this.objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.ChildFrame00.set_formurl("Admin::Form_Mdi.xfdl");
-        	this.objApp.mainframe.VFrameSet00.BottomFrame.set_formurl("Admin::Form_Bottom.xfdl");
-        	this.objApp.mainframe.VFrameSet00.set_separatesize("0,50,*,60");
-        };
-
-
-
 
         this.loginForm_btn_login_onclick = function(obj,e)
         {
@@ -293,9 +252,6 @@
         {
             this.loginForm.form.btn_login.addEventHandler("onclick",this.loginForm_btn_login_onclick,this);
             this.loginForm.form.rad_chk.addEventHandler("onitemchanged",this.Div00_Radio00_onitemchanged,this);
-            this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
-            this.Button00_00.addEventHandler("onclick",this.Button00_00_onclick,this);
-            this.Button00_01.addEventHandler("onclick",this.Button00_01_onclick,this);
         };
 
         this.loadIncludeScript("Form_login.xfdl");
