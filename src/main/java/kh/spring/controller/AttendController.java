@@ -33,7 +33,7 @@ public class AttendController {
 		}
 		return nr;
 	}
-	@RequestMapping("/attendList.nex")
+	@RequestMapping("/attendInsert.nex")
 	public NexacroResult attendList(@ParamDataSet(name="in_ds")List<AttendDTO> list) {
 		NexacroResult nr = new NexacroResult();
 		AttendDTO dto = new AttendDTO();
