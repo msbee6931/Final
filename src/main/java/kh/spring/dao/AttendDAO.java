@@ -1,6 +1,8 @@
 package kh.spring.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +30,12 @@ public class AttendDAO {
 	public int attendDel(AttendDTO dto) {
 		return session.delete("Attend.attendDel",dto);
 	}
+	public List <AttendDTO> selectOneAttend(AttendDTO dto) {
+		return session.selectList("Attend.selectOneAttend", dto);
+	}
+	public List <AttendDTO> selectAttend(int cCode) {
+		return session.selectList("Attend.selectAttend", cCode);
+	}
+	
+	
 }

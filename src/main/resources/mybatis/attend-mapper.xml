@@ -14,9 +14,15 @@
 		</foreach>
 	</insert>
 	<update id="attendUpd" >	
-		update attend set attendState = #{attendState}, absenceReason = #{absenceReason,jdbcType=VARCHAR} where classCode =#{classCode} and sCode = #{sCode} and attendDay = #{attendDay}
+		update attend set attendState = #{attendState}, absenceReason = #{absenceReason,jdbcType=VARCHAR} where sCode = #{sCode} and attendDay = #{attendDay} and classCode =#{classCode}
 	</update>
 	<delete id="attendDel">
 		delete from attend where attendDay = #{attendDay} and classCode =#{classCode}
 	</delete>
+	<select id="selectOneAttend" resultType="kh.spring.dto.AttendDTO">
+		select * from attend where classCode=#{classCode} and sCode=#{sCode}
+	</select>
+	<select id="selectAttend" resultType="kh.spring.dto.AttendDTO">
+		select * from attend where classCode=#{classCode}
+	</select>
 </mapper>
