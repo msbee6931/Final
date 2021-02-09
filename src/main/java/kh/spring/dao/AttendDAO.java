@@ -31,7 +31,11 @@ public class AttendDAO {
 		return session.delete("Attend.attendDel",dto);
 	}
 	public List <AttendDTO> selectOneAttend(AttendDTO dto) {
-		System.out.println(dto.getsCode() +"---------"+dto.getClassCode());
 		return session.selectList("Attend.selectOneAttend", dto);
 	}
+	public List <AttendDTO> selectAttend(int cCode) {
+		return session.selectList("Attend.selectAttend", cCode);
+	}
+	
+	
 }

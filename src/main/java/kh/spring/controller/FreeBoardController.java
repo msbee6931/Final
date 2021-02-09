@@ -81,6 +81,7 @@ public class FreeBoardController {
 		return "Board/FreeView";
 	}
 	
+
 	@RequestMapping("delete")
 	public String delete(FreeBoardDTO dto,HttpServletRequest request,Model model) throws Exception {
 		String seq = Integer.toString(dto.getSeq());
@@ -228,4 +229,6 @@ public class FreeBoardController {
 
 		return "Board/FreeList";
 	}
+	
+	
 }

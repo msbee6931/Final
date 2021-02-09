@@ -105,6 +105,7 @@ nav {
 }
 </style>
 </head>
+
 <body onload="javascript:openPopup('pop.home')">
 	<div class="contatiner">
 		<div class="row">
@@ -190,6 +191,7 @@ nav {
 			placeholder="채팅을 위한 임시아이디 입력하고 버튼클릭시 채팅으로 이동"> <input
 			type="button" value="send" id="sendBtn">
 	</div>
+
 </body>
 <script>
 	document.getElementById("enroll").onclick=function(){
@@ -207,6 +209,10 @@ nav {
 	document.getElementById("free").onclick=function(){
 		location.href="/free/boardList"
 	}
+
+	document.getElementById("request").onclick=function(){
+		location.href="/request/boardList"
+
 
 	
 	document.getElementById("sendBtn").onclick = function(){

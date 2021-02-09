@@ -90,8 +90,17 @@ public class AttendController {
 		List<AttendDTO> list = service.selectOneAttend(dto);
 		
 		NexacroResult nr = new NexacroResult();
-			nr.addDataSet("out_ds",list);
+		nr.addDataSet("out_ds",list);
+		return nr;
+	}
+	
+	@RequestMapping("/selectAttend.nex")
+	public NexacroResult selectAttend(@ParamVariable(name="cCode")int cCode) {
+		System.out.println("교수쪽 학생 출결조회 들어오는지확인 ------ cCode>>"+cCode);
 
+		List<AttendDTO> list = service.selectAttend(cCode);	
+		NexacroResult nr = new NexacroResult();
+		nr.addDataSet("out_ds",list);
 		return nr;
 	}
 	
