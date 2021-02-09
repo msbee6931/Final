@@ -23,12 +23,12 @@
 		<th>채팅방</th>
 			<th>${user.getUserName() }</th>
 			<c:choose>
-				<c:when test="${list != null }">
-					<c:forEach var="dto" items="${list}">
-						<tr id="enter">
+				<c:when test="${roomList != null }">
+					<c:forEach var="dto" items="${roomList}">
+						<tr class="enter">
 							<td>이미지</td>
-							<td id="roomNumber">${dto.getRoomNumber() }</td>
-							<td id="roomName">${dto.getRoomName() }</td>
+							<td class="roomNumber">${dto.getRoomNumber() }</td>
+							<td class="roomName">${dto.getRoomName() }</td>
 						</tr>
 					</c:forEach>
 				</c:when>
@@ -38,9 +38,10 @@
 	</div>
 	
 	<script>
-		$("#enter").on("click",function(){
-			var roomNumber = $("#roomNumber").text();
+		$(document).on("click",".enter",function(){
+			var roomNumber = $(this).children(".roomNumber").text();
 			location.href="/chatting/chatDetail?roomNumber="+roomNumber;
+			//$("#main").load("chatDetail?roomNumber="+roomNumber);
 		});
 	</script>
 </body>

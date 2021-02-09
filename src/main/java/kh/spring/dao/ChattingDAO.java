@@ -26,6 +26,27 @@ public class ChattingDAO {
 	public List<FriendDTO> getFriendsList(String userId){
 		return session.selectList("chatting.getFriendsList", userId);
 	}
+	
+	// Friend
+	public List<UserDTO> searchFriend(String searchId) {
+		return session.selectList("chatting.searchFriend", searchId);
+	}
+	
+	public FriendDTO isFriendExist(String userId, String friendId) {
+		Map<String,String> param = new HashMap<>();
+		param.put("userId", userId);
+		param.put("friendId", friendId);
+		return session.selectOne("chatting.isFriendExist", param);
+	}
+
+	public int insertFriend(String userId, String userName, String friendId, String friendName) {
+		Map<String,String> param = new HashMap<>();
+		param.put("userId", userId);
+		param.put("userName", userName);
+		param.put("friendId", friendId);
+		param.put("friendName", friendName);
+		return session.insert("chatting.insertFriend",param);
+	}
 
 	// Chat
 	public int insertMessage(String userId, String message, String roomNumber) {
@@ -38,6 +59,20 @@ public class ChattingDAO {
 	
 	public List<MessageDTO> getChatting(String roomNumber) {
 		return session.selectList("chatting.getChatting",roomNumber);
+	}
+	
+	public int insertChatFile(String roomNumber, String oriName, String savedName,String userId) {
+		Map<String,String> param = new HashMap<>();
+		param.put("userId", userId);
+		param.put("roomNumber", roomNumber);
+		param.put("oriName", oriName);
+		param.put("savedName", savedName);
+		return session.insert("chatting.insertChatFile",param);
+	}
+	
+
+	public MessageDTO getFile(String savedName) {
+		return session.selectOne("chatting.getFile", savedName);
 	}
 	
 	// Room
@@ -62,4 +97,5 @@ public class ChattingDAO {
 		param.put("friendId", friendId);		
 		return session.selectOne("chatting.findRoomById",param);
 	}
+
 }

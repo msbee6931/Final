@@ -10,16 +10,42 @@
  	</select>
  	
  	<select id="getFriendsList" resultType="kh.spring.dto.FriendDTO">
- 		select * from friend where userId=#{userId}
+ 		select * from friend where userId=#{userId} order by friendName
  	</select>
+	
+	<!-- FRIEND -->
+	<select id="searchFriend" resultType="kh.spring.dto.UserDTO">
+		select * from chatUser where userId like '%'||#{searchId}||'%'
+	</select>
+	
+	<select id="isFriendExist" resultType="kh.spring.dto.FriendDTO">
+		select * from friend where userId=#{userId} and friendId=#{friendId}
+	</select>
+	
+	<insert id="insertFriend">
+		insert into friend values(#{userId},#{userName},#{friendId},#{friendName})
+	</insert>
 	
 	<!-- Chat -->
  	<insert id="insertMessage">
- 		insert into chatMessage values(chatMessage_seq.nextval,#{userId},#{message},#{roomNumber})
+ 		insert into chatMessage(seq,userId,message,roomNumber) values(chatMessage_seq.nextval,#{userId},#{message},#{roomNumber})
  	</insert>
  	
  	<select id="getChatting" resultType="kh.spring.dto.MessageDTO">
- 		select * from chatMessage where roomNumber=#{roomNumber} order by seq
+ 		select 
+ 			seq,userId,roomNumber,message,oriName,savedName,uploadDate,
+ 			SUBSTR (oriName, INSTR (oriName, '.', -1) + 1)format 
+ 		from chatMessage 
+ 		where roomNumber=#{roomNumber} 
+ 		order by uploadDate
+ 	</select>
+ 	
+ 	<insert id="insertChatFile">
+ 		insert into chatMessage(seq,roomNumber,oriName,savedName,uploadDate,userId) values(chatFile_seq.nextval,#{roomNumber},#{oriName},#{savedName},default,#{userId})
+ 	</insert>
+ 	
+ 	<select id="getFile" resultType="kh.spring.dto.MessageDTO">
+ 		select * from chatMessage where savedName = #{savedName}
  	</select>
  	
  	<!-- Room -->
