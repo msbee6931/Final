@@ -17,8 +17,13 @@
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
+<<<<<<< HEAD
             obj = new Dataset("ds_stdTimeTable", this);
             obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"INT\" size=\"256\"/><Column id=\"time\" type=\"STRING\" size=\"256\"/><Column id=\"mon\" type=\"STRING\" size=\"256\"/><Column id=\"tue\" type=\"STRING\" size=\"256\"/><Column id=\"wed\" type=\"STRING\" size=\"256\"/><Column id=\"thu\" type=\"STRING\" size=\"256\"/><Column id=\"fri\" type=\"STRING\" size=\"256\"/><Column id=\"sat\" type=\"STRING\" size=\"256\"/><Column id=\"sun\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+=======
+            obj = new Dataset("Dataset00", this);
+            obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/><Column id=\"contents\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"code\">1</Col><Col id=\"name\">알리스타</Col><Col id=\"contents\">서폿</Col></Row><Row><Col id=\"code\">2</Col><Col id=\"name\">아리</Col><Col id=\"contents\">미드</Col></Row><Row><Col id=\"code\">3</Col><Col id=\"name\">가렌</Col><Col id=\"contents\">탑</Col></Row></Rows>");
+>>>>>>> 7ce2599a794fe466239a9559360b91ad0143a96b
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -51,11 +56,17 @@
             obj.set_background("RGBA(236,135,135,0.71)");
             this.addChild(obj.name, obj);
 
+<<<<<<< HEAD
             obj = new Grid("Grid00","140","60","800","400",null,null,null,null,null,null,this);
             obj.set_taborder("5");
             obj.set_autofittype("col");
             obj.set_binddataset("ds_stdTimeTable");
             obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"60\"/><Column size=\"105\"/><Column size=\"105\"/><Column size=\"105\"/><Column size=\"105\"/><Column size=\"105\"/><Column size=\"105\"/><Column size=\"105\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"31\"/></Rows><Band id=\"head\"><Cell/><Cell col=\"1\" text=\"월요일\"/><Cell col=\"2\" text=\"화요일\"/><Cell col=\"3\" text=\"수요일\"/><Cell col=\"4\" text=\"목요일\"/><Cell col=\"5\" text=\"금요일\"/><Cell col=\"6\" text=\"토요일\"/><Cell col=\"7\" text=\"일요일\" wordWrap=\"english\"/></Band><Band id=\"body\"><Cell text=\"bind:time\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:mon\" textAlign=\"center\" wordWrap=\"english\"/><Cell col=\"2\" text=\"bind:tue\" textAlign=\"center\" wordWrap=\"english\"/><Cell col=\"3\" text=\"bind:wed\" textAlign=\"center\" wordWrap=\"english\"/><Cell col=\"4\" text=\"bind:thu\" textAlign=\"center\" wordWrap=\"english\"/><Cell col=\"5\" text=\"bind:fri\" textAlign=\"center\" wordWrap=\"english\"/><Cell col=\"6\" text=\"bind:sat\" textAlign=\"center\" wordWrap=\"english\"/><Cell col=\"7\" text=\"bind:sun\" textAlign=\"center\"/></Band></Format></Formats>");
+=======
+            obj = new Graphics("Graphics00","55","200","955","265",null,null,null,null,null,null,this);
+            obj.set_taborder("5");
+            obj.set_border("1px solid #c1c1c1");
+>>>>>>> 7ce2599a794fe466239a9559360b91ad0143a96b
             this.addChild(obj.name, obj);
 
             // Layout Functions
@@ -78,6 +89,7 @@
 
         this.timeSchule_onload = function(obj,e)
         {
+<<<<<<< HEAD
         	var sCode = "12345"; // 로그인시 학번 받아와야 함 ------강제로 끼워넣기
 
         	//1~8월까지 나누고 8~12월 나누기
@@ -106,6 +118,28 @@
         this.fn_callback_TimeTable=function()
         {
 
+=======
+            var objGRect = new nexacro.GraphicsRect();
+            this.Graphics00.addChild( "GraphicsRect00", objGRect );
+            objGRect.set_x(50);
+            objGRect.set_y(50);
+            objGRect.set_width(50);
+            objGRect.set_height(50);
+            objGRect.set_strokepen("1px solid red");
+        	this.Graphics00.redraw();
+
+        	this.Graphics00.set_background("#ffffaa");
+
+
+        	var objGText = new nexacro.GraphicsText();
+        	this.Graphics00.addChild( "GraphicsText00", objGText );
+            objGText.set_x(50);
+            objGText.set_y(50);
+            objGText.set_color('red');
+            objGText.set_font('8pt/normal Verdana');
+            objGText.set_text('과연 그래픽으로 만들수 있을까?');
+        	this.Graphics00.redraw();
+>>>>>>> 7ce2599a794fe466239a9559360b91ad0143a96b
         };
 
 

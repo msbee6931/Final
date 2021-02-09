@@ -191,20 +191,6 @@
         }
 
 
-        this.myinfoModify_onload = function(obj,e)
-        {
-        	this.transaction(
-
-        				"ds_myInfoStu" //1. strSvcID
-        				,"/myInfoStu.nex" //2. strURL
-        				,"" //3.strInDatasets - I,U,D Sds=Fds:U 변경된값만보내겟다, :A, :N
-        				,"ds_students_copy=out_ds" //4.strOutDatasets -select Fds=Sds
-        				,"" //5.strArgument text값
-        				,"fn_callback" //6.strCallbackFunc
-        			);
-        			//this.ds_students_copy.filter("");
-        };
-
         this.Div00_btn_cancel_onclick = function(obj,e)
         {
         	this.close("");
@@ -220,8 +206,8 @@
         	var s_seq = this.ds_students_copy.getColumn(e.row,"s_seq");
         	var pw = this.ds_students_copy.getColumn(e.row,"pw");
 
-        	let x = this.width/2-100;
-        	let y = this.height/2-100;
+        	let x = this.width/2-50;
+        	let y = this.height/2-50;
         	let objCF = new ChildFrame();
         	objCF.init("passpop",x,y,200,200,0,0,"stdWork::passwordPop.xfdl");
         	objCF.set_showtitlebar(false);
@@ -270,12 +256,26 @@
         	}
         }
 
+        this.myInfoModify_onload = function(obj,e)
+        {
+        	this.transaction(
+
+        				"ds_myInfoStu" //1. strSvcID
+        				,"/myInfoStu.nex" //2. strURL
+        				,"" //3.strInDatasets - I,U,D Sds=Fds:U 변경된값만보내겟다, :A, :N
+        				,"ds_students_copy=out_ds" //4.strOutDatasets -select Fds=Sds
+        				,"" //5.strArgument text값
+        				,"fn_callback" //6.strCallbackFunc
+        			);
+        			//this.ds_students_copy.filter("");
+        };
+
         });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
-            this.Div00.form.edt_s_seq.addEventHandler("onchanged",this.Div00_edt_s_seq_onchanged,this);
+            this.addEventHandler("onload",this.myInfoModify_onload,this);
             this.Div00.form.btn_modify.addEventHandler("onclick",this.Div00_btn_modify_onclick,this);
             this.Div00.form.btn_cancel.addEventHandler("onclick",this.Div00_btn_cancel_onclick,this);
         };

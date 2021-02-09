@@ -38,8 +38,6 @@
 		<beans:property name="defaultCharset" value="UTF-8"></beans:property>
 	</beans:bean>
 	
-
-
 	<beans:bean class="com.nexacro.uiadapter17.spring.core.resolve.NexacroRequestMappingHandlerAdapter" p:order="0">
       <beans:property name="customArgumentResolvers">
          <beans:list>
@@ -55,6 +53,7 @@
       </beans:property>
    </beans:bean>
    
+  
 	<context:component-scan base-package="kh.spring" />
 
 

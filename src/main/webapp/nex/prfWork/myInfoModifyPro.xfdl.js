@@ -187,8 +187,8 @@
         	var p_seq = this.ds_professor_copy.getColumn(e.row,"p_seq");
         	var pw = this.ds_professor_copy.getColumn(e.row,"pw");
 
-        	let x = this.width/2-100;
-        	let y = this.height/2-100;
+        	let x = this.width/2-50;
+        	let y = this.height/2-50;
         	let objCF = new ChildFrame();
         	objCF.init("passpop",x,y,200,200,0,0,"stdWork::passwordPop.xfdl");
         	objCF.set_showtitlebar(false);
@@ -259,7 +259,7 @@
         // Regist UI Components Event
         this.on_initEvent = function()
         {
-            this.Div00.form.edt_p_seq.addEventHandler("onchanged",this.Div00_edt_s_seq_onchanged,this);
+            this.addEventHandler("onload",this.myInfoModifyPro_onload,this);
             this.Div00.form.edt_age.addEventHandler("onchanged",this.Div00_edt_age_onchanged,this);
             this.Div00.form.btn_modify.addEventHandler("onclick",this.Div00_btn_modify_onclick,this);
             this.Div00.form.btn_cancel.addEventHandler("onclick",this.Div00_btn_cancel_onclick,this);

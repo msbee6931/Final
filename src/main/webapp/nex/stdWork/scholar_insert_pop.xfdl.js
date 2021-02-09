@@ -144,6 +144,7 @@
         	//파일업로드시 파일저장 폴더경로 PostData 셋팅
         	this.FileUpTransfer00.setPostData("filepath","reqScholar");
 
+
         };
 
         //파일추가 버튼클릭
@@ -185,6 +186,7 @@
 
                 //File 사이즈 체크를 위해
         		vFile.open(null,VirtualFile.openRead);
+
             }
         }
 
