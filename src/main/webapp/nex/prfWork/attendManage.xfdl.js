@@ -127,26 +127,11 @@
             obj.set_text("삭제");
             this.addChild(obj.name, obj);
 
-            obj = new Grid("Grid03","40","42","210","268",null,null,null,null,null,null,this);
-            obj.set_taborder("10");
-            obj.set_positionstep("1");
-            obj.set_binddataset("ds_class");
-            obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"141\"/><Column size=\"68\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"과목명\"/><Cell col=\"1\" text=\"인원 수\"/></Band><Band id=\"body\"><Cell text=\"bind:className\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:limit\" textAlign=\"center\"/></Band></Format></Formats>");
-            this.addChild(obj.name, obj);
-
-            obj = new Grid("Grid01","290","42","700","468",null,null,null,null,null,null,this);
-            obj.set_taborder("11");
-            obj.set_positionstep("1");
-            obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"학번\"/><Cell col=\"1\" text=\"성명\"/></Band><Band id=\"body\"><Cell text=\"bind:sCode\"/><Cell col=\"1\" text=\"bind:sName\"/></Band></Format></Formats>");
-            this.addChild(obj.name, obj);
-
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","",1080,570,this,function(p){});
             obj.set_mobileorientation("landscape");
-            obj.set_stepcount("2");
+            obj.set_stepcount("0");
             this.addLayout(obj.name, obj);
             
             // BindItem Information
@@ -444,52 +429,7 @@
         	);
         };
 
-        this.Grid03_oncellclick = function(obj,e)
-        {
-        	var classCode = this.ds_class.getColumn(e.row,"classSeq");
-        	this.transaction(
-        		"stdListSeq"
-        		,"/stdListSeq.nex"
-        		,""
-        		,"ds_stdClass=out_ds"
-        		,"classCode="+classCode
-        		,"fn_callback_attendList"
-        	);
 
-        };
-        this.fn_callback_attendList=function(sId){
-        	var classCode = this.ds_stdClass.getColumn(0,"classCode");
-        	if(sId == "stdListSeq"){
-        		this.transaction(
-        			"attendDayList"
-        			,"/attendDayList.nex"
-        			,""
-        			,"ds_attendDayList=out_ds"
-        			,"classCode="+classCode
-        			,"fn_callback_attendList"
-        		);
-        	}else if(sId == "attendDayList"){
-        		this.ds_stdClass.clearData();
-        		if(this.ds_attendDayList.getRowCount() > 0 ){
-        			for(var i=0; i<this.ds_attendDayList.getRowCount(); i++){
-        				this.Grid01.appendContentsCol("body");
-        				var attendDay = this.ds_attendDayList.getColumn(i,"attendDay");
-        				var sCode = this.ds_attendDayList.getColumn(i,"sCode");
-        				var attendState = this.ds_attendDayList.getColumn(i,"attendState");
-        				if(attendState == 01){
-        					attend = "출석"
-        				}
-        				this.ds_stdClass.addColumn(attendDay, "string");
-        				this.Grid01.setCellProperty("Head",i+2,"text",attendDay);
-        				this.Grid01.setCellProperty("Head",i+2,"size",80);
-        				for(var j=0; j < this.ds_stdClass.getRowCount(); j++){
-        					var nRow = this.ds_stdClass.findRow("sCode",sCode);
-        					this.ds_stdClass.setColumn(nRow,attendDay,attendState);
-        				}
-        			}
-        		}
-        	}
-        }
         });
         
         // Regist UI Components Event
@@ -504,7 +444,6 @@
             this.btnSave.addEventHandler("onclick",this.btnSave_onclick,this);
             this.PopupDiv00.addEventHandler("oncloseup",this.PopupDiv00_oncloseup,this);
             this.btnDel.addEventHandler("onclick",this.btnDel_onclick,this);
-            this.Grid03.addEventHandler("oncellclick",this.Grid03_oncellclick,this);
             this.ds_attend.addEventHandler("oncolumnchanged",this.ds_attend_oncolumnchanged,this);
             this.ds_attendDayList.addEventHandler("oncolumnchanged",this.ds_attend_oncolumnchanged,this);
         };
