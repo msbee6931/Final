@@ -25,6 +25,20 @@ public class ChattingService {
 		return dao.getFriendsList(userId);
 	}
 	
+	// Friend
+	public List<UserDTO> searchFriend(String searchId) {
+		return dao.searchFriend(searchId);
+	}
+	
+
+	public FriendDTO isFriendExist(String userId, String friendId) {
+		return dao.isFriendExist(userId,friendId);
+	}
+
+	public int insertFriend(String userId, String userName, String friendId, String friendName) {
+		return dao.insertFriend(userId,userName,friendId,friendName);
+	}
+	
 	// Chat
 	public int insertMessage(String userId, String message, String roomNumber) {
 		return  dao.insertMessage(userId,message,roomNumber);
@@ -33,7 +47,14 @@ public class ChattingService {
 	public List<MessageDTO> getChatting(String roomNumber) {
 		return dao.getChatting(roomNumber);
 	}
+	
+	public int insertChatFile(String roomNumber, String oriName, String savedName, String userId) {
+		return dao.insertChatFile(roomNumber,oriName,savedName,userId);
+	}
 
+	public MessageDTO getFile(String savedName) {
+		return dao.getFile(savedName);
+	}
 	
 	// Room
 	public List<RoomDTO> findAllRoomByUserId(String userId) {
@@ -51,4 +72,5 @@ public class ChattingService {
 	public RoomDTO findRoomById(String userId,String friendId) {
 		return  dao.findRoomById(userId,friendId);
 	}
+
 }
