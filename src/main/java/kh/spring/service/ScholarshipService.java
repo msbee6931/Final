@@ -126,4 +126,11 @@ public class ScholarshipService {
 		return sDao.selectDTOByStd_Code(std_code);
 	}
 	
+	public List<ReqScholarDTO> selectOneReqScholar(int stdCode) {
+		return sDao.selectOneReqScholar(stdCode);
+	}
+	
+	public int checkValueReqScholar(int seq) {
+		return sDao.checkValueReqScholar(seq);
+	}
 }

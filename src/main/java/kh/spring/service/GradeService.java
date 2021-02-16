@@ -26,4 +26,7 @@ public class GradeService {
 	public int stdGradeUpd(GradeDTO dto) {
 		return dao.stdGradeUpd(dto);
 	}
+	public List<GradeDTO> stdGradeOneList(int stdCode){
+		return dao.stdGradeOneList(stdCode);
+	}
 }

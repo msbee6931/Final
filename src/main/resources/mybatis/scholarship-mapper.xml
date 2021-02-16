@@ -15,12 +15,11 @@
 </insert>
 
 <insert id="reqScholar">
-	insert into reqScholar values (reqScholar_seq.nextval,#{std_code},#{title},#{contents},sysdate)
+	<selectKey keyProperty="seq" resultType="int" order="BEFORE">
+      select reqScholar_seq.nextval from dual
+    </selectKey>
+	insert into reqScholar (seq,std_code,title,contents,writeDate,checkRead) values (#{seq},#{std_code},#{title},#{contents},sysdate,'읽지않음')
 </insert>
-
-<select id="selectlastSeq" resultType="int">
-	SELECT LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'REQSCHOLAR_SEQ'
-</select>
 
 <select id="selectReqScholar" resultType="kh.spring.dto.ReqScholarDTO">
 	select * from reqScholar order by 1
@@ -39,7 +38,14 @@
 </select>
 
 <select id="selectDTOByStd_Code" resultType="kh.spring.dto.ScholarshipDTO">
-select * from scholarship where std_code=#{std_code}
+	select * from scholarship where std_code=#{std_code}
 </select>
+
+<select id="selectOneReqScholar" resultType="kh.spring.dto.ReqScholarDTO">
+	select * from reqScholar where std_code=#{stdCode}
+</select>
+<update id="checkValueReqScholar">
+	update reqScholar set checkRead='읽음' where seq=#{seq}
+</update>
 
 </mapper>

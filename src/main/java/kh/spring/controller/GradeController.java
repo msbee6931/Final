@@ -18,12 +18,21 @@ public class GradeController {
 
 	@Autowired
 	private GradeService service;
-	
+
 	@RequestMapping("/stdGrade.nex")
 	public NexacroResult stdGrade(@ParamDataSet(name="in_ds")GradeDTO dto) {
+		//		NexacroResult nr = new NexacroResult();
+		//		dto = service.stdGrade(dto);
+		//		nr.addDataSet("out_ds",dto);
+		//		return nr;
 		NexacroResult nr = new NexacroResult();
-		dto = service.stdGrade(dto);
-		nr.addDataSet("out_ds",dto);
+		GradeDTO gdto = new GradeDTO();
+		gdto = service.stdGrade(dto);
+		if(gdto != null) {
+			nr.addDataSet("out_ds",gdto);
+		}else {
+			nr.addDataSet("out_ds",dto);
+		}
 		return nr;
 	}
 	@RequestMapping("/stdGradeInsert.nex")
@@ -51,4 +60,14 @@ public class GradeController {
 		}
 		return nr;
 	}
+	//개인 성적 조회
+	@RequestMapping("/stdGradeOneList.nex")
+	public NexacroResult stdGradeOneList(@ParamVariable(name="sCode")int stdCode) {
+		NexacroResult nr = new NexacroResult();
+		List<GradeDTO> list = service.stdGradeOneList(stdCode);
+		nr.addDataSet("out_ds",list);
+		return nr;
+	}
+
+
 }
